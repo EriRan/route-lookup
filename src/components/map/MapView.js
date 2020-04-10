@@ -12,9 +12,9 @@ class MapView extends React.Component {
     console.log("Rendering");
     return (
       <div>
-        <p>Stops: {this.props.stops.size}</p>
-        <p>Roads: {this.props.roads.size}</p>
-        <p>Bus lines : {this.props.busLines.size}</p>
+        <p>Stops: {this.props.stops.length}</p>
+        <p>Roads: {this.props.roads.length}</p>
+        <p>Bus lines : this is an object</p>
       </div>
     );
   }
@@ -22,10 +22,12 @@ class MapView extends React.Component {
 
 const mapStateToProps = state => {
   console.log("Mapping state");
+  console.log(state);
+  console.log(state.transportData.stops);
   return {
-    stops: state.stops != null ? state.stops : [],
-    roads: state.roads != null ? state.roads : [],
-    busLines: state.busLines != null ? state.busLines : [],
+    stops: state.transportData.stops != null ? state.transportData.stops : [],
+    roads: state.transportData.roads != null ? state.transportData.roads : [],
+    busLines: state.transportData.busLines != null ? state.transportData.busLines : [],
   };
 };
 
