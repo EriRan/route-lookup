@@ -4,17 +4,18 @@ import { getPublicTransportData } from "../../actions";
 
 class MapView extends React.Component {
   componentDidMount() {
-    console.log("Component mounting");
     this.props.getPublicTransportData();
   }
 
   render() {
-    console.log("Rendering");
+    console.log(this.props.stops);
+    console.log(this.props.roads);
+    console.log(this.props.busLines);
     return (
       <div>
         <p>Stops: {this.props.stops.length}</p>
         <p>Roads: {this.props.roads.length}</p>
-        <p>Bus lines : this is an object</p>
+        <p>Bus lines : {this.props.busLines.length}</p>
       </div>
     );
   }
