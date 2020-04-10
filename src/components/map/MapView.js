@@ -8,9 +8,6 @@ class MapView extends React.Component {
   }
 
   render() {
-    console.log(this.props.stops);
-    console.log(this.props.roads);
-    console.log(this.props.busLines);
     return (
       <div>
         <p>Stops: {this.props.stops.length}</p>
@@ -22,9 +19,6 @@ class MapView extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("Mapping state");
-  console.log(state);
-  console.log(state.transportData.stops);
   return {
     stops: state.transportData.stops != null ? state.transportData.stops : [],
     roads: state.transportData.roads != null ? state.transportData.roads : [],
