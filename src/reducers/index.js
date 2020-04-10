@@ -4,5 +4,5 @@ import publicTransportDataReducer from "./publicTransportDataReducer";
 
 export default combineReducers({
   form: formReducer,
-  publicTransport: publicTransportDataReducer
+  transportData: publicTransportDataReducer
 });
