@@ -1,9 +1,11 @@
 import React from "react";
 
+import MapView from "./map/MapView";
+
 const App = () => {
   return (
     <div className="ui container">
-      Hello world!
+      <MapView/>
     </div>
   );
 };
