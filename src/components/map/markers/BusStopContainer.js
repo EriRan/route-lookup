@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import BusStop from "./BusStop";
+import "./BusStopContainer.css"
 
 class BusStopContainer extends React.Component {
   render() {
-    return <div>{this.renderBusStops()}</div>;
+    return <div className="bus-stop-container">{this.renderBusStops()}</div>;
   }
 
   renderBusStops() {

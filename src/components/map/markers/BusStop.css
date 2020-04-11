@@ -1,0 +1,9 @@
+circle {
+  fill: yellow;
+  stroke: black;
+  stroke-width: 2;
+}
+text {
+  text-anchor: middle;
+  stroke: black;
+}

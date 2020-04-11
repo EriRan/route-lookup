@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./BusStop.css";
+
 class BusStop extends React.Component {
   render() {
     return (
@@ -9,17 +11,12 @@ class BusStop extends React.Component {
             cx="25"
             cy="25"
             r="20"
-            fill="yellow"
-            stroke="black"
-            strokeWidth="2"
           >
           </circle>
           <text
               x="51%"
               y="57%"
               className="heavy"
-              textAnchor="middle"
-              stroke="black"
             >
               {this.props.name}
             </text>
