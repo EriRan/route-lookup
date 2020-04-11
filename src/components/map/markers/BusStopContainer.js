@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import BusStop from "./BusStop";
-import "./BusStopContainer.css"
+import "./BusStopContainer.css";
 
 class BusStopContainer extends React.Component {
   render() {
@@ -10,10 +10,8 @@ class BusStopContainer extends React.Component {
   }
 
   renderBusStops() {
-    return this.props.stops.map(stop => {
-      return (
-        <BusStop key={`stop-${stop}`} name={stop}/>
-      );
+    return this.props.stops.map((stop) => {
+      return <BusStop key={`stop-${stop}`} name={stop} />;
     });
   }
 }

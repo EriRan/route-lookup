@@ -7,19 +7,10 @@ class BusStop extends React.Component {
     return (
       <svg width="50" height="50">
         <g>
-          <circle
-            cx="25"
-            cy="25"
-            r="20"
-          >
-          </circle>
-          <text
-              x="51%"
-              y="57%"
-              className="heavy"
-            >
-              {this.props.name}
-            </text>
+          <circle cx="25" cy="25" r="20"></circle>
+          <text x="51%" y="57%" className="heavy">
+            {this.props.name}
+          </text>
         </g>
       </svg>
     );
