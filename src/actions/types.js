@@ -1,1 +1,1 @@
-export const GET_DATA = "GET_DATA";
+//Will be needed once it is possible for the user to provide route request
