@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { getPublicTransportData } from "../../actions";
 import BusStopContainer from "./markers/stop/BusStopContainer";
+import RoutesContainer from "./markers/road/RoadsContainer";
 
 class MapView extends React.Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class MapView extends React.Component {
     return (
       <div>
         <BusStopContainer/>
-        <p>Roads: {this.props.roads.length}</p>
+        <RoutesContainer/>
         <p>Bus lines : {this.props.busLines.length}</p>
       </div>
     );
@@ -22,9 +23,7 @@ class MapView extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    stops: state.transportData.stops != null ? state.transportData.stops : [],
-    roads: state.transportData.roads != null ? state.transportData.roads : [],
-    busLines: state.transportData.busLines != null ? state.transportData.busLines : [],
+    busLines: state.transportData.busLines != null ? state.transportData.busLines : []
   };
 };
 
