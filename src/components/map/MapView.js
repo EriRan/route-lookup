@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { getPublicTransportData } from "../../actions";
+import BusStopContainer from "./markers/BusStopContainer";
 
 class MapView extends React.Component {
   componentDidMount() {
@@ -10,7 +12,7 @@ class MapView extends React.Component {
   render() {
     return (
       <div>
-        <p>Stops: {this.props.stops.length}</p>
+        <BusStopContainer/>
         <p>Roads: {this.props.roads.length}</p>
         <p>Bus lines : {this.props.busLines.length}</p>
       </div>
