@@ -3,11 +3,15 @@ import React from "react";
 class Road extends React.Component {
   render() {
     return (
-      <div>
-        <p>From: {this.props.from}</p>
-        <p>To: {this.props.to}</p>
-        <p>Duration: {this.props.duration}</p>
-      </div>
+      <svg>
+        <line
+          x1={this.props.pointOne.x}
+          y1={this.props.pointOne.y}
+          x2={this.props.pointTwo.x}
+          y2={this.props.pointTwo.y}
+          stroke="black"
+        />
+      </svg>
     );
   }
 }
