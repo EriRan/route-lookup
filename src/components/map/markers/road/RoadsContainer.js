@@ -9,15 +9,26 @@ class RoadsContainer extends React.Component {
   }
 
   renderRoutes() {
-    return this.props.roads.map((road) => {
-      return <Road to={road.to} from={road.from} duration={road.duration} />;
-    });
+    if (this.props.roads != null) {
+      return this.props.roads.map((road) => {
+        return (
+          <Road
+            key={`road-${road.to}-${road.from}`}
+            to={road.to}
+            from={road.from}
+            duration={road.duration}
+          />
+        );
+      });
+    } else {
+      return "Loading routes...";
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    roads: state.transportData.roads != null ? state.transportData.roads : [],
+    roads: state.transportData.roads,
   };
 };
 

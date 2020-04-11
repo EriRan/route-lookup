@@ -10,15 +10,19 @@ class BusStopContainer extends React.Component {
   }
 
   renderBusStops() {
-    return this.props.stops.map((stop) => {
-      return <BusStop key={`stop-${stop}`} name={stop} />;
-    });
+    if (this.props.stops != null) {
+      return this.props.stops.map((stop) => {
+        return <BusStop key={`stop-${stop}`} name={stop} />;
+      });
+    } else {
+      return "Loading bus stops..."
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    stops: state.transportData.stops != null ? state.transportData.stops : [],
+    stops: state.transportData.stops,
   };
 };
 
