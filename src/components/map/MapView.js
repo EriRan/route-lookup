@@ -1,7 +1,6 @@
 import React from "react";
 
-import BusStopContainer from "./markers/stop/BusStopContainer";
-import RoutesContainer from "./markers/road/RoadsContainer";
+import BusTrafficContainer from "./markers/BusTrafficContainer";
 import TransportDataProvider from "../../data/TransportDataProvider";
 
 class MapView extends React.Component {
@@ -9,11 +8,12 @@ class MapView extends React.Component {
     var transportData = new TransportDataProvider().provide();
     return (
       <div>
-        <BusStopContainer
+        <BusTrafficContainer
           stops={transportData.stops}
-          routes={transportData.routes}
+          roads={transportData.roads}
         />
-        <RoutesContainer />
+        <p>Bus lines : {transportData.busLines.length}</p>
+        <p>Roads : {transportData.roads.length}</p>
         <p>Bus lines : {transportData.busLines.length}</p>
       </div>
     );
