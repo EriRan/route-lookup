@@ -6,7 +6,7 @@ class TransportDataMapper {
     const mappedTransportData = {};
 
     mappedTransportData.stops = transportData.pysakit;
-    mappedTransportData.roads = transportData.tiet;
+    mappedTransportData.roads = mapRoutes(transportData.tiet);
     mappedTransportData.busLines = mapBuslines(transportData.linjastot);
 
     return mappedTransportData;
@@ -21,6 +21,19 @@ class TransportDataMapper {
       }
       return mappedBusLines;
     }
+
+    function mapRoutes(routesJson) {
+      const mappedRoutes = [];
+      routesJson.map((jsonRoute) => {
+        const mappedRoute = {};
+        mappedRoute.from = jsonRoute.mista;
+        mappedRoute.to = jsonRoute.mihin;
+        mappedRoute.duration = jsonRoute.kesto;
+        mappedRoutes.push(mappedRoute);
+      });
+      return mappedRoutes;
+    }
   }
 }
+
 export default TransportDataMapper;
