@@ -12,7 +12,7 @@ class MapView extends React.Component {
           stops={transportData.stops}
           roads={transportData.roads}
         />
-        <p>Bus lines : {transportData.busLines.length}</p>
+        <p>Stops : {transportData.stops.length}</p>
         <p>Roads : {transportData.roads.length}</p>
         <p>Bus lines : {transportData.busLines.length}</p>
       </div>
