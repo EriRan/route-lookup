@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { getPublicTransportData } from "../../actions";
-import BusStopContainer from "./markers/BusStopContainer";
+import BusStopContainer from "./markers/stop/BusStopContainer";
 
 class MapView extends React.Component {
   componentDidMount() {
