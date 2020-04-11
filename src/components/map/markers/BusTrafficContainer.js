@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import BusStop from "./BusStop";
-import "./BusStopContainer.css";
+import BusStop from "./stop/BusStop";
+import "./BusTrafficContainer.css";
 
-class BusStopContainer extends React.Component {
+class BusTrafficContainer extends React.Component {
   render() {
     return <div className="bus-stop-container">{this.renderBusStops()}</div>;
   }
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(BusStopContainer);
+export default connect(mapStateToProps, {})(BusTrafficContainer);
