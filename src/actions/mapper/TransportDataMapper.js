@@ -24,7 +24,7 @@ class TransportDataMapper {
 
     function mapRoutes(routesJson) {
       const mappedRoutes = [];
-      routesJson.map((jsonRoute) => {
+      routesJson.forEach((jsonRoute) => {
         const mappedRoute = {};
         mappedRoute.from = jsonRoute.mista;
         mappedRoute.to = jsonRoute.mihin;
