@@ -1,30 +1,23 @@
 import React from "react";
-import { connect } from "react-redux";
 
-import { getPublicTransportData } from "../../actions";
 import BusStopContainer from "./markers/stop/BusStopContainer";
 import RoutesContainer from "./markers/road/RoadsContainer";
+import TransportDataProvider from "../../data/TransportDataProvider";
 
 class MapView extends React.Component {
-  componentDidMount() {
-    this.props.getPublicTransportData();
-  }
-
   render() {
+    var transportData = new TransportDataProvider().provide();
     return (
       <div>
-        <BusStopContainer/>
-        <RoutesContainer/>
-        <p>Bus lines : {this.props.busLines.length}</p>
+        <BusStopContainer
+          stops={transportData.stops}
+          routes={transportData.routes}
+        />
+        <RoutesContainer />
+        <p>Bus lines : {transportData.busLines.length}</p>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    busLines: state.transportData.busLines != null ? state.transportData.busLines : []
-  };
-};
-
-export default connect(mapStateToProps, { getPublicTransportData })(MapView);
+export default MapView;

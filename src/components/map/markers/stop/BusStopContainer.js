@@ -22,7 +22,7 @@ class BusStopContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    stops: state.transportData.stops,
+    //Needed in future
   };
 };
 

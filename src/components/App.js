@@ -5,7 +5,7 @@ import MapView from "./map/MapView";
 const App = () => {
   return (
     <div className="ui container">
-      <MapView/>
+      <MapView />
     </div>
   );
 };
