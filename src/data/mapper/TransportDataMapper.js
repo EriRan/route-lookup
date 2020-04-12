@@ -4,34 +4,54 @@
 class TransportDataMapper {
   map(transportData) {
     const mappedTransportData = {};
-
-    mappedTransportData.stops = transportData.pysakit;
-    mappedTransportData.roads = mapRoutes(transportData.tiet);
-    mappedTransportData.busLines = mapBuslines(transportData.linjastot);
-
+    mappedTransportData.stops = mapStops(transportData);
+    mappedTransportData.lines = mapLines(transportData.linjastot);
     return mappedTransportData;
 
-    function mapBuslines(buslinesJson) {
-      const mappedBusLines = [];
-      for (var lineName in buslinesJson) {
-        const mappedBusline = {};
-        mappedBusline.name = lineName;
-        mappedBusline.stopsAt = buslinesJson[lineName];
-        mappedBusLines.push(mappedBusline);
-      }
-      return mappedBusLines;
+    function mapStops(transportData) {
+      const mappedStops = new Map();
+      transportData.pysakit.forEach((stop) => {
+        const mappedStop = {};
+        mappedStop.name = stop;
+        mappedStop.roads = [];
+        mappedStops.set(mappedStop.name, mappedStop);
+      });
+      mapRoads(mappedStops, transportData.tiet);
+      return Array.from(mappedStops.values());
     }
 
-    function mapRoutes(routesJson) {
-      const mappedRoutes = [];
-      routesJson.forEach((jsonRoute) => {
-        const mappedRoute = {};
-        mappedRoute.from = jsonRoute.mista;
-        mappedRoute.to = jsonRoute.mihin;
-        mappedRoute.duration = jsonRoute.kesto;
-        mappedRoutes.push(mappedRoute);
+    function mapRoads(mappedStops, roadsJson) {
+      roadsJson.forEach((road) => {
+        const mappedRoad = {};
+        mappedRoad.pointOne = road.mista;
+        mappedRoad.pointTwo = road.mihin;
+        mappedRoad.duration = road.kesto;
+        mappedRoad.isReverse = false;
+        const mappedPointOneStop = mappedStops.get(mappedRoad.pointOne);
+        mappedPointOneStop.roads.push(mappedRoad);
+        const mappedPointTwoStop = mappedStops.get(mappedRoad.pointTwo);
+        mappedPointTwoStop.roads.push(createReverseRoad(mappedRoad));
       });
-      return mappedRoutes;
+    }
+
+    function createReverseRoad(mappedRoad) {
+      const reverseRoad = {};
+      reverseRoad.pointOne = mappedRoad.pointTwo;
+      reverseRoad.pointTwo = mappedRoad.pointOne;
+      reverseRoad.duration = mappedRoad.duration;
+      reverseRoad.isReverse = true;
+      return reverseRoad;
+    }
+
+    function mapLines(linesJson) {
+      const mappedLines = [];
+      for (var lineName in linesJson) {
+        const mappedLine = {};
+        mappedLine.name = lineName;
+        mappedLine.stopsAt = linesJson[lineName];
+        mappedLines.push(mappedLine);
+      }
+      return mappedLines;
     }
   }
 }
