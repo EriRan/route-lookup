@@ -22,22 +22,22 @@ class TransportDataMapper {
 
     function mapRoads(mappedStops, roadsJson) {
       roadsJson.forEach((road) => {
+        const mappedPointOneStop = mappedStops.get(road.mista);
+        const mappedPointTwoStop = mappedStops.get(road.mihin);
         const mappedRoad = {};
-        mappedRoad.pointOne = road.mista;
-        mappedRoad.pointTwo = road.mihin;
+        mappedRoad.from = mappedPointOneStop;
+        mappedRoad.to = mappedPointTwoStop;
         mappedRoad.duration = road.kesto;
         mappedRoad.isReverse = false;
-        const mappedPointOneStop = mappedStops.get(mappedRoad.pointOne);
         mappedPointOneStop.roads.push(mappedRoad);
-        const mappedPointTwoStop = mappedStops.get(mappedRoad.pointTwo);
-        mappedPointTwoStop.roads.push(createReverseRoad(mappedRoad));
+        mappedPointTwoStop.roads.push(createReverseRoad(mappedRoad, mappedPointOneStop, mappedPointTwoStop));
       });
     }
 
-    function createReverseRoad(mappedRoad) {
+    function createReverseRoad(mappedRoad, mappedPointOneStop, mappedPointTwoStop) {
       const reverseRoad = {};
-      reverseRoad.pointOne = mappedRoad.pointTwo;
-      reverseRoad.pointTwo = mappedRoad.pointOne;
+      reverseRoad.from = mappedPointTwoStop;
+      reverseRoad.to = mappedPointOneStop;
       reverseRoad.duration = mappedRoad.duration;
       reverseRoad.isReverse = true;
       return reverseRoad;
