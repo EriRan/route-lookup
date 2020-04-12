@@ -12,7 +12,7 @@ class BusTrafficContainer extends React.Component {
   renderBusStops() {
     if (this.props.stops != null) {
       return this.props.stops.map((stop) => {
-        return <BusStop key={`stop-${stop}`} name={stop} />;
+        return <BusStop key={`stop-${stop.name}`} name={stop.name} />;
       });
     } else {
       return "Loading bus stops..."
