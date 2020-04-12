@@ -1,5 +1,3 @@
-.bus-stop-container {
-  display: grid;
-  grid-template-columns: 400px 400px 0px;
-  row-gap: 150px;
+.bus-traffic-container {
+  
 }

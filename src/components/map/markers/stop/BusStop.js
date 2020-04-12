@@ -5,14 +5,12 @@ import "./BusStop.css";
 class BusStop extends React.Component {
   render() {
     return (
-      <svg x={this.props.location.x} y={this.props.location.y} width="50" height="50">
-        <g>
-          <circle cx="25" cy="25" r="20"></circle>
-          <text x="51%" y="57%" className="heavy">
-            {this.props.name}
-          </text>
-        </g>
-      </svg>
+      <g className = "bus-stop">
+        <circle cx={this.props.location.x} cy={this.props.location.y} r="20"></circle>
+        <text x={this.props.location.x} y={this.props.location.y} className="heavy">
+          {this.props.name}
+        </text>
+      </g>
     );
   }
 }

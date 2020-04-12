@@ -11,7 +11,7 @@ class Road extends React.Component {
       provideDirection(this.props.directionIndex)
     );
     return (
-      <div>
+      <g className="road">
         {this.renderRoadLine(
           this.props.data,
           this.props.startPointLocation,
@@ -22,16 +22,16 @@ class Road extends React.Component {
           endPoint,
           this.props.renderedStops
         )}
-      </div>
+      </g>
     );
   }
 
   renderRoadLine(data, startPointLocation, endPoint) {
     return (
-      <svg>
+      <g className="road-line">
         <text>{data.duration}</text>
         {this.renderLine(startPointLocation, endPoint)}
-      </svg>
+      </g>
     );
   }
 

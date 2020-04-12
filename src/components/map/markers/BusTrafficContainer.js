@@ -8,15 +8,15 @@ import "./BusTrafficContainer.css";
 class BusTrafficContainer extends React.Component {
   render() {
     return (
-      <div>{this.renderTrafficNetwork()}</div>
+      <g className="bus-traffic-container">{this.renderTrafficNetwork()}</g>
     );
   }
 
   renderTrafficNetwork() {
     if (!_.isUndefined(this.props.stops) && !_.isNull(this.props.stops)) {
       const firstStopLocation = {
-        x: 500,
-        y: 500,
+        x: 50,
+        y: 50,
       };
       return (
         <BusStopContainer
