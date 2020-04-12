@@ -7,7 +7,7 @@ class BusStop extends React.Component {
     return (
       <g className = "bus-stop">
         <circle cx={this.props.location.x} cy={this.props.location.y} r="20"></circle>
-        <text x={this.props.location.x} y={this.props.location.y} className="heavy">
+        <text x={this.props.location.x} y={this.props.location.y + 5} className="heavy">
           {this.props.name}
         </text>
       </g>

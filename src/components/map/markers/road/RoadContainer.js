@@ -14,7 +14,7 @@ class RoadContainer extends React.Component {
             return (
               <Road
                 key={`road-${road.to.name}-${road.from.name}`}
-                data={road}
+                roadData={road}
                 renderedStops={this.props.renderedStops}
                 startPointLocation={this.props.startPointLocation}
                 directionIndex={index}
