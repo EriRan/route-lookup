@@ -64,8 +64,11 @@ class Road extends React.Component {
     const alreadyRenderedStopLocation = alreadyRenderedStops.get(
       this.props.roadData.to.name
     );
-    if (!_.isUndefined(alreadyRenderedStopLocation) && !_.isNull(alreadyRenderedStopLocation)) {
-      //Draw line to already existing stop
+    if (
+      !_.isUndefined(alreadyRenderedStopLocation) &&
+      !_.isNull(alreadyRenderedStopLocation)
+    ) {
+      //Line will be done to an already rendered station
       return alreadyRenderedStopLocation;
     } else {
       return this.calculateNewLineEndLocation(startPointLocation);
@@ -73,6 +76,8 @@ class Road extends React.Component {
   }
 
   calculateNewLineEndLocation(startPointLocation) {
+    //Weak point here: if a station has more than 4 roads, we won't be able to render a road to it. 
+    //Could add the diagonals to allow for 8 more directions but after that we would have to make lines make turns.
     switch (provideDirection(this.props.directionIndex)) {
       case RIGHT:
         return {
@@ -95,7 +100,9 @@ class Road extends React.Component {
           y: startPointLocation.y - STOP_GAP,
         };
       default:
-        console.log("Unknown direction encountered! Returning crazy direction so that this is not ignored!");
+        console.log(
+          "Unknown direction encountered! Returning crazy direction so that this is not ignored!"
+        );
         return {
           x: 0,
           y: 0,
