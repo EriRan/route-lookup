@@ -33,7 +33,7 @@ class BusStopContainer extends React.Component {
   }
 
   renderBusStopElement(stopData, renderedStops, location) {
-    renderedStops.set(stopData.name, stopData);
+    renderedStops.set(stopData.name, location);
     return (
       <BusStop
         key={`stop-${stopData.name}`}

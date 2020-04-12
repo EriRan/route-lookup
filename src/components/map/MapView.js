@@ -1,6 +1,6 @@
 import React from "react";
 
-import BusTrafficContainer from "./markers/BusTrafficContainer";
+import TrafficNetworkContainer from "./markers/TrafficNetworkContainer";
 import TransportDataProvider from "../../data/TransportDataProvider";
 import "./MapView.css";
 
@@ -9,7 +9,7 @@ class MapView extends React.Component {
     var transportData = new TransportDataProvider().provide();
     return (
       <svg className = "map-view" width="1000" height="1000">
-        <BusTrafficContainer stops={transportData.stops} />
+        <TrafficNetworkContainer stops={transportData.stops} />
       </svg>
     );
   }

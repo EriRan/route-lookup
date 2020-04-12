@@ -1,24 +1,26 @@
 import React from "react";
+import _ from "lodash";
 
 import BusStopContainer from "../stop/BusStopContainer";
 import { provideDirection } from "./RoadDirectionProvider";
 import { RIGHT, DOWN, LEFT, UP } from "./RoadDirection";
+import { STOP_GAP } from "./RoadConstant";
 
 class Road extends React.Component {
   render() {
-    const endPoint = this.deduceEndPoint(
+    const endPoint = this.calculateLineEndLocation(
       this.props.startPointLocation,
-      provideDirection(this.props.directionIndex)
+      this.props.renderedStops
     );
     return (
       <g className="road">
         {this.renderRoadLine(
-          this.props.data,
+          this.props.roadData,
           this.props.startPointLocation,
           endPoint
         )}
         {this.renderDestinationBusStop(
-          this.props.data,
+          this.props.roadData,
           endPoint,
           this.props.renderedStops
         )}
@@ -26,10 +28,10 @@ class Road extends React.Component {
     );
   }
 
-  renderRoadLine(data, startPointLocation, endPoint) {
+  renderRoadLine(roadData, startPointLocation, endPoint) {
     return (
       <g className="road-line">
-        <text>{data.duration}</text>
+        <text>{roadData.duration}</text>
         {this.renderLine(startPointLocation, endPoint)}
       </g>
     );
@@ -47,43 +49,53 @@ class Road extends React.Component {
     );
   }
 
-  renderDestinationBusStop(data, location, renderedStops) {
+  renderDestinationBusStop(roadData, location, renderedStops) {
     return (
       <BusStopContainer
-        key={`stopContainer-${data.to.name}`}
-        stopData={data.to}
+        key={`stopContainer-${roadData.to.name}`}
+        stopData={roadData.to}
         renderedStops={renderedStops}
         location={location}
       />
     );
   }
 
-  deduceEndPoint(startPointLocation, direction) {
-    switch (direction) {
+  calculateLineEndLocation(startPointLocation, alreadyRenderedStops) {
+    const alreadyRenderedStopLocation = alreadyRenderedStops.get(
+      this.props.roadData.to.name
+    );
+    if (!_.isUndefined(alreadyRenderedStopLocation) && !_.isNull(alreadyRenderedStopLocation)) {
+      //Draw line to already existing stop
+      return alreadyRenderedStopLocation;
+    } else {
+      return this.calculateNewLineEndLocation(startPointLocation);
+    }
+  }
+
+  calculateNewLineEndLocation(startPointLocation) {
+    switch (provideDirection(this.props.directionIndex)) {
       case RIGHT:
         return {
-          x: startPointLocation.x + 50,
+          x: startPointLocation.x + STOP_GAP,
           y: startPointLocation.y,
         };
       case DOWN:
         return {
           x: startPointLocation.x,
-          y: startPointLocation.y + 50,
+          y: startPointLocation.y + STOP_GAP,
         };
       case LEFT:
         return {
-          x: startPointLocation.x - 50,
+          x: startPointLocation.x - STOP_GAP,
           y: startPointLocation.y,
         };
       case UP:
         return {
           x: startPointLocation.x,
-          y: startPointLocation.y - 50,
+          y: startPointLocation.y - STOP_GAP,
         };
       default:
-        console.log(
-          "Unknown direction encountered! Returning crazy direction so that this is not ignored!"
-        );
+        console.log("Unknown direction encountered! Returning crazy direction so that this is not ignored!");
         return {
           x: 0,
           y: 0,
