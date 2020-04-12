@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 
 import BusStop from "./BusStop";
-import Road from "../road/Road";
+import RoadContainer from "../road/RoadContainer";
 
 /**
  * Renders the stop and the roads leaving from it. Roads that are copies from roads with just their destinations flipped around (reverse roads) are not rendered.
@@ -14,18 +14,18 @@ class BusStopContainer extends React.Component {
     );
     if (_.isUndefined(alreadyRenderedStop) || _.isNull(alreadyRenderedStop)) {
       return (
-        <div>
+        <g className="bus-stop-container">
           {this.renderBusStopElement(
             this.props.stopData,
             this.props.renderedStops,
             this.props.location
           )}
-          {this.renderRoads(
-            this.props.stopData,
-            this.props.renderedStops,
-            this.props.location
-          )}
-        </div>
+          <RoadContainer
+            stopData={this.props.stopData}
+            renderedStops={this.props.renderedStops}
+            startPointLocation={this.props.location}
+          />
+        </g>
       );
     } else {
       return null;
@@ -40,28 +40,6 @@ class BusStopContainer extends React.Component {
         name={stopData.name}
         location={location}
       />
-    );
-  }
-
-  renderRoads(stopData, renderedStops, startPointLocation) {
-    return (
-      <div>
-        {stopData.roads
-          .filter((road) => {
-            return road.isReverse === false;
-          })
-          .map((road, index) => {
-            return (
-              <Road
-                key={`road-${road.to.name}-${road.from.name}`}
-                data={road}
-                renderedStops={renderedStops}
-                startPointLocation={startPointLocation}
-                directionIndex={index}
-              />
-            );
-          })}
-      </div>
     );
   }
 }
