@@ -1,12 +1,14 @@
 import React from "react";
 
 class RoadLine extends React.Component {
-
   render() {
     return (
       <g className="road-line">
         <text>{this.props.roadData.duration}</text>
-        {this.renderLine(this.props.startPointLocation, this.props.endPointLocation)}
+        {this.renderLine(
+          this.props.startPointLocation,
+          this.props.endPointLocation
+        )}
       </g>
     );
   }

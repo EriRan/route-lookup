@@ -1,58 +1,52 @@
 import React from "react";
-import _ from "lodash";
+import { isUndefinedOrNull } from "../../../../util/Utilities";
 
-import Road from "./Road";
+import RoadLine from "./RoadLine";
 
 class RoadContainer extends React.Component {
   render() {
-    const nextDirectionIndexContainer = { next: -1 };
     return (
-      <g className="road-container">
-        {this.props.stopData.roads
-          .filter((road) => {
-            return road.isReverse === false;
-          })
-          .map((road) => {
-            return this.renderRoadsWithCorrectDirection(
-              road,
-              nextDirectionIndexContainer,
-              this.props.renderedStops,
-              this.props.startPointLocation
-            );
-          })}
+      <g>
+        {this.props.stops.map((stop) => {
+          return stop.roads
+            .filter((road) => {
+              return road.isReverse === false;
+            })
+            .map((road) => {
+              return this.renderRoad(
+                road,
+                this.props.busStopLocationMap.get(road.from.name),
+                this.props.busStopLocationMap.get(road.to.name)
+              );
+            });
+        })}
       </g>
     );
   }
 
-  renderRoadsWithCorrectDirection(
-    road,
-    nextDirectionIndexContainer,
-    renderedStops,
-    startPointLocation
-  ) {
-    const alreadyRenderedStop = renderedStops.get(road.to.name);
-    if (!_.isUndefined(alreadyRenderedStop) && !_.isNull(alreadyRenderedStop)) {
-      return (
-        <Road
-          key={`road-${road.to.name}-${road.from.name}`}
-          roadData={road}
-          renderedStops={renderedStops}
-          startPointLocation={startPointLocation}
-          alreadyRenderedStop={alreadyRenderedStop}
-        />
-      );
-    } else {
-      nextDirectionIndexContainer.next++;
-      return (
-        <Road
-          key={`road-${road.to.name}-${road.from.name}`}
-          roadData={road}
-          renderedStops={renderedStops}
-          startPointLocation={startPointLocation}
-          directionIndex={nextDirectionIndexContainer.next}
-        />
-      );
+  renderRoad(road, startPointLocation, endPointLocation) {
+    if (isUndefinedOrNull(startPointLocation)) {
+      console.log("Start point location was undefined or null. Unable to render a road from ",
+      road.from.name,
+      " to ",
+      road.to.name)
+      return null;
     }
+    if (isUndefinedOrNull(endPointLocation)) {
+      console.log("End point location was undefined or null. Unable to render a road from ",
+      road.from.name,
+      " to ",
+      road.to.name)
+      return null;
+    }
+    return (
+      <RoadLine
+        key={`road-line-from-${road.from.name}-to-${road.to.name}`}
+        roadData={road}
+        startPointLocation={startPointLocation}
+        endPointLocation={endPointLocation}
+      />
+    );
   }
 }
 
