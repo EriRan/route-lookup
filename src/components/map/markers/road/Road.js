@@ -16,7 +16,6 @@ class Road extends React.Component {
       " Existing stop: ",
       this.props.alreadyRenderedStop
     );
-
     const endPoint = this.calculateLineEndLocation(
       this.props.startPointLocation,
       this.props.alreadyRenderedStop,
@@ -38,11 +37,7 @@ class Road extends React.Component {
     );
   }
 
-  renderDestinationBusStop(
-    roadData,
-    location,
-    renderedStops
-  ) {
+  renderDestinationBusStop(roadData, location, renderedStops) {
     return (
       <BusStopContainer
         key={`stopContainer-${roadData.to.name}`}
