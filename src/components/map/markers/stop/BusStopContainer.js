@@ -28,6 +28,7 @@ class BusStopContainer extends React.Component {
         </g>
       );
     } else {
+      console.log("Already rendered for ", alreadyRenderedStop);
       return null;
     }
   }
