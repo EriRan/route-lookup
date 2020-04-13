@@ -2,23 +2,33 @@ import React from "react";
 import _ from "lodash";
 
 import BusStopContainer from "../stop/BusStopContainer";
+import RoadLine from "./RoadLine";
 import { provideDirection } from "./RoadDirectionProvider";
 import { RIGHT, DOWN, LEFT, UP } from "./RoadDirection";
 import { STOP_GAP } from "./RoadConstant";
 
 class Road extends React.Component {
   render() {
+    console.log(
+      "Rendering ",
+      this.props.roadData.to.name,
+      this.props.roadData.from.name,
+      " Existing stop: ",
+      this.props.alreadyRenderedStop
+    );
+
     const endPoint = this.calculateLineEndLocation(
       this.props.startPointLocation,
-      this.props.renderedStops
+      this.props.alreadyRenderedStop,
+      this.props.directionIndex
     );
     return (
       <g className="road">
-        {this.renderRoadLine(
-          this.props.roadData,
-          this.props.startPointLocation,
-          endPoint
-        )}
+        <RoadLine
+          roadData={this.props.roadData}
+          startPointLocation={this.props.startPointLocation}
+          endPointLocation={endPoint}
+        />
         {this.renderDestinationBusStop(
           this.props.roadData,
           endPoint,
@@ -28,28 +38,11 @@ class Road extends React.Component {
     );
   }
 
-  renderRoadLine(roadData, startPointLocation, endPoint) {
-    return (
-      <g className="road-line">
-        <text>{roadData.duration}</text>
-        {this.renderLine(startPointLocation, endPoint)}
-      </g>
-    );
-  }
-
-  renderLine(startPointLocation, endPoint) {
-    return (
-      <line
-        x1={startPointLocation.x}
-        y1={startPointLocation.y}
-        x2={endPoint.x}
-        y2={endPoint.y}
-        stroke="black"
-      />
-    );
-  }
-
-  renderDestinationBusStop(roadData, location, renderedStops) {
+  renderDestinationBusStop(
+    roadData,
+    location,
+    renderedStops
+  ) {
     return (
       <BusStopContainer
         key={`stopContainer-${roadData.to.name}`}
@@ -60,25 +53,26 @@ class Road extends React.Component {
     );
   }
 
-  calculateLineEndLocation(startPointLocation, alreadyRenderedStops) {
-    const alreadyRenderedStopLocation = alreadyRenderedStops.get(
-      this.props.roadData.to.name
-    );
-    if (
-      !_.isUndefined(alreadyRenderedStopLocation) &&
-      !_.isNull(alreadyRenderedStopLocation)
-    ) {
+  calculateLineEndLocation(
+    startPointLocation,
+    alreadyRenderedStop,
+    directionIndex
+  ) {
+    if (!_.isUndefined(alreadyRenderedStop) && !_.isNull(alreadyRenderedStop)) {
       //Line will be done to an already rendered station
-      return alreadyRenderedStopLocation;
+      return alreadyRenderedStop;
     } else {
-      return this.calculateNewLineEndLocation(startPointLocation);
+      return this.calculateNewLineEndLocation(
+        startPointLocation,
+        directionIndex
+      );
     }
   }
 
-  calculateNewLineEndLocation(startPointLocation) {
-    //Weak point here: if a station has more than 4 roads, we won't be able to render a road to it. 
+  calculateNewLineEndLocation(startPointLocation, directionIndex) {
+    //Weak point here: if a station has more than 4 roads, we won't be able to render a road to it.
     //Could add the diagonals to allow for 8 more directions but after that we would have to make lines make turns.
-    switch (provideDirection(this.props.directionIndex)) {
+    switch (provideDirection(directionIndex)) {
       case RIGHT:
         return {
           x: startPointLocation.x + STOP_GAP,
