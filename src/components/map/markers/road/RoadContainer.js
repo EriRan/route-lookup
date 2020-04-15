@@ -13,30 +13,32 @@ class RoadContainer extends React.Component {
               return road.isReverse === false;
             })
             .map((road) => {
-              return this.renderRoad(
-                road,
-                this.props.busStopLocationMap.get(road.from.name),
-                this.props.busStopLocationMap.get(road.to.name)
-              );
+              return this.renderRoad(road, this.props.busStopLocationMap);
             });
         })}
       </g>
     );
   }
 
-  renderRoad(road, startPointLocation, endPointLocation) {
+  renderRoad(road, busStopLocationMap) {
+    const startPointLocation = busStopLocationMap.get(road.from.name);
+    const endPointLocation = busStopLocationMap.get(road.to.name);
     if (isUndefinedOrNull(startPointLocation)) {
-      console.log("Start point location was undefined or null. Unable to render a road from ",
-      road.from.name,
-      " to ",
-      road.to.name)
+      console.log(
+        "Start point location was undefined or null. Unable to render a road from ",
+        road.from.name,
+        " to ",
+        road.to.name
+      );
       return null;
     }
     if (isUndefinedOrNull(endPointLocation)) {
-      console.log("End point location was undefined or null. Unable to render a road from ",
-      road.from.name,
-      " to ",
-      road.to.name)
+      console.log(
+        "End point location was undefined or null. Unable to render a road from ",
+        road.from.name,
+        " to ",
+        road.to.name
+      );
       return null;
     }
     return (
