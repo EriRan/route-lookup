@@ -21,7 +21,7 @@ class BusTrafficContainer extends React.Component {
       return (
         <g className="bus-traffic-container">
           {this.renderBusStops(busStopLocationsMap)}
-          {this.renderRoads(busStopLocationsMap, this.props.stops)}
+          <RoadContainer busStopLocationMap={busStopLocationsMap} stops={this.props.stops} />
         </g>
       );
     } else {
@@ -43,12 +43,6 @@ class BusTrafficContainer extends React.Component {
           );
         })}
       </g>
-    );
-  }
-
-  renderRoads(busStopLocationsMap, stops) {
-    return (
-      <RoadContainer busStopLocationMap={busStopLocationsMap} stops={stops} />
     );
   }
 }
