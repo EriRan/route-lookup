@@ -1,19 +1,24 @@
 import { FIRST_LOCATION } from "./BusStopConstant";
 import { provideNextLocation } from "./NextLocationProvider";
-import { RIGHT } from "./NextBusStopDirection";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 
+/**
+ * Deduces locations for bustops.
+ */
 class BusStopLocationProvider {
   provide(firstStop) {
     const alreadyDeducedStops = new Map();
     const alreadyIncludedRoads = [];
+    const occupiedLocations = new Map();
     alreadyDeducedStops.set(firstStop.name, {
       x: FIRST_LOCATION.x,
       y: FIRST_LOCATION.y,
     });
+    occupiedLocations.set(FIRST_LOCATION.x, new Array(FIRST_LOCATION.y));
     this.addNeighbours(
       alreadyDeducedStops,
       alreadyIncludedRoads,
+      occupiedLocations,
       firstStop,
       FIRST_LOCATION
     );
@@ -23,16 +28,16 @@ class BusStopLocationProvider {
   addNeighbours(
     alreadyDeducedStops,
     alreadyIncludedRoads,
+    occupiedLocations,
     stopData,
     currentLocation
   ) {
     const neighbourStops = [];
-    const nextDirectionIndexContainer = { next: RIGHT };
     this.deduceNeighbours(
       stopData,
       alreadyIncludedRoads,
       alreadyDeducedStops,
-      nextDirectionIndexContainer,
+      occupiedLocations,
       currentLocation,
       neighbourStops
     );
@@ -40,6 +45,7 @@ class BusStopLocationProvider {
       this.addNeighbours(
         alreadyDeducedStops,
         alreadyIncludedRoads,
+        occupiedLocations,
         neighbourStop.stopData,
         neighbourStop.location
       );
@@ -50,7 +56,7 @@ class BusStopLocationProvider {
     stopData,
     alreadyIncludedRoads,
     alreadyDeducedStops,
-    nextDirectionIndexContainer,
+    occupiedLocations,
     currentLocation,
     neighbourStops
   ) {
@@ -67,9 +73,12 @@ class BusStopLocationProvider {
         return;
       }
       const nextLocation = this.deduceNextLocation(
-        nextDirectionIndexContainer,
+        occupiedLocations,
         currentLocation
       );
+      if (nextLocation.x === 0) {
+        console.log("No location for ", road.to.name);
+      }
       alreadyDeducedStops.set(road.to.name, nextLocation);
       neighbourStops.push({
         stopData: road.to,
@@ -78,13 +87,24 @@ class BusStopLocationProvider {
     });
   }
 
-  deduceNextLocation(nextDirectionIndexContainer, currentLocation) {
+  deduceNextLocation(occupiedLocations, currentLocation) {
     const nextLocation = provideNextLocation(
       currentLocation,
-      nextDirectionIndexContainer.next
+      occupiedLocations,
     );
-    nextDirectionIndexContainer.next++;
+    this.addOccupiedLocation(nextLocation, occupiedLocations)
     return nextLocation;
+  }
+
+  addOccupiedLocation(nextLocation, occupiedLocations) {
+    const yLocationsInXAxis = occupiedLocations.get(nextLocation.x);
+    if (isUndefinedOrNull(yLocationsInXAxis)) {
+      const newYArray = [];
+      newYArray.push(nextLocation.y);
+      occupiedLocations.set(nextLocation.x, newYArray);
+    } else {
+      yLocationsInXAxis.push(nextLocation.y);
+    }
   }
 
   isRoadAlreadyIncluded(road, alreadyIncludedRoads) {
