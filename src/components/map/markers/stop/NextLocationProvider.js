@@ -20,7 +20,6 @@ export function provideNextLocation(
   duration,
   occupiedDirectionsForStop
 ) {
-  console.log(occupiedDirectionsForStop);
   const distance = calculateDistance(duration);
   return findFreeLocation(location, distance, occupiedDirectionsForStop);
 
