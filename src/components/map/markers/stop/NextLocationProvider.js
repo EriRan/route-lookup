@@ -34,13 +34,13 @@ export function provideNextLocation(location, occupiedLocations) {
     //Lower right
     else if (
       isLocationFree(
-        location.x - STOP_GAP,
+        location.x + STOP_GAP,
         location.y + STOP_GAP,
         occupiedLocations
       )
     ) {
       return {
-        x: location.x - STOP_GAP,
+        x: location.x + STOP_GAP,
         y: location.y + STOP_GAP,
       };
     }
