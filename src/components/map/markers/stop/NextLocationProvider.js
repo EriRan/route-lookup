@@ -24,8 +24,16 @@ export function provideNextLocation(
   return findFreeLocation(location, distance, occupiedDirectionsForStop);
 
   function findFreeLocation(location, distance, occupiedDirectionsForStop) {
+    //Upper right
+    if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x + distance,
+        location.y - distance,
+        UPPER_RIGHT
+      );
+    }
     //Right
-    if (isDirectionFree(RIGHT, occupiedDirectionsForStop)) {
+    else if (isDirectionFree(RIGHT, occupiedDirectionsForStop)) {
       return createResponseObject(location.x + distance, location.y, RIGHT);
     }
     //Lower right
@@ -63,16 +71,7 @@ export function provideNextLocation(
     //UP
     else if (isDirectionFree(UP, occupiedDirectionsForStop)) {
       return createResponseObject(location.x, location.y - distance, UP);
-    } 
-    //Upper right
-    else if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
-      return createResponseObject(
-        location.x + distance,
-        location.y - distance,
-        UPPER_RIGHT
-      );
-    }
-    else {
+    } else {
       console.log("Unable to find free location!");
       return null;
     }
