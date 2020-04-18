@@ -8,3 +8,7 @@
   z-index: 1;
   background-color: white;
 }
+.drawer-header {
+  display: 'flex';
+  align-items: 'center';
+}
