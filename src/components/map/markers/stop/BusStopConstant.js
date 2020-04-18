@@ -1,5 +1,5 @@
 export const FIRST_LOCATION = {
-  x: 150,
-  y: 450
+  x: 50,
+  y: 500
 }
-export const STOP_GAP = 100;
+export const STOP_GAP = 50;

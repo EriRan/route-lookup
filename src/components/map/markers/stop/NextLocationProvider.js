@@ -1,111 +1,101 @@
 import { STOP_GAP } from "./BusStopConstant";
+import {
+  UPPER_RIGHT,
+  RIGHT,
+  LOWER_RIGHT,
+  DOWN,
+  LOWER_LEFT,
+  LEFT,
+  UPPER_LEFT,
+  UP,
+} from "./NextBusStopDirection";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 
 /**
- * Search for first available nearby location. We try 9 directions,
+ * Search for first available direction. We try 9 directions,
  * starting from upper right and then try every direction in a clockwise order
  */
-export function provideNextLocation(location, occupiedLocations) {
-  return findFreeLocation(location, occupiedLocations);
+export function provideNextLocation(
+  location,
+  duration,
+  occupiedDirectionsForStop
+) {
+  console.log(occupiedDirectionsForStop);
+  const distance = calculateDistance(duration);
+  return findFreeLocation(location, distance, occupiedDirectionsForStop);
 
-  function findFreeLocation(location, occupiedLocations) {
+  function findFreeLocation(location, distance, occupiedDirectionsForStop) {
     //Upper right
-    if (
-      isLocationFree(
-        location.x + STOP_GAP,
-        location.y - STOP_GAP,
-        occupiedLocations
-      )
-    ) {
-      return {
-        x: location.x + STOP_GAP,
-        y: location.y - STOP_GAP,
-      };
+    if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x + distance,
+        location.y - distance,
+        UPPER_RIGHT
+      );
     }
     //Right
-    else if (
-      isLocationFree(location.x + STOP_GAP, location.y, occupiedLocations)
-    ) {
-      return {
-        x: location.x + STOP_GAP,
-        y: location.y,
-      };
+    else if (isDirectionFree(RIGHT, occupiedDirectionsForStop)) {
+      return createResponseObject(location.x + distance, location.y, RIGHT);
     }
     //Lower right
-    else if (
-      isLocationFree(
-        location.x + STOP_GAP,
-        location.y + STOP_GAP,
-        occupiedLocations
-      )
-    ) {
-      return {
-        x: location.x + STOP_GAP,
-        y: location.y + STOP_GAP,
-      };
+    else if (isDirectionFree(LOWER_RIGHT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x + distance,
+        location.y + distance,
+        LOWER_RIGHT
+      );
     }
     //Down
-    else if (
-      isLocationFree(location.x, location.y + STOP_GAP, occupiedLocations)
-    ) {
-      return {
-        x: location.x,
-        y: location.y + STOP_GAP,
-      };
+    else if (isDirectionFree(DOWN, occupiedDirectionsForStop)) {
+      return createResponseObject(location.x, location.y + distance, DOWN);
     }
     //Lower left
-    else if (
-      isLocationFree(
-        location.x - STOP_GAP,
-        location.y - STOP_GAP,
-        occupiedLocations
-      )
-    ) {
-      return {
-        x: location.x - STOP_GAP,
-        y: location.y - STOP_GAP,
-      };
+    else if (isDirectionFree(LOWER_LEFT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x - distance,
+        location.y - distance,
+        LOWER_LEFT
+      );
     }
     //Left
-    else if (
-      isLocationFree(location.x - STOP_GAP, location.y, occupiedLocations)
-    ) {
-      return {
-        x: location.x - STOP_GAP,
-        y: location.y,
-      };
+    else if (isDirectionFree(LEFT, occupiedDirectionsForStop)) {
+      return createResponseObject(location.x - distance, location.y, LEFT);
     }
     //Upper left
-    else if (
-      isLocationFree(
-        location.x - STOP_GAP,
-        location.y + STOP_GAP,
-        occupiedLocations
-      )
-    ) {
-      return {
-        x: location.x - STOP_GAP,
-        y: location.y + STOP_GAP,
-      };
+    else if (isDirectionFree(UPPER_LEFT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x - distance,
+        location.y + distance,
+        UPPER_LEFT
+      );
     }
     //UP
-    else if (
-      isLocationFree(location.x, location.y - STOP_GAP, occupiedLocations)
-    ) {
-      return {
-        x: location.x,
-        y: location.y - STOP_GAP,
-      };
+    else if (isDirectionFree(UP, occupiedDirectionsForStop)) {
+      return createResponseObject(location.x, location.y - distance, UP);
     } else {
       console.log("Unable to find free location!");
       return null;
     }
   }
 
-  function isLocationFree(x, y, occupiedLocations) {
-    const yLocationsInXAxis = occupiedLocations.get(x);
+  function createResponseObject(x, y, direction) {
+    return {
+      point: {
+        x: x,
+        y: y,
+      },
+      direction: direction,
+    };
+  }
+
+  function isDirectionFree(direction, occupiedDirectionsForStop) {
     return (
-      isUndefinedOrNull(yLocationsInXAxis) || !yLocationsInXAxis.includes(y)
+      isUndefinedOrNull(occupiedDirectionsForStop) ||
+      !occupiedDirectionsForStop.includes(direction)
     );
+  }
+
+  function calculateDistance(duration) {
+    return STOP_GAP * duration;
   }
 }
