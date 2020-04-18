@@ -32,7 +32,7 @@ class RoadLineDuration extends React.Component {
     return (
       <text
         x={startPointLocation.x}
-        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y)}
+        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
       >
         {duration}
       </text>
@@ -43,7 +43,7 @@ class RoadLineDuration extends React.Component {
     return (
       <text
         x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
-        y={startPointLocation.y}
+        y={startPointLocation.y + 5}
       >
         {duration}
       </text>
@@ -54,7 +54,7 @@ class RoadLineDuration extends React.Component {
     return (
       <text
         x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
-        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y)}
+        y={this.calculateMidpoint(startPointLocation.y, endPointLocation.y) + 5}
       >
         {duration}
       </text>
