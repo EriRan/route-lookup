@@ -1,26 +1,27 @@
 import React from "react";
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import { Drawer } from "@material-ui/core";
 import "./Sidebar.css";
 
 class Sidebar extends React.Component {
   render() {
     return (
-      <div className="sidebar">
-      <List disablePadding dense>
-        <ListItem button>
-          <ListItemText>Home</ListItemText>
-        </ListItem>
-        <ListItem button>
-          <ListItemText>Billing</ListItemText>
-        </ListItem>
-        <ListItem button>
-          <ListItemText>Settings</ListItemText>
-        </ListItem>
-      </List>
-      </div>
-    )
+      <Drawer anchor={"left"} open={true} variant="persistent">
+        <List disablePadding dense>
+          <ListItem button>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
+          <ListItem button>
+            <ListItemText>Billing</ListItemText>
+          </ListItem>
+          <ListItem button>
+            <ListItemText>Settings</ListItemText>
+          </ListItem>
+        </List>
+      </Drawer>
+    );
   }
 }
 
