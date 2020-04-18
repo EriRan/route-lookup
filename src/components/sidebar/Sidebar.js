@@ -1,4 +1,6 @@
 import React from "react";
+
+import SidebarHeader from "./header/SidebarHeader";
 import {
   Button,
   Drawer,
@@ -16,7 +18,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <Drawer anchor={"left"} open={true} variant="persistent">
-        <p>Kuutiola reittiopas</p>
+        <SidebarHeader />
         <Divider />
         <form>
           <TextField
