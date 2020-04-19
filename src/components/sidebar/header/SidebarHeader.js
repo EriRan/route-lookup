@@ -5,9 +5,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 class SidebarHeader extends React.Component {
   render() {
     return (
-      <List component="nav">
-        <ListItem component="div">
-          <ListItemText inset>
+      <List>
+        <ListItem>
+          <ListItemText>
             <Typography variant="h4" align="center">
               Kuutiola
               <br />
