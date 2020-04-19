@@ -6,7 +6,7 @@ class SidebarHeader extends React.Component {
   render() {
     return (
       <div>
-        <Typography variant="h4" align="right">
+        <Typography align="right">
           <IconButton>
             <Close />
           </IconButton>
