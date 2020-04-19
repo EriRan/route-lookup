@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
-import "./Sidebar.css";
 
 class Sidebar extends React.Component {
   render() {
