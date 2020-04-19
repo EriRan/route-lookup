@@ -1,6 +1,5 @@
 import React from "react";
 
-import SidebarHeader from "./header/SidebarHeader";
 import {
   Button,
   Drawer,
@@ -11,7 +10,9 @@ import {
   Typography
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import TextField from "@material-ui/core/TextField";
+
+import SidebarHeader from "./header/SidebarHeader";
+import RouteInput from "./route/RouteInput";
 
 class Sidebar extends React.Component {
   render() {
@@ -19,15 +20,7 @@ class Sidebar extends React.Component {
       <Drawer anchor={"left"} open={true} variant="persistent">
         <SidebarHeader />
         <Divider />
-        <form>
-          <TextField
-            id="outlined-basic"
-            label="Lähtöpaikka"
-            variant="outlined"
-          />
-
-          <TextField id="outlined-basic" label="Määränpää" variant="outlined" />
-        </form>
+        <RouteInput />
         <Divider />
         <p>Keltainen linja: A -> D</p>
         <p>Punainen linja: D -> Q</p>
