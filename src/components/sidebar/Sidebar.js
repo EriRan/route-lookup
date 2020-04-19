@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import {
   Button,
@@ -7,7 +8,7 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -18,7 +19,11 @@ import RouteResult from "./route/RouteResult";
 class Sidebar extends React.Component {
   render() {
     return (
-      <Drawer anchor={"left"} open={true} variant="persistent">
+      <Drawer
+        anchor={"left"}
+        open={this.props.isSidebarOpen}
+        variant="persistent"
+      >
         <SidebarHeader />
         <Divider />
         <RouteInput />
@@ -33,10 +38,10 @@ class Sidebar extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              <p>Keltainen <Button>Näytä</Button></p>
-              <p>Punainen <Button>Näytä</Button></p>
-              <p>Vihreä <Button>Näytä</Button></p>
-              <p>Sininen <Button>Näytä</Button></p>
+              Keltainen <Button>Näytä</Button> <br />
+              Punainen <Button>Näytä</Button> <br />
+              Vihreä <Button>Näytä</Button> <br />
+              Sininen <Button>Näytä</Button> <br />
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -50,8 +55,8 @@ class Sidebar extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              <p>Tehty Solidabiksen koodihaastetta varten</p>
-              <p>Koodaus ja ulkoasu: Erik Rantanen</p>
+              Tehty Solidabiksen koodihaastetta varten <br />
+              Koodaus ja ulkoasu: Erik Rantanen
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -60,4 +65,10 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  return {
+    isSidebarOpen: state.sidebar.isOpen,
+  };
+};
+
+export default connect(mapStateToProps, {})(Sidebar);

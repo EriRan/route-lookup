@@ -1,1 +1,1 @@
-//Will be needed once it is possible for the user to provide route request
+export const SIDEBAR_STATE_CHANGE = "SIDEBAR_STATE_CHANGE";
