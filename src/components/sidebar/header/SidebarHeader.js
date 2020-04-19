@@ -1,12 +1,25 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, IconButton, List, ListItem, ListItemText } from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 class SidebarHeader extends React.Component {
   render() {
     return (
-      <Typography variant="h3" align="center">
-        Kuutiola reittiopas
-      </Typography>
+      <List component="nav">
+        <ListItem component="div">
+          <ListItemText inset>
+            <Typography variant="h4" align="center">
+              Kuutiola
+              <br />
+              reittiopas
+            </Typography>
+          </ListItemText>
+          <IconButton>
+            <ChevronLeftIcon />
+          </IconButton>
+        </ListItem>
+          
+      </List>
     );
   }
 }
