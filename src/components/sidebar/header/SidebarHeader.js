@@ -1,16 +1,12 @@
 import React from "react";
-import { Divider, Typography, IconButton } from "@material-ui/core";
-import Close from "@material-ui/icons/Close";
+import { Divider, Typography } from "@material-ui/core";
+import SidebarCloseButton from "./SidebarCloseButton";
 
 class SidebarHeader extends React.Component {
   render() {
     return (
       <div>
-        <Typography align="right">
-          <IconButton>
-            <Close />
-          </IconButton>
-        </Typography>
+        <SidebarCloseButton />
         <Divider />
         <Typography variant="h4" align="center">
           Kuutiola
