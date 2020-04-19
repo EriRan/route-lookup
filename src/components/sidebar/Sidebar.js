@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import SidebarHeader from "./header/SidebarHeader";
 import RouteInput from "./route/RouteInput";
+import RouteResult from "./route/RouteResult";
 
 class Sidebar extends React.Component {
   render() {
@@ -21,11 +22,7 @@ class Sidebar extends React.Component {
         <SidebarHeader />
         <Divider />
         <RouteInput />
-        <Divider />
-        <p>Keltainen linja: A -> D</p>
-        <p>Punainen linja: D -> Q</p>
-        <p>Kesto: 12</p>
-        <Divider />
+        <RouteResult />
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
