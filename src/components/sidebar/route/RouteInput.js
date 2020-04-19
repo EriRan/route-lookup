@@ -12,6 +12,7 @@ class RouteInput extends React.Component {
             id="outlined-basic"
             className="center-input"
             label="Lähtöpaikka"
+            autoFocus={true}
             variant="outlined"
             margin="dense"
           />
