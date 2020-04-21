@@ -9,7 +9,7 @@ class SidebarCloseButton extends React.Component {
   render() {
     return (
       <Typography align="right">
-        <IconButton onClick={this.close}>
+        <IconButton onClick={this.close} color="primary">
           <Close />
         </IconButton>
       </Typography>
