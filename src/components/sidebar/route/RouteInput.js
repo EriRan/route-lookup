@@ -7,7 +7,7 @@ class RouteInput extends React.Component {
     return (
       <form>
         <Grid container alignItems="center" direction="column">
-          <Typography>Mistä lähdet?</Typography>
+          <Typography color="primary">Mistä lähdet?</Typography>
           <TextField
             id="outlined-basic"
             className="center-input"
@@ -15,15 +15,17 @@ class RouteInput extends React.Component {
             autoFocus={true}
             variant="outlined"
             margin="dense"
+            color="primary"
           />
 
-          <Typography>Minne haluat mennä?</Typography>
+          <Typography color="primary">Minne haluat mennä?</Typography>
           <TextField
             id="outlined-basic"
             className="center-input"
             label="Määränpää"
             variant="outlined"
             margin="dense"
+            color="primary"
           />
         </Grid>
       </form>

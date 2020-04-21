@@ -8,7 +8,7 @@ class SidebarHeader extends React.Component {
       <div>
         <SidebarCloseButton />
         <Divider />
-        <Typography variant="h4" align="center">
+        <Typography variant="h4" align="center" color="primary">
           Kuutiola
           <br />
           reittiopas
