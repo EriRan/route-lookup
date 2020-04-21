@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Linjatiedot</Typography>
+            <Typography color="primary">Linjatiedot</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
@@ -51,7 +51,7 @@ class Sidebar extends React.Component {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Tietoa sivusta</Typography>
+            <Typography color="primary">Tietoa sivusta</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
