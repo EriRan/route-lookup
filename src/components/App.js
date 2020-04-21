@@ -2,13 +2,13 @@ import React from "react";
 
 import MapView from "./map/MapView";
 import Sidebar from "./sidebar/Sidebar";
-import SidebarOpenButton from "./sidebar/SidebarOpenButton";
+import HeaderBar from "./header/HeaderBar";
 
 const App = () => {
   return (
     <div className="ui container">
+      <HeaderBar />
       <Sidebar />
-      <SidebarOpenButton />
       <MapView />
     </div>
   );
