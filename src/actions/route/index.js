@@ -12,7 +12,6 @@ export const setRoute = (routeData) => {
 };
 
 export const setStartStop = (startStop, hasError) => {
-  console.log("Action ", startStop, " is: ", hasError);
   return {
     type: SET_START_STOP,
     payload: {
@@ -23,7 +22,6 @@ export const setStartStop = (startStop, hasError) => {
 };
 
 export const setDestinationStop = (destinationStop, hasError) => {
-  console.log("Action ", destinationStop, " is: ", hasError);
   return {
     type: SET_DESTINATION_STOP,
     payload: {
