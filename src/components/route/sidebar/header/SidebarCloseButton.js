@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { changeSidebarOpenState } from "../../../../actions";
+import { changeSidebarOpenState } from "../../../../actions/sidebar";
 import { Typography, IconButton } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
 
