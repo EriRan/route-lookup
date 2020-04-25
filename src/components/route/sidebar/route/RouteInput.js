@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import _ from "lodash";
 
+import { setStartStop, setDestinationStop } from "../../../../actions/route";
 import { TextField, Typography, Grid } from "@material-ui/core";
 
 class RouteInput extends React.Component {
@@ -16,6 +19,7 @@ class RouteInput extends React.Component {
             variant="outlined"
             margin="dense"
             color="primary"
+            onChange={event => this.startStopChanged(event)}
           />
 
           <Typography color="primary">Minne haluat mennä?</Typography>
@@ -26,11 +30,20 @@ class RouteInput extends React.Component {
             variant="outlined"
             margin="dense"
             color="primary"
+            onChange={event => this.destinationStopChanged(event)}
           />
         </Grid>
       </form>
     );
   }
+
+  startStopChanged(event) {
+    this.props.setStartStop(_.upperCase(event.target.value));
+  }
+
+  destinationStopChanged(event) {
+    this.props.setDestinationStop(_.upperCase(event.target.value));
+  }
 }
 
-export default RouteInput;
+export default connect(null, { setStartStop, setDestinationStop })(RouteInput);
