@@ -1,11 +1,10 @@
-import { CALCULATE_ROUTE } from "./types";
+import { SET_ROUTE } from "./types";
 
-export const calculateRoute = (startStop, destinationStop) => {
+export const calculateRoute = (routeData) => {
   return {
-    type: CALCULATE_ROUTE,
+    type: SET_ROUTE,
     payload: {
-      startStop: { startStop },
-      destinationStop: { destinationStop },
+      routeData: {routeData}
     },
   };
 };
