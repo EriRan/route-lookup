@@ -5,19 +5,29 @@ import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
 import RouteCalculator from "./RouteCalculator";
 
 class RouteResult extends React.Component {
+  componentDidMount() {
+    this.routeCalculator = new RouteCalculator(this.props.transportData);
+  }
+
   render() {
     if (
       this.hasUsableInput(this.props.startStop) &&
       this.hasUsableInput(this.props.destinationStop)
     ) {
-      const response = new RouteCalculator().calculate();
-      return <div>Calculator response: {response}</div>;
+      return (
+        <div>
+          Calculator response:
+          {this.routeCalculator.calculate(
+            this.props.startStop.name,
+            this.props.destinationStop.name
+          )}
+        </div>
+      );
     }
     return <div />;
   }
 
   hasUsableInput(targetStop) {
-    console.log(targetStop);
     return (
       !isUndefinedOrNullOrEmptyString(targetStop.name) && !targetStop.hasError
     );
