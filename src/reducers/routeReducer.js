@@ -5,16 +5,18 @@ import {
 } from "../actions/route/types";
 
 const INITIAL_STATE = {
-  routeData: null,
+  calculatedRoute: null,
+  startStop: null,
+  destinationStop: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_ROUTE:
-      return { ...state, route: action.payload };
-      case SET_START_STOP:
+      return { ...state, calculatedRoute: action.payload };
+    case SET_START_STOP:
       return { ...state, startStop: action.payload };
-      case SET_DESTINATION_STOP:
+    case SET_DESTINATION_STOP:
       return { ...state, destinationStop: action.payload };
     default:
       return state;

@@ -1,11 +1,21 @@
 import React from "react";
+import { connect } from "react-redux";
 
 class RouteResult extends React.Component {
   render() {
+    if (this.props.calculatedRoute == null) {
+      return <div />;
+    }
     return (
-      <div />
+      <div>Route has been calculated</div>
     );
   }
 }
 
-export default RouteResult;
+const mapStateToProps = (state) => {
+  return {
+    calculatedRoute: state.route.calculatedRoute,
+  };
+};
+
+export default connect(mapStateToProps, {})(RouteResult);
