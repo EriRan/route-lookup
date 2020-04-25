@@ -6,7 +6,7 @@ import { setStartStop, setDestinationStop } from "../../../../actions/route";
 import { TextField, Typography, Grid } from "@material-ui/core";
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
 
-class RouteInput extends React.Component {
+class RouteForm extends React.Component {
   render() {
     return (
       <form>
@@ -56,8 +56,8 @@ class RouteInput extends React.Component {
 
   isInputInvalid(input, possibleStops) {
     return (
-      !isUndefinedOrNullOrEmptyString(input)
-      && !possibleStops.some((stop) => stop.name === input)
+      !isUndefinedOrNullOrEmptyString(input) &&
+      !possibleStops.some((stop) => stop.name === input)
     );
   }
 }
@@ -70,5 +70,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { setStartStop, setDestinationStop })(
-  RouteInput
+  RouteForm
 );

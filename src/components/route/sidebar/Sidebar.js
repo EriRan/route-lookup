@@ -13,7 +13,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import SidebarHeader from "./header/SidebarHeader";
-import RouteInput from "./route/RouteInput";
+import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
 
 class Sidebar extends React.Component {
@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
       >
         <SidebarHeader />
         <Divider />
-        <RouteInput possibleStops={this.props.transportData.stops}/>
+        <RouteForm possibleStops={this.props.transportData.stops}/>
         <RouteResult/>
         <ExpansionPanel>
           <ExpansionPanelSummary
