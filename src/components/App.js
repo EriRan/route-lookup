@@ -1,15 +1,13 @@
 import React from "react";
 
-import MapView from "./route/map/MapView";
-import Sidebar from "./route/sidebar/Sidebar";
 import HeaderBar from "./header/HeaderBar";
+import RouteContainer from "./route/RouteContainer";
 
 const App = () => {
   return (
     <div className="ui container">
       <HeaderBar />
-      <Sidebar />
-      <MapView />
+      <RouteContainer />
     </div>
   );
 };
