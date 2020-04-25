@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import { SET_ROUTE, SET_START_STOP, SET_DESTINATION_STOP } from "./types";
 
 export const setRoute = (routeData) => {
@@ -9,20 +11,24 @@ export const setRoute = (routeData) => {
   };
 };
 
-export const setStartStop = (startStop) => {
+export const setStartStop = (startStop, hasError) => {
+  console.log("Action ", startStop, " is: ", hasError);
   return {
     type: SET_START_STOP,
     payload: {
-      startStop: startStop,
+      name: _.upperCase(startStop),
+      hasError: hasError,
     },
   };
 };
 
-export const setDestinationStop = (destinationStop) => {
+export const setDestinationStop = (destinationStop, hasError) => {
+  console.log("Action ", destinationStop, " is: ", hasError);
   return {
     type: SET_DESTINATION_STOP,
     payload: {
-      destinationStop: destinationStop,
+      name: _.upperCase(destinationStop),
+      hasError: hasError,
     },
   };
 };
