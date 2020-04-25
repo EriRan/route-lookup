@@ -1,7 +1,7 @@
 import React from "react";
 
-import MapView from "./map/MapView";
-import Sidebar from "./sidebar/Sidebar";
+import MapView from "./route/map/MapView";
+import Sidebar from "./route/sidebar/Sidebar";
 import HeaderBar from "./header/HeaderBar";
 
 const App = () => {

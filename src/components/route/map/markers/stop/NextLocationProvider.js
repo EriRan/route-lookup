@@ -9,7 +9,7 @@ import {
   UPPER_LEFT,
   UP,
 } from "./NextBusStopDirection";
-import { isUndefinedOrNull } from "../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
  * Search for first available direction. We try 9 directions,
