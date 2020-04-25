@@ -4,6 +4,7 @@ import _ from "lodash";
 
 import { setStartStop, setDestinationStop } from "../../../../actions/route";
 import { TextField, Typography, Grid } from "@material-ui/core";
+import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
 
 class RouteInput extends React.Component {
   render() {
@@ -19,7 +20,11 @@ class RouteInput extends React.Component {
             variant="outlined"
             margin="dense"
             color="primary"
-            onChange={event => this.startStopChanged(event)}
+            onChange={(event) => this.startStopChanged(event)}
+            error={this.isInputInvalid(
+              this.props.startStop,
+              this.props.possibleStops
+            )}
           />
 
           <Typography color="primary">Minne haluat mennä?</Typography>
@@ -30,7 +35,11 @@ class RouteInput extends React.Component {
             variant="outlined"
             margin="dense"
             color="primary"
-            onChange={event => this.destinationStopChanged(event)}
+            onChange={(event) => this.destinationStopChanged(event)}
+            error={this.isInputInvalid(
+              this.props.destinationStop,
+              this.props.possibleStops
+            )}
           />
         </Grid>
       </form>
@@ -44,6 +53,22 @@ class RouteInput extends React.Component {
   destinationStopChanged(event) {
     this.props.setDestinationStop(_.upperCase(event.target.value));
   }
+
+  isInputInvalid(input, possibleStops) {
+    return (
+      !isUndefinedOrNullOrEmptyString(input)
+      && !possibleStops.some((stop) => stop.name === input)
+    );
+  }
 }
 
-export default connect(null, { setStartStop, setDestinationStop })(RouteInput);
+const mapStateToProps = (state) => {
+  return {
+    startStop: state.route.startStop,
+    destinationStop: state.route.destinationStop,
+  };
+};
+
+export default connect(mapStateToProps, { setStartStop, setDestinationStop })(
+  RouteInput
+);
