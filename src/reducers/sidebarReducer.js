@@ -1,4 +1,4 @@
-import { SIDEBAR_STATE_CHANGE } from "../actions/types";
+import { SIDEBAR_STATE_CHANGE } from "../actions/sidebar/types";
 
 const INITIAL_STATE = {
   isOpen: true,
