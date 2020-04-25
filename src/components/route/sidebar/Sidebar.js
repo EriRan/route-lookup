@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
         <SidebarHeader />
         <Divider />
         <RouteForm possibleStops={this.props.transportData.stops}/>
-        <RouteResult/>
+        <RouteResult transportData={this.props.transportData}/>
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
