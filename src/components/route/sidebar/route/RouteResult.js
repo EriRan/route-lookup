@@ -6,12 +6,19 @@ import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
 class RouteResult extends React.Component {
   render() {
     if (
-      !isUndefinedOrNullOrEmptyString(this.props.startStop) &&
-      !isUndefinedOrNullOrEmptyString(this.props.destinationStop)
+      this.hasUsableInput(this.props.startStop) &&
+      this.hasUsableInput(this.props.destinationStop)
     ) {
       return <div>Can calculate the route</div>;
     }
     return <div />;
+  }
+
+  hasUsableInput(targetStop) {
+    console.log(targetStop);
+    return (
+      !isUndefinedOrNullOrEmptyString(targetStop.name) && !targetStop.hasError
+    );
   }
 }
 
