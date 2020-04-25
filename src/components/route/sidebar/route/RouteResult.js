@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import calculateRoute from "./routeCalculator";
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
+import RouteCalculator from "./RouteCalculator";
 
 class RouteResult extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class RouteResult extends React.Component {
       this.hasUsableInput(this.props.startStop) &&
       this.hasUsableInput(this.props.destinationStop)
     ) {
-      const response = calculateRoute();
+      const response = new RouteCalculator().calculate();
       return <div>Calculator response: {response}</div>;
     }
     return <div />;
