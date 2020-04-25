@@ -1,7 +1,7 @@
 import React from "react";
 
 import TrafficNetworkContainer from "./markers/TrafficNetworkContainer";
-import TransportDataProvider from "../../data/TransportDataProvider";
+import TransportDataProvider from "../../../data/TransportDataProvider";
 import "./MapView.css";
 
 class MapView extends React.Component {
