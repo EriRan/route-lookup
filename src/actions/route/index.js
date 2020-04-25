@@ -13,7 +13,7 @@ export const setStartStop = (startStop) => {
   return {
     type: SET_START_STOP,
     payload: {
-      startStop: { startStop },
+      startStop: startStop,
     },
   };
 };
@@ -22,7 +22,7 @@ export const setDestinationStop = (destinationStop) => {
   return {
     type: SET_DESTINATION_STOP,
     payload: {
-      destinationStop: { destinationStop },
+      destinationStop: destinationStop,
     },
   };
 };

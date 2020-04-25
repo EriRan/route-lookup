@@ -15,9 +15,9 @@ export default (state = INITIAL_STATE, action) => {
     case SET_ROUTE:
       return { ...state, calculatedRoute: action.payload };
     case SET_START_STOP:
-      return { ...state, startStop: action.payload };
+      return { ...state, startStop: action.payload.startStop };
     case SET_DESTINATION_STOP:
-      return { ...state, destinationStop: action.payload };
+      return { ...state, destinationStop: action.payload.destinationStop };
     default:
       return state;
   }
