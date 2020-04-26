@@ -14,7 +14,7 @@ class RouteCalculator {
 
   calculate(startStop, destinationStop) {
     if (startStop === destinationStop) {
-      return "Olet jo määränpäässäsi.";
+      return new ResponseConverter().emptyResponse();
     }
     const settledNodes = new Map();
     const unsettledNodes = new Map();
