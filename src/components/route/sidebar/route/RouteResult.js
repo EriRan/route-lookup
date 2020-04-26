@@ -18,12 +18,15 @@ class RouteResult extends React.Component {
         this.props.startStop.name,
         this.props.destinationStop.name
       );
-      return <div>Calculator response:{this.renderRoute(optimalRoute)}</div>;
+      return this.renderRoute(optimalRoute);
     }
     return <div />;
   }
 
   renderRoute(optimalRoute) {
+    if (optimalRoute.totalDuration === 0) {
+      return <div key={`result-stop-no-route`}>Olet jo määränpäässäsi</div>
+    }
     const routeData = optimalRoute.route.map((stopRoute) => {
       return (
         <div key={`result-stop-${stopRoute.name}`}>

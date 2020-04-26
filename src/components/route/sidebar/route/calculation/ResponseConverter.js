@@ -15,6 +15,13 @@ class ResponseConverter {
       route: route,
     };
   }
+
+  emptyResponse() {
+    return {
+      totalDuration: 0,
+      route: {},
+    };
+  }
 }
 
 export default ResponseConverter;
