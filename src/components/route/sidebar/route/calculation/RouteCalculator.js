@@ -21,20 +21,21 @@ class RouteCalculator {
     const startNode = this.nodeFactory.buildStartNode(
       this.transportData.stops.get(startStop)
     );
-    unsettledNodes.set(startNode.stopData.name, startNode);
+    this.addToNodeMap(unsettledNodes, startNode);
     while (unsettledNodes.size > 0) {
       const currentNode = this.findLowestDurationNode(unsettledNodes);
       this.removeNode(currentNode, unsettledNodes);
       for (const adjacentNode of this.deduceAdjacentNodes(currentNode)) {
         if (!settledNodes.has(adjacentNode.stopData.name)) {
           this.calculateMinimumDistance(adjacentNode, currentNode);
-          unsettledNodes.set(adjacentNode.stopData.name, adjacentNode);
+          this.addToNodeMap(unsettledNodes, adjacentNode);
         }
       }
-      settledNodes.set(currentNode.stopData.name, currentNode);
+      this.addToNodeMap(settledNodes, currentNode);
     }
     return new ResponseConverter().convert(settledNodes.get(destinationStop).shortestPath);
   }
+
 
   getOtherNodes(startStop, stops) {
     const otherNodes = [];
@@ -79,7 +80,7 @@ class RouteCalculator {
   }
 
   addAdjacentNode(road, currentNode, adjacentNodes) {
-    //If stop does not belong to any lines, it cannot be used
+    //If the road does not belong to any lines, it cannot be used
     if (
       isUndefinedOrNull(road) ||
       isUndefinedOrNull(road.includesLines) ||
@@ -125,6 +126,10 @@ class RouteCalculator {
     return road.includesLines.some(
       (line) => line === currentNode.lineBeingUsed
     );
+  }
+
+  addToNodeMap(settledNodes, currentNode) {
+    settledNodes.set(currentNode.stopData.name, currentNode);
   }
 
   removeNode(nodeToRemove, nodesMap) {
