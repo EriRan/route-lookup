@@ -1,4 +1,5 @@
 import NodeFactory from "./NodeFactory";
+import ResponseConverter from "./ResponseConverter";
 
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
@@ -34,7 +35,8 @@ class RouteCalculator {
     }
     console.log(settledNodes);
     console.log(settledNodes.get(destinationStop).shortestPath);
-    return `Path from ${startStop} to ${destinationStop}`;
+
+    return new ResponseConverter().convert(settledNodes.get(destinationStop).shortestPath);
   }
 
   getOtherNodes(startStop, stops) {

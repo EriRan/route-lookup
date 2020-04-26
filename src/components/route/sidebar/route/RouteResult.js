@@ -14,17 +14,29 @@ class RouteResult extends React.Component {
       this.hasUsableInput(this.props.startStop) &&
       this.hasUsableInput(this.props.destinationStop)
     ) {
-      return (
-        <div>
-          Calculator response:
-          {this.routeCalculator.calculate(
-            this.props.startStop.name,
-            this.props.destinationStop.name
-          )}
-        </div>
+      const optimalRoute = this.routeCalculator.calculate(
+        this.props.startStop.name,
+        this.props.destinationStop.name
       );
+      return <div>Calculator response:{this.renderRoute(optimalRoute)}</div>;
     }
     return <div />;
+  }
+
+  renderRoute(optimalRoute) {
+    const routeData = optimalRoute.route.map((stopRoute) => {
+      return (
+        <div key={`result-stop-${stopRoute.name}`}>
+          Pysäkki: {stopRoute.name}, Linja: {stopRoute.line}
+        </div>
+      );
+    });
+    return (
+      <div>
+        {routeData}
+        <div>Kestää yhteensä: {optimalRoute.totalDuration}</div>
+      </div>
+    );
   }
 
   hasUsableInput(targetStop) {
