@@ -1,5 +1,7 @@
 import StopDataMapper from "./StopDataMapper";
 
+import { isUndefinedOrNull } from "../../util/Utilities";
+
 /**
  * Map the data provided in JSON to a object that can be handled more easily
  *
@@ -37,15 +39,38 @@ class TransportDataMapper {
     }
 
     function mapLinesToRoads(mappedData) {
-      for (const stop in mappedData.stops) {
-        for (const road in stop.roads) {
-          mappedData.lines.forEach(line => addLineIfRoadIncluded(road, line));
-        }
-      }
+      mappedData.stops.forEach((stop) => {
+        stop.roads.forEach((road) => {
+          mappedData.lines.forEach((line) => addLineIfRoadIncluded(road, line));
+        });
+      });
     }
 
     function addLineIfRoadIncluded(road, line) {
-      
+      var toIndex = null;
+      var fromIndex = null;
+      for (let i = 0; i < line.stopsAt.length; i++) {
+        let iteratedStop = line.stopsAt[i];
+        if (iteratedStop === road.to.name) {
+          toIndex = i;
+        } else if (iteratedStop === road.from.name) {
+          fromIndex = i;
+        }
+      }
+      if (
+        !isUndefinedOrNull(toIndex) &&
+        !isUndefinedOrNull(fromIndex) &&
+        indexesAreNextToEachOther(toIndex, fromIndex)
+      ) {
+        if (isUndefinedOrNull(road.includesLines)) {
+          road.includesLines = [];
+        }
+        road.includesLines.push(line.name);
+      }
+    }
+
+    function indexesAreNextToEachOther(toIndex, fromIndex) {
+      return toIndex - 1 === fromIndex || toIndex + 1 === fromIndex;
     }
   }
 }
