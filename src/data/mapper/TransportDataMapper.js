@@ -29,16 +29,18 @@ class TransportDataMapper {
   map(transportData) {
     const mappedTransportData = {};
     mappedTransportData.stops = new StopDataMapper().map(transportData);
-    mappedTransportData.lines = new LinesDataMapper().map(transportData.linjastot);
+    mappedTransportData.lines = new LinesDataMapper().map(
+      transportData.linjastot
+    );
     mapLinesToRoads(mappedTransportData);
     return mappedTransportData;
 
     function mapLinesToRoads(mappedData) {
-      mappedData.stops.forEach((stop) => {
+      for (const stop of mappedData.stops.values()) {
         stop.roads.forEach((road) => {
           mappedData.lines.forEach((line) => addLineIfRoadIncluded(road, line));
         });
-      });
+      }
     }
 
     function addLineIfRoadIncluded(road, line) {

@@ -15,8 +15,9 @@ class BusTrafficContainer extends React.Component {
 
   renderTrafficNetwork() {
     if (!_.isUndefined(this.props.stops) && !_.isNull(this.props.stops)) {
+      //Start from the first bus stop in the props and crawl to next ones through the roads.
       const busStopLocationsMap = new BusStopLocationProvider().provide(
-        this.props.stops[0]
+        this.props.stops.values().next().value
       );
       return (
         <g className="bus-traffic-container">
