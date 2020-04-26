@@ -33,7 +33,7 @@ class RouteInput extends React.Component {
   isInputInvalid(input, possibleStops) {
     return (
       !isUndefinedOrNullOrEmptyString(input) &&
-      !possibleStops.some((stop) => stop.name === input)
+      !possibleStops.has(input)
     );
   }
 }
