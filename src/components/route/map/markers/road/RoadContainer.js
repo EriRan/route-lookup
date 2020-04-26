@@ -7,7 +7,7 @@ class RoadContainer extends React.Component {
   render() {
     return (
       <g>
-        {this.props.stops.map((stop) => {
+        {Array.from(this.props.stops.values()).map((stop) => {
           return stop.roads
             .filter((road) => {
               return road.isReverse === false;

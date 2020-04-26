@@ -8,7 +8,7 @@ class StopDataMapper {
       mappedStops.set(mappedStop.name, mappedStop);
     });
     mapRoads(mappedStops, transportData.tiet);
-    return Array.from(mappedStops.values());
+    return mappedStops;
 
     function mapRoads(mappedStops, roadsJson) {
       roadsJson.forEach((road) => {
