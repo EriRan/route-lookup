@@ -1,5 +1,19 @@
 /**
  * Map the data provided in JSON to a object that can be handled more easily
+ *
+ * Response:
+ * Object {
+ *  Map<String, Stop> stops
+ *  Array<Line> lines
+ * }
+ * Stop {
+ *  String name
+ *  Array<Road> roads
+ * }
+ * Line {
+ *  String name
+ *  Array[] stopsAt
+ * }
  */
 class TransportDataMapper {
   map(transportData) {
@@ -30,11 +44,17 @@ class TransportDataMapper {
         mappedRoad.duration = road.kesto;
         mappedRoad.isReverse = false;
         mappedPointOneStop.roads.push(mappedRoad);
-        mappedPointTwoStop.roads.push(createReverseRoad(mappedRoad, mappedPointOneStop, mappedPointTwoStop));
+        mappedPointTwoStop.roads.push(
+          createReverseRoad(mappedRoad, mappedPointOneStop, mappedPointTwoStop)
+        );
       });
     }
 
-    function createReverseRoad(mappedRoad, mappedPointOneStop, mappedPointTwoStop) {
+    function createReverseRoad(
+      mappedRoad,
+      mappedPointOneStop,
+      mappedPointTwoStop
+    ) {
       const reverseRoad = {};
       reverseRoad.from = mappedPointTwoStop;
       reverseRoad.to = mappedPointOneStop;
