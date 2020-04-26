@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { Typography } from "@material-ui/core";
+
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
 import RouteCalculator from "./calculation/RouteCalculator";
 
@@ -25,19 +27,23 @@ class RouteResult extends React.Component {
 
   renderRoute(optimalRoute) {
     if (optimalRoute.totalDuration === 0) {
-      return <div key={`result-stop-no-route`}>Olet jo määränpäässäsi</div>
+      return (
+        <Typography key={`result-stop-no-route`}>
+          Olet jo määränpäässäsi
+        </Typography>
+      );
     }
     const routeData = optimalRoute.route.map((stopRoute) => {
       return (
-        <div key={`result-stop-${stopRoute.name}`}>
+        <Typography key={`result-stop-${stopRoute.name}`}>
           Pysäkki: {stopRoute.name}, Linja: {stopRoute.line}
-        </div>
+        </Typography>
       );
     });
     return (
       <div>
         {routeData}
-        <div>Kestää yhteensä: {optimalRoute.totalDuration}</div>
+        <Typography>Kestää yhteensä: {optimalRoute.totalDuration}</Typography>
       </div>
     );
   }
