@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
-import RouteCalculator from "./RouteCalculator";
+import RouteCalculator from "./calculation/RouteCalculator";
 
 class RouteResult extends React.Component {
   componentDidMount() {
