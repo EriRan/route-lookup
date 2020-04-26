@@ -33,9 +33,6 @@ class RouteCalculator {
       }
       settledNodes.set(currentNode.stopData.name, currentNode);
     }
-    console.log(settledNodes);
-    console.log(settledNodes.get(destinationStop).shortestPath);
-
     return new ResponseConverter().convert(settledNodes.get(destinationStop).shortestPath);
   }
 
