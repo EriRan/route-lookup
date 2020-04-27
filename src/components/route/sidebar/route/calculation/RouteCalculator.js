@@ -28,7 +28,10 @@ class RouteCalculator {
       );
       this.removeNode(currentNode, unsettledNodeNames);
       for (const road of currentNode.stopData.roads) {
-        if (this.isRoadUsable(road) && !settledNodeNames.includes(road.to.name)) {
+        if (
+          this.isRoadUsable(road) &&
+          !settledNodeNames.includes(road.to.name)
+        ) {
           const adjacentNode = allNodesMap.get(road.to.name);
           this.deduceWhichLineToUse(currentNode, road, adjacentNode);
           this.calculateMinimumDistance(
@@ -41,6 +44,7 @@ class RouteCalculator {
       }
       settledNodeNames.push(currentNode.stopData.name);
     }
+
     return new ResponseConverter().convert(
       allNodesMap.get(destinationStop).shortestPath
     );
@@ -130,7 +134,7 @@ class RouteCalculator {
   }
 
   removeNode(nodeToRemove, nodeNames) {
-    nodeNames.splice(nodeNames.indexOf(nodeToRemove.stopData.name));
+    nodeNames.splice(nodeNames.indexOf(nodeToRemove.stopData.name), 1);
   }
 }
 
