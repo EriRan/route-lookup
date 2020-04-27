@@ -3,6 +3,13 @@
  */
 class ResponseConverter {
   convert(nodes) {
+    if (nodes.length === 0) {
+      return {
+        totalDuration: null,
+        route: [],
+        message: "Reittiä ei löytynyt",
+      };
+    }
     const route = nodes.map((node) => {
       return {
         name: node.stopData.name,

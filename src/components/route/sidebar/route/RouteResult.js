@@ -32,20 +32,27 @@ class RouteResult extends React.Component {
           Olet jo määränpäässäsi
         </Typography>
       );
-    }
-    const routeData = optimalRoute.route.map((stopRoute) => {
+    } else if (!isUndefinedOrNullOrEmptyString(optimalRoute.message)) {
       return (
-        <Typography key={`result-stop-${stopRoute.name}`}>
-          Pysäkki: {stopRoute.name}, Linja: {stopRoute.line}
+        <Typography key={`result-stop-no-route`}>
+          {optimalRoute.message}
         </Typography>
       );
-    });
-    return (
-      <div>
-        {routeData}
-        <Typography>Kestää yhteensä: {optimalRoute.totalDuration}</Typography>
-      </div>
-    );
+    } else {
+      const routeData = optimalRoute.route.map((stopRoute) => {
+        return (
+          <Typography key={`result-stop-${stopRoute.name}`}>
+            Pysäkki: {stopRoute.name}, Linja: {stopRoute.line}
+          </Typography>
+        );
+      });
+      return (
+        <div>
+          {routeData}
+          <Typography>Kestää yhteensä: {optimalRoute.totalDuration}</Typography>
+        </div>
+      );
+    }
   }
 
   hasUsableInput(targetStop) {
