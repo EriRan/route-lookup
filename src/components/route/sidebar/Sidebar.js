@@ -31,23 +31,6 @@ class Sidebar extends React.Component {
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography color="primary">Linjatiedot</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Keltainen <Button>Näytä</Button> <br />
-              Punainen <Button>Näytä</Button> <br />
-              Vihreä <Button>Näytä</Button> <br />
-              Sininen <Button>Näytä</Button> <br />
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
