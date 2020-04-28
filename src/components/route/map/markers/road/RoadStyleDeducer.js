@@ -1,18 +1,30 @@
 /**
- * Deduces correct style for a RoadLine depending on what lines does it have
+ * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
+ *
+ * return Array<StyleObject>
+ *
+ * StyleObject : {
+ *  Integer opacity
+ *  String color
+ * }
  */
 class RoadStyleDeducer {
   deduce(includesLines) {
     if (!Array.isArray(includesLines) || includesLines.length === 0) {
-      return this.createResponse(0.3, "gray");
+      return new Array(this.createResponse(0.3, "gray"));
     }
-    if (includesLines.length === 1) {
-      return this.deduceFromSingleLine(includesLines[0])
-    }
-    return this.deduceFromMultipleLines(includesLines);
+    return this.deduceFromLines(includesLines);
   }
 
-  deduceFromSingleLine(colorString) {
+  deduceFromLines(includesLines) {
+    const arrayResponse = [];
+    includesLines.forEach((singleLine) => {
+      arrayResponse.push(this.deduceOneLineStyle(singleLine));
+    });
+    return arrayResponse;
+  }
+
+  deduceOneLineStyle(colorString) {
     switch (colorString) {
       case "keltainen":
         return this.createResponse(1.0, "yellow");
@@ -23,20 +35,20 @@ class RoadStyleDeducer {
       case "sininen":
         return this.createResponse(1.0, "blue");
       default:
-        console.log("Unrecognised line name: ", colorString, " Please define a color for it");
+        console.log(
+          "Unrecognised line name: ",
+          colorString,
+          " Please define a color for it"
+        );
         return this.createResponse(1.0, "black");
     }
   }
 
-  deduceFromMultipleLines(includesLines) {
-    return this.createResponse(1.0, "pink");
-  }
-
   createResponse(opacity, colorString) {
     return {
-        opacity: opacity,
-        color: colorString,
-    }
+      opacity: opacity,
+      color: colorString,
+    };
   }
 }
 
