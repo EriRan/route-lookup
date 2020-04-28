@@ -6,16 +6,16 @@ class RoadLine extends React.Component {
   render() {
     return (
       <g className="road-line">
-        <RoadLineDuration
-          startPointLocation={this.props.startPointLocation}
-          endPointLocation={this.props.endPointLocation}
-          duration={this.props.roadData.duration}
-        />
         {this.renderLine(
           this.props.startPointLocation,
           this.props.endPointLocation,
           new RoadStyleDeducer().deduce(this.props.roadData.includesLines)
         )}
+        <RoadLineDuration
+          startPointLocation={this.props.startPointLocation}
+          endPointLocation={this.props.endPointLocation}
+          duration={this.props.roadData.duration}
+        />
       </g>
     );
   }

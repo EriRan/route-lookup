@@ -3,11 +3,9 @@
  */
 class RoadStyleDeducer {
   deduce(includesLines) {
-    //No lines
     if (!Array.isArray(includesLines) || includesLines.length === 0) {
       return this.createResponse(0.3, "gray");
     }
-    //Only one line
     if (includesLines.length === 1) {
       return this.deduceFromSingleLine(includesLines[0])
     }
