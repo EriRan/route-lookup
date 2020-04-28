@@ -47,6 +47,7 @@ class RoadContainer extends React.Component {
         roadData={road}
         startPointLocation={startPointLocation}
         endPointLocation={endPointLocation}
+        includesLines={road.includesLines}
       />
     );
   }

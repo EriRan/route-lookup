@@ -1,5 +1,6 @@
 import React from "react";
 import RoadLineDuration from "./RoadLineDuration";
+import RoadStyleDeducer from "./RoadStyleDeducer";
 
 class RoadLine extends React.Component {
   render() {
@@ -12,20 +13,22 @@ class RoadLine extends React.Component {
         />
         {this.renderLine(
           this.props.startPointLocation,
-          this.props.endPointLocation
+          this.props.endPointLocation,
+          new RoadStyleDeducer().deduce(this.props.roadData.includesLines)
         )}
       </g>
     );
   }
 
-  renderLine(startPointLocation, endPoint) {
+  renderLine(startPointLocation, endPoint, styleObject) {
     return (
       <line
         x1={startPointLocation.x}
         y1={startPointLocation.y}
         x2={endPoint.x}
         y2={endPoint.y}
-        stroke="black"
+        stroke={styleObject.color}
+        opacity={styleObject.opacity}
       />
     );
   }
