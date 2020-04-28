@@ -46,6 +46,7 @@ class RouteCalculator {
     }
 
     return new ResponseConverter().convert(
+      startStop,
       allNodesMap.get(destinationStop).shortestPath
     );
   }
