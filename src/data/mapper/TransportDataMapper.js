@@ -19,6 +19,7 @@ import { isUndefinedOrNull } from "../../util/Utilities";
  *  Stop to
  *  Stop from
  *  Array<String> includesLines
+ *  Boolean isReverse
  * }
  * Line {
  *  String name
