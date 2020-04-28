@@ -20,6 +20,7 @@ class RouteResult extends React.Component {
         this.props.startStop.name,
         this.props.destinationStop.name
       );
+      console.log(optimalRoute);
       return this.renderRoute(optimalRoute);
     }
     return <div />;
@@ -41,15 +42,15 @@ class RouteResult extends React.Component {
     } else {
       const routeData = optimalRoute.route.map((stopRoute) => {
         return (
-          <Typography key={`result-stop-${stopRoute.name}`}>
-            Pysäkki: {stopRoute.name}, Linja: {stopRoute.line}
+          <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
+            Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla: {stopRoute.line}
           </Typography>
         );
       });
       return (
         <div>
           {routeData}
-          <Typography>Kestää yhteensä: {optimalRoute.totalDuration}</Typography>
+          <Typography>Kesto yhteensä: {optimalRoute.totalDuration}</Typography>
         </div>
       );
     }

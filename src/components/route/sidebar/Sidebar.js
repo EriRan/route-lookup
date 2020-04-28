@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-  Button,
   Drawer,
   Divider,
   ExpansionPanel,
@@ -26,8 +25,8 @@ class Sidebar extends React.Component {
       >
         <SidebarHeader />
         <Divider />
-        <RouteForm possibleStops={this.props.transportData.stops}/>
-        <RouteResult transportData={this.props.transportData}/>
+        <RouteForm possibleStops={this.props.transportData.stops} />
+        <RouteResult transportData={this.props.transportData} />
         <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
