@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
+import RouteCalculator from "./calculation/RouteCalculator";
 
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
-import RouteCalculator from "./calculation/RouteCalculator";
+import { setRoute } from "../../../../actions/route";
 
 class RouteResult extends React.Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class RouteResult extends React.Component {
         this.props.startStop.name,
         this.props.destinationStop.name
       );
-      console.log(optimalRoute);
+      this.props.setRoute(optimalRoute.route);
       return this.renderRoute(optimalRoute);
     }
     return <div />;
@@ -71,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(RouteResult);
+export default connect(mapStateToProps, {setRoute})(RouteResult);
