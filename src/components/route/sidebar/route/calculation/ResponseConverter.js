@@ -10,7 +10,6 @@ class ResponseConverter {
         message: "Reittiä ei löytynyt",
       };
     }
-    console.log(nodes);
     return {
       totalDuration: nodes[nodes.length - 1].totalDuration,
       route: this.buildRoute(startStop, nodes),
