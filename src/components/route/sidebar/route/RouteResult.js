@@ -5,7 +5,6 @@ import { Typography } from "@material-ui/core";
 import RouteCalculator from "./calculation/RouteCalculator";
 
 import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
-import { setRoute } from "../../../../actions/route";
 
 class RouteResult extends React.Component {
   componentDidMount() {
@@ -21,8 +20,6 @@ class RouteResult extends React.Component {
         this.props.startStop.name,
         this.props.destinationStop.name
       );
-      console.log(optimalRoute.route);
-      this.props.setRoute(optimalRoute.route);
       return this.renderRoute(optimalRoute);
     }
     return <div />;
@@ -42,7 +39,8 @@ class RouteResult extends React.Component {
         </Typography>
       );
     } else {
-      const routeData = optimalRoute.route.map((stopRoute, unneededKey) => {
+      const routeData = Array.from(optimalRoute.route).map((entry) => {
+        const stopRoute = entry[1];
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
             Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla: {stopRoute.line}
@@ -72,4 +70,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {setRoute})(RouteResult);
+export default connect(mapStateToProps, {})(RouteResult);
