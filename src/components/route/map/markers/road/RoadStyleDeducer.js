@@ -1,3 +1,4 @@
+import { UNUSED_ROAD_OPACITY, USED_ROAD_OPACITY } from "./RoadConstant";
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
  *
@@ -9,45 +10,63 @@
  * }
  */
 class RoadStyleDeducer {
-  deduce(includesLines) {
+  deduce(includesLines, calculatedRouteNode, isRouteCalculated) {
     if (!Array.isArray(includesLines) || includesLines.length === 0) {
-      return new Array(this.createResponse(0.3, "gray"));
+      return new Array(this.createResponse(UNUSED_ROAD_OPACITY, "gray"));
     }
-    return this.deduceFromLines(includesLines);
+    return this.deduceFromLines(
+      includesLines,
+      calculatedRouteNode,
+      isRouteCalculated
+    );
   }
 
-  deduceFromLines(includesLines) {
+  deduceFromLines(includesLines, calculatedRouteNode) {
     const arrayResponse = [];
     includesLines.forEach((singleLine) => {
-      arrayResponse.push(this.deduceOneLineStyle(singleLine));
+      arrayResponse.push(
+        this.deduceOneLineStyle(singleLine, calculatedRouteNode)
+      );
     });
     return arrayResponse;
   }
 
-  deduceOneLineStyle(colorString) {
+  deduceOneLineStyle(colorString, calculatedRouteNode, isRouteCalculated) {
+    if (isRouteCalculated) {
+      if (calculatedRouteNode.line === colorString) {
+        this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
+      } else {
+        this.returnColorDependingOnLine(colorString, UNUSED_ROAD_OPACITY);
+      }
+    } else {
+      return this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
+    }
+  }
+
+  returnColorDependingOnLine(colorString, opacity) {
     switch (colorString) {
       case "keltainen":
-        return this.createResponse(1.0, "yellow");
+        return this.createResponse("yellow", opacity);
       case "punainen":
-        return this.createResponse(1.0, "red");
+        return this.createResponse("red", opacity);
       case "vihreä":
-        return this.createResponse(1.0, "green");
+        return this.createResponse("green", opacity);
       case "sininen":
-        return this.createResponse(1.0, "blue");
+        return this.createResponse("blue", opacity);
       default:
         console.log(
           "Unrecognised line name: ",
           colorString,
           " Please define a color for it"
         );
-        return this.createResponse(1.0, "black");
+        return this.createResponse("black", opacity);
     }
   }
 
-  createResponse(opacity, colorString) {
+  createResponse(colorString, opacity) {
     return {
-      opacity: opacity,
       color: colorString,
+      opacity: opacity,
     };
   }
 }

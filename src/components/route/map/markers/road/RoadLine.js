@@ -1,4 +1,5 @@
 import React from "react";
+
 import RoadLineDuration from "./RoadLineDuration";
 import RoadStyleDeducer from "./RoadStyleDeducer";
 import { LINE_GAP } from "./RoadConstant";
@@ -10,7 +11,9 @@ class RoadLine extends React.Component {
         {this.renderLines(
           this.props.startPointLocation,
           this.props.endPointLocation,
-          this.props.roadData
+          this.props.roadData,
+          this.props.calculatedRouteNode,
+          this.props.isRouteCalculated
         )}
         <RoadLineDuration
           startPointLocation={this.props.startPointLocation}
@@ -21,9 +24,17 @@ class RoadLine extends React.Component {
     );
   }
 
-  renderLines(startPointLocation, endPoint, roadData) {
+  renderLines(
+    startPointLocation,
+    endPoint,
+    roadData,
+    calculatedRouteNode,
+    isRouteCalculated
+  ) {
     const styleObjects = new RoadStyleDeducer().deduce(
-      this.props.roadData.includesLines
+      this.props.roadData.includesLines,
+      calculatedRouteNode,
+      isRouteCalculated
     );
     const linesToRender = [];
     for (let i = 0; i < styleObjects.length; i++) {
