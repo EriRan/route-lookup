@@ -21,6 +21,7 @@ class RouteResult extends React.Component {
         this.props.startStop.name,
         this.props.destinationStop.name
       );
+      console.log(optimalRoute.route);
       this.props.setRoute(optimalRoute.route);
       return this.renderRoute(optimalRoute);
     }
@@ -66,7 +67,6 @@ class RouteResult extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    calculatedRoute: state.route.calculatedRoute,
     startStop: state.route.startStop,
     destinationStop: state.route.destinationStop,
   };
