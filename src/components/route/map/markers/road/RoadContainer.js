@@ -1,21 +1,25 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 import RoadLine from "./RoadLine";
 
 class RoadContainer extends React.Component {
   render() {
+    const roads = Array.from(this.props.stops.values()).flatMap(
+      (stop) => stop.roads
+    );
     return (
       <g>
-        {Array.from(this.props.stops.values()).map((stop) => {
-          return stop.roads
-            .filter((road) => {
-              return road.isReverse === false;
-            })
-            .map((road) => {
-              return this.renderRoad(road, this.props.busStopLocationMap);
-            });
-        })}
+        {roads
+          .filter((road) => {
+            return road.isReverse === false;
+          })
+          .map((road) => {
+            return this.renderRoad(road, this.props.busStopLocationMap);
+          })}
+        )}
       </g>
     );
   }
@@ -41,6 +45,7 @@ class RoadContainer extends React.Component {
       );
       return null;
     }
+
     return (
       <RoadLine
         key={`road-line-from-${road.from.name}-to-${road.to.name}`}
@@ -53,4 +58,10 @@ class RoadContainer extends React.Component {
   }
 }
 
-export default RoadContainer;
+const mapStateToProps = (state) => {
+  return {
+    calculatedRoute: state.route.calculatedRoute,
+  };
+};
+
+export default connect(mapStateToProps, {})(RoadContainer);
