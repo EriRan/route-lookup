@@ -42,7 +42,7 @@ class RouteResult extends React.Component {
         </Typography>
       );
     } else {
-      const routeData = optimalRoute.route.map((stopRoute) => {
+      const routeData = optimalRoute.route.map((stopRoute, unneededKey) => {
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
             Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla: {stopRoute.line}
