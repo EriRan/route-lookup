@@ -13,7 +13,7 @@ import { isUndefinedOrNull } from "../../../../../util/Utilities";
 class RoadStyleDeducer {
   deduce(includesLines, calculatedRouteNode, isRouteCalculated) {
     if (!Array.isArray(includesLines) || includesLines.length === 0) {
-      return new Array(this.createResponse(UNUSED_ROAD_OPACITY, "gray"));
+      return new Array(this.createResponse("gray", UNUSED_ROAD_OPACITY));
     }
     return this.deduceFromLines(
       includesLines,
