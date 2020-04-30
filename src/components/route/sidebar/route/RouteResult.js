@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
-import RouteCalculator from "./calculation/RouteCalculator";
+import RouteCalculator from "../../../../reducers/route/calculation/RouteCalculator";
 
-import { isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
+import {
+  isUndefinedOrNull,
+  isUndefinedOrNullOrEmptyString,
+} from "../../../../util/Utilities";
 
 class RouteResult extends React.Component {
   componentDidMount() {
@@ -12,15 +15,8 @@ class RouteResult extends React.Component {
   }
 
   render() {
-    if (
-      this.hasUsableInput(this.props.startStop) &&
-      this.hasUsableInput(this.props.destinationStop)
-    ) {
-      const optimalRoute = this.routeCalculator.calculate(
-        this.props.startStop.name,
-        this.props.destinationStop.name
-      );
-      return this.renderRoute(optimalRoute);
+    if (!isUndefinedOrNull(this.props.calculatedRoute)) {
+      return this.renderRoute(this.props.calculatedRoute);
     }
     return <div />;
   }
@@ -43,7 +39,8 @@ class RouteResult extends React.Component {
         const stopRoute = entry[1];
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla: {stopRoute.line}
+            Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla:{" "}
+            {stopRoute.line}
           </Typography>
         );
       });
@@ -55,18 +52,11 @@ class RouteResult extends React.Component {
       );
     }
   }
-
-  hasUsableInput(targetStop) {
-    return (
-      !isUndefinedOrNullOrEmptyString(targetStop.name) && !targetStop.hasError
-    );
-  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    startStop: state.route.startStop,
-    destinationStop: state.route.destinationStop,
+    calculatedRoute: state.route.calculatedRoute,
   };
 };
 

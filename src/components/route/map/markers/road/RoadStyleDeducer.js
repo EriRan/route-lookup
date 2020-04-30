@@ -1,4 +1,5 @@
 import { UNUSED_ROAD_OPACITY, USED_ROAD_OPACITY } from "./RoadConstant";
+import { isUndefinedOrNull } from "../../../../../util/Utilities";
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
  *
@@ -21,11 +22,15 @@ class RoadStyleDeducer {
     );
   }
 
-  deduceFromLines(includesLines, calculatedRouteNode) {
+  deduceFromLines(includesLines, calculatedRouteNode, isRouteCalculated) {
     const arrayResponse = [];
     includesLines.forEach((singleLine) => {
       arrayResponse.push(
-        this.deduceOneLineStyle(singleLine, calculatedRouteNode)
+        this.deduceOneLineStyle(
+          singleLine,
+          calculatedRouteNode,
+          isRouteCalculated
+        )
       );
     });
     return arrayResponse;
@@ -33,10 +38,16 @@ class RoadStyleDeducer {
 
   deduceOneLineStyle(colorString, calculatedRouteNode, isRouteCalculated) {
     if (isRouteCalculated) {
-      if (calculatedRouteNode.line === colorString) {
-        this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
+      if (
+        !isUndefinedOrNull(calculatedRouteNode) &&
+        calculatedRouteNode.line === colorString
+      ) {
+        return this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
       } else {
-        this.returnColorDependingOnLine(colorString, UNUSED_ROAD_OPACITY);
+        return this.returnColorDependingOnLine(
+          colorString,
+          UNUSED_ROAD_OPACITY
+        );
       }
     } else {
       return this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);

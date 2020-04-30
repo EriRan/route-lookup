@@ -32,7 +32,7 @@ class RoadLine extends React.Component {
     isRouteCalculated
   ) {
     const styleObjects = new RoadStyleDeducer().deduce(
-      this.props.roadData.includesLines,
+      roadData.includesLines,
       calculatedRouteNode,
       isRouteCalculated
     );
@@ -51,6 +51,12 @@ class RoadLine extends React.Component {
     return linesToRender;
   }
 
+  /**
+   * If there are multiple lines, draw each one LINE_GAP amount from each other.
+   *
+   * The direction where the next line is placed to depends on which direction the line is going: If the line is horizontal,
+   * we must draw the next one below it and not next to it so the lines do not overlap.
+   */
   renderOneLine(startPointLocation, endPoint, roadData, styleObject, index) {
     if (this.isLineHorizontal(startPointLocation.x, endPoint.x)) {
       return (
