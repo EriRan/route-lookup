@@ -15,12 +15,12 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_START_STOP:
-      return appendCalculatedRouteIfBothStopsAvailable({
+      return appendCalculatedRoute({
         ...state,
         startStop: action.payload,
       });
     case SET_DESTINATION_STOP:
-      return appendCalculatedRouteIfBothStopsAvailable({
+      return appendCalculatedRoute({
         ...state,
         destinationStop: action.payload,
       });
@@ -29,7 +29,7 @@ export default (state = INITIAL_STATE, action) => {
   }
 };
 
-function appendCalculatedRouteIfBothStopsAvailable(currentState) {
+function appendCalculatedRoute(currentState) {
   if (
     hasUsableInput(currentState.startStop) &&
     hasUsableInput(currentState.destinationStop)
@@ -37,6 +37,8 @@ function appendCalculatedRouteIfBothStopsAvailable(currentState) {
     currentState.calculatedRoute = new RouteCalculator(
       TransportDataSingleton.getInstance()
     ).calculate(currentState.startStop.name, currentState.destinationStop.name);
+  } else {
+    currentState.calculatedRoute = null;
   }
   return currentState;
 }
