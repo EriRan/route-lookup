@@ -1,13 +1,13 @@
 import React from "react";
 
 import HeaderBar from "./header/HeaderBar";
-import RouteContainer from "./route/RouteContainer";
+import RouteLayer from "./route/RouteLayer";
 
 const App = () => {
   return (
     <div className="ui container">
       <HeaderBar />
-      <RouteContainer />
+      <RouteLayer />
     </div>
   );
 };

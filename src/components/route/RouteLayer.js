@@ -3,11 +3,11 @@ import React from "react";
 import MapView from "./map/MapView"
 import Sidebar from "./sidebar/Sidebar"
 
-import TransportDataProvider from "../../data/TransportDataProvider";
+import TransportDataSingleton from "../../data/TransportDataSingleton";
 
 class RouteContainer extends React.Component {
   render() {
-    var transportData = new TransportDataProvider().provide();
+    var transportData = TransportDataSingleton.getInstance();
     return (
       <div>
         <MapView transportData={transportData}/>
