@@ -1,3 +1,2 @@
-export const SET_ROUTE = "SET_ROUTE";
 export const SET_START_STOP = "SET_START_STOP";
 export const SET_DESTINATION_STOP = "SET_DESTINATION_STOP";

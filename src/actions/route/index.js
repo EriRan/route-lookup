@@ -1,15 +1,6 @@
 import _ from "lodash";
 
-import { SET_ROUTE, SET_START_STOP, SET_DESTINATION_STOP } from "./types";
-
-export const setRoute = (routeData) => {
-  return {
-    type: SET_ROUTE,
-    payload: {
-      routeData: { routeData },
-    },
-  };
-};
+import { SET_START_STOP, SET_DESTINATION_STOP } from "./types";
 
 export const setStartStop = (startStop, hasError) => {
   return {

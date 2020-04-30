@@ -1,9 +1,11 @@
 /**
  * Convert the nodes response from calculator to a more compact format for state and element rendering.
  *
- * Return Map<String, NodeInfo>
- *
- * Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
+ * Return {
+ *  Integer totalDuration
+ *  Map<String, StopData> - Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
+ *  String message
+ * }
  */
 class ResponseConverter {
   convert(startStop, nodes) {

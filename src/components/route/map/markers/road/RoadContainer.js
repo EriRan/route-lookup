@@ -48,8 +48,10 @@ class RoadContainer extends React.Component {
       );
       return null;
     }
-    if (_.isMap(calculatedRoute) && calculatedRoute.length > 0) {
-      const calculatedRouteNode = calculatedRoute.get(road.from.name + "-" + road.to.name);
+    if (this.hasRouteBeenCalculated(calculatedRoute)) {
+      const calculatedRouteNode = calculatedRoute.route.get(
+        road.from.name + "-" + road.to.name
+      );
       return (
         <RoadLine
           key={`road-line-from-${road.from.name}-to-${road.to.name}`}
@@ -71,6 +73,15 @@ class RoadContainer extends React.Component {
         includesLines={road.includesLines}
         isRouteCalculated={false}
       />
+    );
+  }
+
+  hasRouteBeenCalculated(calculatedRoute) {
+    return (
+      !isUndefinedOrNull(calculatedRoute) &&
+      calculatedRoute.totalDuration > 0 &&
+      _.isMap(calculatedRoute.route) &&
+      calculatedRoute.route.size > 0
     );
   }
 }

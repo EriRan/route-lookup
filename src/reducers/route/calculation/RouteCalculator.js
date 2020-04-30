@@ -1,7 +1,7 @@
 import NodeFactory from "./NodeFactory";
 import ResponseConverter from "./ResponseConverter";
 
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../util/Utilities";
 
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.
