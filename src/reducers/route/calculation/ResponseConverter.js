@@ -1,5 +1,7 @@
+import _ from "lodash";
+
 /**
- * Convert the nodes response from calculator to a more compact format for state and element rendering.
+ * Convert the response from calculator to a more compact format for state and element rendering.
  *
  * Return {
  *  Integer totalDuration
@@ -29,7 +31,7 @@ class ResponseConverter {
       let currentNode = nodes[i];
       if (i === 0) {
         route.set(
-          this.createKey(startStop, currentNode.stopData.name),
+          this.createStartStopKey(startStop, currentNode),
           this.createOneDirection(
             startStop,
             currentNode.stopData.name,
@@ -40,7 +42,7 @@ class ResponseConverter {
       } else {
         let previousNode = nodes[i - 1];
         route.set(
-          this.createKey(previousNode.stopData.name, currentNode.stopData.name),
+          this.createKey(previousNode, currentNode),
           this.createOneDirection(
             previousNode.stopData.name,
             currentNode.stopData.name,
@@ -53,8 +55,36 @@ class ResponseConverter {
     return route;
   }
 
-  createKey(from, to) {
-    return from + "-" + to;
+  createStartStopKey(fromName, toNode) {
+    return this.createKeyString(
+      toNode.stopData.roads.find((route) => route.to.name === fromName)
+    );
+  }
+
+  createKey(fromNode, toNode) {
+    return this.createKeyString(
+      toNode.stopData.roads.find(
+        (road) => road.to.name === fromNode.stopData.name
+      )
+    );
+  }
+
+  /** 
+   * Create a key for the map which is made of the names of the two stops that the road goes between
+   * and a dash between the names. If the road that was found between has flag isReverse, we flip the
+   * two stop names around because reverse roads are not rendered
+  */
+  createKeyString(roadBetween) {
+    if (_.isUndefined(roadBetween)) {
+      console.log("Unable to find route between two stops!");
+      return null;
+    } else {
+      if (roadBetween.isReverse) {
+        return roadBetween.to.name + "-" + roadBetween.from.name;
+      } else {
+        return roadBetween.from.name + "-" + roadBetween.to.name;
+      }
+    }
   }
 
   createOneDirection(to, from, line, duration) {
