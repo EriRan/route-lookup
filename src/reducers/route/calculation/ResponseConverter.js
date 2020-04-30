@@ -12,11 +12,7 @@ import _ from "lodash";
 class ResponseConverter {
   convert(startStop, nodes) {
     if (nodes.length === 0) {
-      return {
-        totalDuration: null,
-        route: null,
-        message: "Reittiä ei löytynyt",
-      };
+      return this.emptyResponse();
     }
     return {
       totalDuration: nodes[nodes.length - 1].totalDuration,
@@ -69,11 +65,11 @@ class ResponseConverter {
     );
   }
 
-  /** 
+  /**
    * Create a key for the map which is made of the names of the two stops that the road goes between
    * and a dash between the names. If the road that was found between has flag isReverse, we flip the
    * two stop names around because reverse roads are not rendered
-  */
+   */
   createKeyString(roadBetween) {
     if (_.isUndefined(roadBetween)) {
       console.log("Unable to find route between two stops!");
@@ -87,10 +83,10 @@ class ResponseConverter {
     }
   }
 
-  createOneDirection(to, from, line, duration) {
+  createOneDirection(from, to, line, duration) {
     return {
-      to: to,
       from: from,
+      to: to,
       line: line,
       duration: duration,
     };
@@ -98,8 +94,9 @@ class ResponseConverter {
 
   emptyResponse() {
     return {
-      totalDuration: 0,
-      route: {},
+      totalDuration: null,
+      route: null,
+      message: "Reittiä ei löytynyt",
     };
   }
 }
