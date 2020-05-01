@@ -13,7 +13,7 @@ import { isUndefinedOrNull } from "../../../../../util/Utilities";
 class RoadStyleDeducer {
   deduce(includesLines, calculatedRouteNode, isRouteCalculated) {
     if (!Array.isArray(includesLines) || includesLines.length === 0) {
-      return new Array(this.createResponse("gray", UNUSED_ROAD_OPACITY));
+      return new Array(this.createResponse("black", UNUSED_ROAD_OPACITY));
     }
     return this.deduceFromLines(
       includesLines,
@@ -57,7 +57,7 @@ class RoadStyleDeducer {
   returnColorDependingOnLine(colorString, opacity) {
     switch (colorString) {
       case "keltainen":
-        return this.createResponse("yellow", opacity);
+        return this.createResponse("#FFFF00", opacity);
       case "punainen":
         return this.createResponse("red", opacity);
       case "vihreä":
