@@ -1,6 +1,6 @@
-import { FIRST_LOCATION } from "./BusStopConstant";
+import { FIRST_LOCATION } from "./BusStopLocationConstant";
 import { provideNextLocation } from "./NextLocationProvider";
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../../../util/Utilities";
 
 /**
  * Deduces locations for bustops.

@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 
 import BusStop from "./stop/BusStop";
-import BusStopLocationProvider from "./stop/BusStopLocationProvider";
+import BusStopLocationProvider from "./stop/location/BusStopLocationProvider";
 import "./TrafficNetworkContainer.css";
 import RoadContainer from "./road/RoadContainer";
 
