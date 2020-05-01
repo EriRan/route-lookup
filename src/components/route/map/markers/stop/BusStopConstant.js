@@ -3,3 +3,5 @@ export const FIRST_LOCATION = {
   y: 600
 }
 export const STOP_GAP = 60;
+
+export const SELECTED_COLOR = "#BBFF99";
