@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 
 import RoadLineDuration from "./RoadLineDuration";
 import RoadStyleDeducer from "./RoadStyleDeducer";
@@ -8,25 +9,20 @@ class RoadLine extends React.Component {
   render() {
     return (
       <g className="road-line">
-        {this.renderLines(
+        {this.renderLinesAndDuration(
           this.props.startPointLocation,
           this.props.endPointLocation,
           this.props.roadData,
           this.props.calculatedRouteNode,
           this.props.isRouteCalculated
         )}
-        <RoadLineDuration
-          startPointLocation={this.props.startPointLocation}
-          endPointLocation={this.props.endPointLocation}
-          duration={this.props.roadData.duration}
-        />
       </g>
     );
   }
 
-  renderLines(
+  renderLinesAndDuration(
     startPointLocation,
-    endPoint,
+    endPointLocation,
     roadData,
     calculatedRouteNode,
     isRouteCalculated
@@ -36,19 +32,36 @@ class RoadLine extends React.Component {
       calculatedRouteNode,
       isRouteCalculated
     );
-    const linesToRender = [];
+    const objectsToRender = [];
     for (let i = 0; i < styleObjects.length; i++) {
-      linesToRender.push(
+      objectsToRender.push(
         this.renderOneLine(
           startPointLocation,
-          endPoint,
+          endPointLocation,
           roadData,
           styleObjects[i],
           i
         )
       );
     }
-    return linesToRender;
+    if (!isRouteCalculated || !_.isUndefined(calculatedRouteNode)) {
+      objectsToRender.push(
+        this.renderDuration(startPointLocation, endPointLocation, roadData)
+      );
+    }
+
+    return objectsToRender;
+  }
+
+  renderDuration(startPointLocation, endPointLocation, roadData) {
+    return (
+      <RoadLineDuration
+        key={`duration-${roadData.from.name}-${roadData.to.name}`}
+        startPointLocation={startPointLocation}
+        endPointLocation={endPointLocation}
+        duration={roadData.duration}
+      />
+    );
   }
 
   /**
