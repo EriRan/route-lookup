@@ -6,18 +6,18 @@ import _ from "lodash";
  * Return {
  *  Integer totalDuration
  *  Map<String, StopData> - Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
- *  String message
+ *  String errorMessage
  * }
  */
 class ResponseConverter {
   convert(startStop, nodes) {
     if (nodes.length === 0) {
-      return this.emptyResponse();
+      return this.createErrorResponse("Reittiä ei löytynyt.");
     }
     return {
       totalDuration: nodes[nodes.length - 1].totalDuration,
       route: this.buildRoute(startStop, nodes),
-      message: null,
+      errorMessage: null,
     };
   }
 
@@ -92,11 +92,11 @@ class ResponseConverter {
     };
   }
 
-  emptyResponse() {
+  createErrorResponse(message) {
     return {
       totalDuration: null,
       route: null,
-      message: "Reittiä ei löytynyt",
+      errorMessage: message,
     };
   }
 }
