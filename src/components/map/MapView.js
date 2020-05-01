@@ -6,7 +6,7 @@ import "./MapView.css";
 class MapView extends React.Component {
   render() {
     return (
-      <svg className = "map-view" width="1500" height="1000">
+      <svg className = "map-view" width="2500" height="1000">
         <TrafficNetworkContainer stops={this.props.transportData.stops} />
       </svg>
     );

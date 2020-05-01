@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../util/Utilities";
 
 import RoadLine from "./RoadLine";
 

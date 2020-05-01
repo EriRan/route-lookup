@@ -10,7 +10,7 @@ const styles = {
   },
 };
 
-const HeaderBar = ({ classes }) => (
+const KuutiolaAppBar = ({ classes }) => (
   <AppBar position="fixed" color="primary">
     <Toolbar>
       <SidebarOpenButton />
@@ -21,4 +21,4 @@ const HeaderBar = ({ classes }) => (
   </AppBar>
 );
 
-export default withStyles(styles)(HeaderBar);
+export default withStyles(styles)(KuutiolaAppBar);

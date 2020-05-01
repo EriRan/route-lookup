@@ -1,5 +1,5 @@
 import { UNUSED_ROAD_OPACITY, UNUSED_ROAD_OPACITY_YELLOW, USED_ROAD_OPACITY } from "./RoadConstant";
-import { isUndefinedOrNull } from "../../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../util/Utilities";
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
  *
