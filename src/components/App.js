@@ -1,13 +1,15 @@
 import React from "react";
 
-import HeaderBar from "./header/HeaderBar";
-import RouteLayer from "./route/RouteLayer";
+import TransportDataSingleton from "../data/TransportDataSingleton"
+import UiContainer from "./ui/UiContainer";
+import MapView from "./map/MapView";
 
 const App = () => {
+  const transportData = TransportDataSingleton.getInstance();
   return (
     <div className="ui container">
-      <HeaderBar />
-      <RouteLayer />
+      <UiContainer transportData={transportData} />
+      <MapView transportData={transportData} />
     </div>
   );
 };
