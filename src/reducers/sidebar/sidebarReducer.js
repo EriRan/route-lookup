@@ -1,4 +1,4 @@
-import { SIDEBAR_STATE_CHANGE } from "../actions/sidebar/types";
+import { SIDEBAR_OPEN_STATE_CHANGE } from "../../actions/sidebar/types";
 
 const INITIAL_STATE = {
   isOpen: true,
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SIDEBAR_STATE_CHANGE:
+    case SIDEBAR_OPEN_STATE_CHANGE:
       return { ...state, isOpen: action.payload };
     default:
       return state;
