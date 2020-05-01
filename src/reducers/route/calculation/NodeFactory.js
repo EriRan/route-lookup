@@ -1,3 +1,6 @@
+/** 
+ * Creates objects for stops that contain variables that Djikstra's algorithm ran in RouteCalculator needs.
+*/
 class NodeFactory {
   build(stopData) {
     return {

@@ -35,11 +35,7 @@ class RouteCalculator {
           !settledNodeNames.includes(road.to.name)
         ) {
           const adjacentNode = allNodesMap.get(road.to.name);
-          this.calculateMinimumDistance(
-            currentNode,
-            road,
-            adjacentNode
-          );
+          this.calculateNodeVariables(currentNode, road, adjacentNode);
           unsettledNodeNames.push(adjacentNode.stopData.name);
         }
       }
@@ -89,14 +85,16 @@ class RouteCalculator {
     return lowestDurationNode;
   }
 
-  calculateMinimumDistance(currentNode, road, adjacentNode) {
+  /**
+   * Calculate whether the path from current to adjacent is the fastest available and if so,
+   * add the path to the node and which line to use to the adjacent node's variables
+   */
+  calculateNodeVariables(currentNode, road, adjacentNode) {
     if (
       _.isNull(adjacentNode.totalDuration) ||
-      currentNode.totalDuration + road.duration <
-        adjacentNode.totalDuration
+      currentNode.totalDuration + road.duration < adjacentNode.totalDuration
     ) {
-      adjacentNode.totalDuration =
-        currentNode.totalDuration + road.duration;
+      adjacentNode.totalDuration = currentNode.totalDuration + road.duration;
       //Copy the shortest path from the current so that we do not modify existing shortest path
       const shortestPath = currentNode.shortestPath.slice();
       shortestPath.push(adjacentNode);
