@@ -2,7 +2,6 @@ import React from "react";
 import _ from "lodash";
 
 import BusStop from "./stop/BusStop";
-import BusStopLocationProvider from "./stop/location/BusStopLocationProvider";
 import "./TrafficNetworkContainer.css";
 import RoadContainer from "./road/RoadContainer";
 
@@ -14,15 +13,11 @@ class BusTrafficContainer extends React.Component {
   }
 
   renderTrafficNetwork() {
-    if (!_.isUndefined(this.props.stops) && !_.isNull(this.props.stops)) {
-      //Start from the first bus stop in the props and crawl to next ones through the roads.
-      const busStopLocationsMap = new BusStopLocationProvider().provide(
-        this.props.stops.values().next().value
-      );
+    if (_.isMap(this.props.busStopLocationsMap)) {
       return (
         <g className="bus-traffic-container">
-          <RoadContainer busStopLocationMap={busStopLocationsMap} stops={this.props.stops} />
-          {this.renderBusStops(busStopLocationsMap)}
+          <RoadContainer busStopLocationMap={this.props.busStopLocationsMap} stops={this.props.stops} />
+          {this.renderBusStops(this.props.busStopLocationsMap)}
         </g>
       );
     } else {

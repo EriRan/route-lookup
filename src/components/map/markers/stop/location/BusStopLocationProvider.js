@@ -3,7 +3,13 @@ import { provideNextLocation } from "./NextLocationProvider";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
- * Deduces locations for bustops.
+ * Deduces locations for bustops in a map with the stop names as keys
+ * 
+ * return {
+ *  Map<String, BusStopLocation> map with bus stop names as keys and values being their x and y coordinates
+ *  Integer xMax maximum z coordinate of the bus stops
+ *  Integer yMax maximum y coordinate of the bus stops
+ * }
  */
 class BusStopLocationProvider {
   provide(firstStop) {
@@ -21,7 +27,13 @@ class BusStopLocationProvider {
       firstStop,
       FIRST_LOCATION
     );
-    return alreadyDeducedStops;
+    const maxCoordinates = this.deduceMaxCoordinates(alreadyDeducedStops);
+    console.log(maxCoordinates);
+    return {
+      map: alreadyDeducedStops,
+      xMax: maxCoordinates.x,
+      yMax: maxCoordinates.y,
+    };
   }
 
   addNeighbours(
@@ -73,7 +85,7 @@ class BusStopLocationProvider {
       const nextLocation = this.deduceNextLocation(
         currentLocation,
         road,
-        occupiedDirections,
+        occupiedDirections
       );
       if (nextLocation === null) {
         console.log("No direction for ", road.to.name);
@@ -86,15 +98,17 @@ class BusStopLocationProvider {
     });
   }
 
-  deduceNextLocation(currentLocation,
-    road,
-    occupiedDirections) {
+  deduceNextLocation(currentLocation, road, occupiedDirections) {
     const nextLocation = provideNextLocation(
       currentLocation,
       road.duration,
       occupiedDirections.get(road.from)
     );
-    this.addOccupiedDirection(road.from, nextLocation.direction, occupiedDirections);
+    this.addOccupiedDirection(
+      road.from,
+      nextLocation.direction,
+      occupiedDirections
+    );
     return nextLocation;
   }
 
@@ -107,6 +121,23 @@ class BusStopLocationProvider {
     } else {
       occupiedDirectionsForStop.push(direction);
     }
+  }
+
+  deduceMaxCoordinates(deducedStops) {
+    let xMax = 0;
+    let yMax = 0;
+    for (let value of Array.from(deducedStops.values())) {
+      if (xMax < value.x) {
+        xMax = value.x;
+      }
+      if (yMax < value.y) {
+        yMax = value.y;
+      }
+    }
+    return {
+      x: xMax,
+      y: yMax,
+    };
   }
 
   isRoadAlreadyIncluded(road, alreadyIncludedRoads) {
