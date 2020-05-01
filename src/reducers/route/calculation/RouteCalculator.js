@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import NodeFactory from "./NodeFactory";
 import ResponseConverter from "./ResponseConverter";
 
@@ -33,10 +35,9 @@ class RouteCalculator {
           !settledNodeNames.includes(road.to.name)
         ) {
           const adjacentNode = allNodesMap.get(road.to.name);
-          this.deduceWhichLineToUse(currentNode, road, adjacentNode);
           this.calculateMinimumDistance(
             currentNode,
-            road.duration,
+            road,
             adjacentNode
           );
           unsettledNodeNames.push(adjacentNode.stopData.name);
@@ -88,9 +89,24 @@ class RouteCalculator {
     return lowestDurationNode;
   }
 
+  calculateMinimumDistance(currentNode, road, adjacentNode) {
+    if (
+      _.isNull(adjacentNode.totalDuration) ||
+      currentNode.totalDuration + road.duration <
+        adjacentNode.totalDuration
+    ) {
+      adjacentNode.totalDuration =
+        currentNode.totalDuration + road.duration;
+      //Copy the shortest path from the current so that we do not modify existing shortest path
+      const shortestPath = currentNode.shortestPath.slice();
+      shortestPath.push(adjacentNode);
+      adjacentNode.shortestPath = shortestPath;
+      this.deduceWhichLineToUse(currentNode, road, adjacentNode);
+    }
+  }
+
   deduceWhichLineToUse(currentNode, road, adjacentNode) {
-    if (currentNode.lineBeingUsed === null) {
-      currentNode.lineBeingUsed = road.includesLines[0];
+    if (_.isNull(currentNode.lineBeingUsed)) {
       adjacentNode.lineBeingUsed = road.includesLines[0];
     } else {
       //Try to use currentNode's line if it is available
@@ -102,21 +118,6 @@ class RouteCalculator {
         //have to do the least amount of transfers to different lines.
         adjacentNode.lineBeingUsed = road.includesLines[0];
       }
-    }
-  }
-
-  calculateMinimumDistance(currentNode, durationBetweenNodes, adjacentNode) {
-    if (
-      adjacentNode.totalDuration === null ||
-      currentNode.totalDuration + durationBetweenNodes <
-        adjacentNode.totalDuration
-    ) {
-      adjacentNode.totalDuration =
-        currentNode.totalDuration + durationBetweenNodes;
-      //Copy the shortest path from the current so that we do not modify existing shortest path
-      const shortestPath = currentNode.shortestPath.slice();
-      shortestPath.push(adjacentNode);
-      adjacentNode.shortestPath = shortestPath;
     }
   }
 
