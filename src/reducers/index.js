@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import sidebarReducer from "./sidebarReducer";
+import sidebarReducer from "./sidebar/sidebarReducer";
 import routeReducer from "./route/routeReducer";
 import mapReducer from "./map/mapReducer";
 

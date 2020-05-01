@@ -1,8 +1,8 @@
-import { SIDEBAR_STATE_CHANGE } from "./types";
+import { SIDEBAR_OPEN_STATE_CHANGE } from "./types";
 
 export const changeSidebarOpenState = (isOpen) => {
   return {
-    type: SIDEBAR_STATE_CHANGE,
+    type: SIDEBAR_OPEN_STATE_CHANGE,
     payload: isOpen === true,
   };
 };
