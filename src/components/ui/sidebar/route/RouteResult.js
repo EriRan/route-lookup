@@ -21,21 +21,16 @@ class RouteResult extends React.Component {
     return <div />;
   }
 
-  renderRoute(optimalRoute) {
-    if (optimalRoute.totalDuration === 0) {
+  renderRoute(calculatedRoute) {
+    console.log(calculatedRoute);
+    if (!isUndefinedOrNullOrEmptyString(calculatedRoute.errorMessage)) {
       return (
         <Typography key={`result-stop-no-route`}>
-          Olet jo määränpäässäsi
-        </Typography>
-      );
-    } else if (!isUndefinedOrNullOrEmptyString(optimalRoute.message)) {
-      return (
-        <Typography key={`result-stop-no-route`}>
-          {optimalRoute.message}
+          {calculatedRoute.errorMessage}
         </Typography>
       );
     } else {
-      const routeData = Array.from(optimalRoute.route).map((entry) => {
+      const routeData = Array.from(calculatedRoute.route).map((entry) => {
         const stopRoute = entry[1];
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
@@ -47,7 +42,7 @@ class RouteResult extends React.Component {
       return (
         <div>
           {routeData}
-          <Typography>Kesto yhteensä: {optimalRoute.totalDuration}</Typography>
+          <Typography>Kesto yhteensä: {calculatedRoute.totalDuration}</Typography>
         </div>
       );
     }
