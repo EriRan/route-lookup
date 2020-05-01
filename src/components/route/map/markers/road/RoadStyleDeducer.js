@@ -1,4 +1,4 @@
-import { UNUSED_ROAD_OPACITY, USED_ROAD_OPACITY } from "./RoadConstant";
+import { UNUSED_ROAD_OPACITY, UNUSED_ROAD_OPACITY_YELLOW, USED_ROAD_OPACITY } from "./RoadConstant";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
@@ -37,27 +37,20 @@ class RoadStyleDeducer {
   }
 
   deduceOneLineStyle(colorString, calculatedRouteNode, isRouteCalculated) {
-    if (isRouteCalculated) {
-      if (
-        !isUndefinedOrNull(calculatedRouteNode) &&
-        calculatedRouteNode.line === colorString
-      ) {
-        return this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
-      } else {
-        return this.returnColorDependingOnLine(
-          colorString,
-          UNUSED_ROAD_OPACITY
-        );
-      }
-    } else {
-      return this.returnColorDependingOnLine(colorString, USED_ROAD_OPACITY);
-    }
+    return this.returnColorDependingOnLine(
+      colorString,
+      this.deduceCorrectOpacity(
+        colorString,
+        calculatedRouteNode,
+        isRouteCalculated
+      )
+    );
   }
 
   returnColorDependingOnLine(colorString, opacity) {
     switch (colorString) {
       case "keltainen":
-        return this.createResponse("#FFFF00", opacity);
+        return this.createResponse("yellow", opacity);
       case "punainen":
         return this.createResponse("red", opacity);
       case "vihreä":
@@ -71,6 +64,29 @@ class RoadStyleDeducer {
           " Please define a color for it"
         );
         return this.createResponse("black", opacity);
+    }
+  }
+
+  deduceCorrectOpacity(colorString, calculatedRouteNode, isRouteCalculated) {
+    if (isRouteCalculated) {
+      if (
+        !isUndefinedOrNull(calculatedRouteNode) &&
+        calculatedRouteNode.line === colorString
+      ) {
+        return USED_ROAD_OPACITY;
+      } else {
+        return this.deduceUnusedRoadOpacity(colorString);
+      }
+    } else {
+      return USED_ROAD_OPACITY;
+    }
+  }
+
+  deduceUnusedRoadOpacity(colorString) {
+    if (colorString === "keltainen") {
+      return UNUSED_ROAD_OPACITY_YELLOW;
+    } else {
+      return UNUSED_ROAD_OPACITY;
     }
   }
 
