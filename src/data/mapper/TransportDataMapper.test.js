@@ -35,7 +35,7 @@ function createMockData() {
   };
 }
 
-test("TransportData mapping integration", () => {
+test("Included lines", () => {
   const mappedTransportData = mapper.map(createMockData());
   expect(mappedTransportData).toBeDefined();
   expect(mappedTransportData.stops).toBeInstanceOf(Map);
