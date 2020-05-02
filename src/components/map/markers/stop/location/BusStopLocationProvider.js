@@ -4,38 +4,36 @@ import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
  * Deduces locations for bustops in a map with the stop names as keys
- * 
+ *
  * return {
  *  Map<String, BusStopLocation> map with bus stop names as keys and values being their x and y coordinates
  *  Integer xMax maximum z coordinate of the bus stops
  *  Integer yMax maximum y coordinate of the bus stops
  * }
  */
-class BusStopLocationProvider {
-  provide(firstStop) {
-    const alreadyDeducedStops = new Map();
-    const alreadyIncludedRoads = [];
-    const occupiedDirections = new Map();
-    alreadyDeducedStops.set(firstStop.name, {
-      x: FIRST_LOCATION.x,
-      y: FIRST_LOCATION.y,
-    });
-    this.addNeighbours(
-      alreadyDeducedStops,
-      alreadyIncludedRoads,
-      occupiedDirections,
-      firstStop,
-      FIRST_LOCATION
-    );
-    const maxCoordinates = this.deduceMaxCoordinates(alreadyDeducedStops);
-    return {
-      map: alreadyDeducedStops,
-      xMax: maxCoordinates.x,
-      yMax: maxCoordinates.y,
-    };
-  }
-
+export function provideBusStopLocations(firstStop) {
+  const alreadyDeducedStops = new Map();
+  const alreadyIncludedRoads = [];
+  const occupiedDirections = new Map();
+  alreadyDeducedStops.set(firstStop.name, {
+    x: FIRST_LOCATION.x,
+    y: FIRST_LOCATION.y,
+  });
   addNeighbours(
+    alreadyDeducedStops,
+    alreadyIncludedRoads,
+    occupiedDirections,
+    firstStop,
+    FIRST_LOCATION
+  );
+  const maxCoordinates = deduceMaxCoordinates(alreadyDeducedStops);
+  return {
+    map: alreadyDeducedStops,
+    xMax: maxCoordinates.x,
+    yMax: maxCoordinates.y,
+  };
+
+  function addNeighbours(
     alreadyDeducedStops,
     alreadyIncludedRoads,
     occupiedDirections,
@@ -43,7 +41,7 @@ class BusStopLocationProvider {
     currentLocation
   ) {
     const neighbourStops = [];
-    this.deduceNeighbours(
+    deduceNeighbours(
       stopData,
       alreadyIncludedRoads,
       alreadyDeducedStops,
@@ -52,7 +50,7 @@ class BusStopLocationProvider {
       neighbourStops
     );
     neighbourStops.forEach((neighbourStop) => {
-      this.addNeighbours(
+      addNeighbours(
         alreadyDeducedStops,
         alreadyIncludedRoads,
         occupiedDirections,
@@ -62,7 +60,7 @@ class BusStopLocationProvider {
     });
   }
 
-  deduceNeighbours(
+  function deduceNeighbours(
     stopData,
     alreadyIncludedRoads,
     alreadyDeducedStops,
@@ -71,7 +69,7 @@ class BusStopLocationProvider {
     neighbourStops
   ) {
     stopData.roads.forEach((road) => {
-      if (this.isRoadAlreadyIncluded(road, alreadyIncludedRoads)) {
+      if (isRoadAlreadyIncluded(road, alreadyIncludedRoads)) {
         return;
       }
       alreadyIncludedRoads.push({
@@ -81,7 +79,7 @@ class BusStopLocationProvider {
       if (!isUndefinedOrNull(alreadyDeducedStops.get(road.to.name))) {
         return;
       }
-      const nextLocation = this.deduceNextLocation(
+      const nextLocation = deduceNextLocation(
         currentLocation,
         road,
         occupiedDirections
@@ -97,13 +95,13 @@ class BusStopLocationProvider {
     });
   }
 
-  deduceNextLocation(currentLocation, road, occupiedDirections) {
+  function deduceNextLocation(currentLocation, road, occupiedDirections) {
     const nextLocation = provideNextLocation(
       currentLocation,
       road.duration,
       occupiedDirections.get(road.from)
     );
-    this.addOccupiedDirection(
+    addOccupiedDirection(
       road.from,
       nextLocation.direction,
       occupiedDirections
@@ -111,7 +109,7 @@ class BusStopLocationProvider {
     return nextLocation;
   }
 
-  addOccupiedDirection(stopName, direction, occupiedDirections) {
+  function addOccupiedDirection(stopName, direction, occupiedDirections) {
     const occupiedDirectionsForStop = occupiedDirections.get(stopName);
     if (isUndefinedOrNull(occupiedDirectionsForStop)) {
       const newDirectionArray = [];
@@ -122,7 +120,7 @@ class BusStopLocationProvider {
     }
   }
 
-  deduceMaxCoordinates(deducedStops) {
+  function deduceMaxCoordinates(deducedStops) {
     let xMax = 0;
     let yMax = 0;
     for (let value of Array.from(deducedStops.values())) {
@@ -139,7 +137,7 @@ class BusStopLocationProvider {
     };
   }
 
-  isRoadAlreadyIncluded(road, alreadyIncludedRoads) {
+  function isRoadAlreadyIncluded(road, alreadyIncludedRoads) {
     return alreadyIncludedRoads.some((alreadyIncludedRoad) => {
       return (
         (road.toName === alreadyIncludedRoad.toName ||
@@ -150,5 +148,3 @@ class BusStopLocationProvider {
     });
   }
 }
-
-export default BusStopLocationProvider;
