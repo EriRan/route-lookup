@@ -5,3 +5,6 @@ export const UNUSED_ROAD_OPACITY = 0.1;
 //too much opacity is applied to it on gray background
 export const UNUSED_ROAD_OPACITY_YELLOW = 0.4;
 export const USED_ROAD_OPACITY = 1.0;
+
+export const UNUSED_ROAD_COLOR = "black";
+export const UNKNOWN_ROAD_COLOR = "black";
