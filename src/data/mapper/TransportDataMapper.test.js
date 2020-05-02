@@ -37,9 +37,6 @@ function createMockData() {
 
 test("Included lines", () => {
   const mappedTransportData = mapper.map(createMockData());
-  expect(mappedTransportData).toBeDefined();
-  expect(mappedTransportData.stops).toBeInstanceOf(Map);
-  expect(mappedTransportData.lines).toBeInstanceOf(Array);
 
   validateIncludedLines(mappedTransportData);
 
