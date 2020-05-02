@@ -1,7 +1,7 @@
 import React from "react";
 
 import TrafficNetworkContainer from "./markers/TrafficNetworkContainer";
-import { provideBusStopLocations } from "./markers/stop/location/BusStopLocationProvider";
+import { provideBusStopLocations } from "./markers/stop/location/busStopLocationProvider";
 import { MAP_PADDING } from "./MapViewConstant";
 import "./MapView.css";
 

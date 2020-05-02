@@ -1,5 +1,5 @@
 import { FIRST_LOCATION } from "./BusStopLocationConstant";
-import { provideNextLocation } from "./NextLocationProvider";
+import { provideNextLocation } from "./nextLocationProvider";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
