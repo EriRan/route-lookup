@@ -49,11 +49,20 @@ test("Reverse roads included", () => {
   expect(bRoads[0].isReverse).toBe(true);
 });
 
-test("No roads", () => {
+test("Empty roads", () => {
   const roadData = [];
   const stopData = createMockStopMap();
 
   mapper.map(stopData, roadData);
+  expect(stopData.get("A").roads).toHaveLength(0);
+  expect(stopData.get("B").roads).toHaveLength(0);
+  expect(stopData.get("C").roads).toHaveLength(0);
+});
+
+test("Undefined roads", () => {
+  const stopData = createMockStopMap();
+
+  mapper.map(stopData);
   expect(stopData.get("A").roads).toHaveLength(0);
   expect(stopData.get("B").roads).toHaveLength(0);
   expect(stopData.get("C").roads).toHaveLength(0);
