@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 
 import RoadLineDuration from "./RoadLineDuration";
-import RoadStyleDeducer from "./RoadStyleDeducer";
+import { provideStyles } from "./roadStyleProvider";
 import { LINE_GAP } from "./RoadConstant";
 
 class RoadLine extends React.Component {
@@ -27,7 +27,7 @@ class RoadLine extends React.Component {
     calculatedRouteNode,
     isRouteCalculated
   ) {
-    const styleObjects = new RoadStyleDeducer().deduce(
+    const styleObjects = provideStyles(
       roadData.includesLines,
       calculatedRouteNode,
       isRouteCalculated
