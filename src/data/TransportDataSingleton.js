@@ -1,4 +1,4 @@
-import transportData from "./reittiopas.json";
+import transportData from "./json/reittiopas.json";
 import TransportDataMapper from "./mapper/TransportDataMapper";
 
 export default (function () {
