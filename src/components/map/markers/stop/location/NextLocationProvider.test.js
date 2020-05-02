@@ -1,14 +1,5 @@
 import { provideNextLocation } from "./NextLocationProvider";
-import {
-  UPPER_RIGHT,
-  RIGHT,
-  LOWER_RIGHT,
-  DOWN,
-  LOWER_LEFT,
-  LEFT,
-  UPPER_LEFT,
-  UP,
-} from "./NextBusStopDirection";
+import { UPPER_RIGHT, RIGHT, LOWER_RIGHT, DOWN } from "./NextBusStopDirection";
 import { STOP_GAP } from "./BusStopLocationConstant";
 
 test("No existing locations", () => {
@@ -46,11 +37,7 @@ test("Next location down", () => {
   );
   expect(nextLocation).toBeDefined();
   expect(nextLocation.direction).toBe(DOWN);
-  validateNextLocationCoordinates(
-    0,
-    duration * STOP_GAP,
-    nextLocation
-  );
+  validateNextLocationCoordinates(0, duration * STOP_GAP, nextLocation);
 });
 
 test("Take first in a gap", () => {
@@ -67,11 +54,7 @@ test("Take first in a gap", () => {
   );
   expect(nextLocation).toBeDefined();
   expect(nextLocation.direction).toBe(RIGHT);
-  validateNextLocationCoordinates(
-    duration * STOP_GAP,
-    0,
-    nextLocation
-  );
+  validateNextLocationCoordinates(duration * STOP_GAP, 0, nextLocation);
 });
 
 function validateNextLocationCoordinates(
