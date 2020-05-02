@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
+
 /**
  * Convert the response from calculator to a more compact format for state and element rendering.
  *
@@ -9,26 +11,24 @@ import _ from "lodash";
  *  String errorMessage
  * }
  */
-class ResponseConverter {
-  convert(startStop, nodes) {
-    if (nodes.length === 0) {
-      return this.createErrorResponse("Reittiä ei löytynyt.");
-    }
-    return {
-      totalDuration: nodes[nodes.length - 1].totalDuration,
-      route: this.buildRoute(startStop, nodes),
-      errorMessage: null,
-    };
+export function convertCalculation(startStop, nodes) {
+  if (nodes.length === 0) {
+    return createErrorResponse(ROUTE_NOT_FOUND);
   }
+  return {
+    totalDuration: nodes[nodes.length - 1].totalDuration,
+    route: buildRoute(startStop, nodes),
+    errorMessage: null,
+  };
 
-  buildRoute(startStop, nodes) {
+  function buildRoute(startStop, nodes) {
     const route = new Map();
     for (let i = 0; i < nodes.length; i++) {
       let currentNode = nodes[i];
       if (i === 0) {
         route.set(
-          this.createStartStopKey(startStop, currentNode),
-          this.createOneDirection(
+          createStartStopKey(startStop, currentNode),
+          createOneDirection(
             startStop,
             currentNode.stopData.name,
             currentNode.lineBeingUsed,
@@ -38,8 +38,8 @@ class ResponseConverter {
       } else {
         let previousNode = nodes[i - 1];
         route.set(
-          this.createKey(previousNode, currentNode),
-          this.createOneDirection(
+          createKey(previousNode, currentNode),
+          createOneDirection(
             previousNode.stopData.name,
             currentNode.stopData.name,
             currentNode.lineBeingUsed,
@@ -51,14 +51,14 @@ class ResponseConverter {
     return route;
   }
 
-  createStartStopKey(fromName, toNode) {
-    return this.createKeyString(
+  function createStartStopKey(fromName, toNode) {
+    return createKeyString(
       toNode.stopData.roads.find((route) => route.to.name === fromName)
     );
   }
 
-  createKey(fromNode, toNode) {
-    return this.createKeyString(
+  function createKey(fromNode, toNode) {
+    return createKeyString(
       toNode.stopData.roads.find(
         (road) => road.to.name === fromNode.stopData.name
       )
@@ -70,7 +70,7 @@ class ResponseConverter {
    * and a dash between the names. If the road that was found between has flag isReverse, we flip the
    * two stop names around because reverse roads are not rendered
    */
-  createKeyString(roadBetween) {
+  function createKeyString(roadBetween) {
     if (_.isUndefined(roadBetween)) {
       console.log("Unable to find route between two stops!");
       return null;
@@ -83,7 +83,7 @@ class ResponseConverter {
     }
   }
 
-  createOneDirection(from, to, line, duration) {
+  function createOneDirection(from, to, line, duration) {
     return {
       from: from,
       to: to,
@@ -91,14 +91,11 @@ class ResponseConverter {
       duration: duration,
     };
   }
-
-  createErrorResponse(message) {
-    return {
-      totalDuration: null,
-      route: null,
-      errorMessage: message,
-    };
-  }
 }
-
-export default ResponseConverter;
+export function createErrorResponse(message) {
+  return {
+    totalDuration: null,
+    route: null,
+    errorMessage: message,
+  };
+}

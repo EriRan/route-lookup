@@ -1,7 +1,8 @@
 import _ from "lodash";
 
 import NodeFactory from "./NodeFactory";
-import ResponseConverter from "./ResponseConverter";
+import { convertCalculation, createErrorResponse } from "./responseConverter";
+import { ALREADY_AT_DESTINATION } from "./ErrorMessageConstant";
 
 import { isUndefinedOrNull } from "../../../util/Utilities";
 
@@ -16,7 +17,7 @@ class RouteCalculator {
 
   calculate(startStop, destinationStop) {
     if (startStop === destinationStop) {
-      return new ResponseConverter().createErrorResponse("Olet jo määränpäässäsi.");
+      return createErrorResponse(ALREADY_AT_DESTINATION);
     }
     const settledNodeNames = [];
     const unsettledNodeNames = [];
@@ -42,7 +43,7 @@ class RouteCalculator {
       settledNodeNames.push(currentNode.stopData.name);
     }
 
-    return new ResponseConverter().convert(
+    return convertCalculation(
       startStop,
       allNodesMap.get(destinationStop).shortestPath
     );
