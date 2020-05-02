@@ -22,7 +22,6 @@ class RouteResult extends React.Component {
   }
 
   renderRoute(calculatedRoute) {
-    console.log(calculatedRoute);
     if (!isUndefinedOrNullOrEmptyString(calculatedRoute.errorMessage)) {
       return (
         <Typography key={`result-stop-no-route`}>
