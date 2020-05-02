@@ -12,16 +12,19 @@ import {
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
- * Search for first available direction. We try 9 directions,
- * starting from upper right and then try every direction in a clockwise order
+ * Provide location for the next bus stop. Each bus stop can be placed to 8 different directions from the current one. 
+ * We start selecting directions from Upper right and then go in clockwise direction to select the first available direction.
  */
 export function provideNextLocation(
   location,
   duration,
   occupiedDirectionsForStop
 ) {
-  const distance = calculateDistance(duration);
-  return findFreeLocation(location, distance, occupiedDirectionsForStop);
+  return findFreeLocation(
+    location,
+    calculatePixelDistance(duration),
+    occupiedDirectionsForStop
+  );
 
   function findFreeLocation(location, distance, occupiedDirectionsForStop) {
     //Upper right
@@ -72,7 +75,7 @@ export function provideNextLocation(
     else if (isDirectionFree(UP, occupiedDirectionsForStop)) {
       return createResponseObject(location.x, location.y - distance, UP);
     } else {
-      console.log("Unable to find free location!");
+      console.log("Unable to find a free location!");
       return null;
     }
   }
@@ -94,7 +97,7 @@ export function provideNextLocation(
     );
   }
 
-  function calculateDistance(duration) {
+  function calculatePixelDistance(duration) {
     return STOP_GAP * duration;
   }
 }
