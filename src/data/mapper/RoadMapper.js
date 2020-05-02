@@ -1,8 +1,13 @@
+import {isUndefinedOrNull} from "../../util/Utilities";
+
 /** 
  * Append road data to the provided stops 
 */
 class RoadMapper {
   map(mappedStops, roadsJson) {
+    if (isUndefinedOrNull(roadsJson)) {
+      return;
+    }
     roadsJson.forEach((road) => {
       const mappedPointOneStop = mappedStops.get(road.mista);
       const mappedPointTwoStop = mappedStops.get(road.mihin);
