@@ -39,6 +39,7 @@ class TransportDataMapper {
     function mapLinesToRoads(mappedData) {
       for (const stop of mappedData.stops.values()) {
         stop.roads.forEach((road) => {
+          road.includesLines = [];
           mappedData.lines.forEach((line) => addLineIfRoadIncluded(road, line));
         });
       }
@@ -47,7 +48,6 @@ class TransportDataMapper {
     function addLineIfRoadIncluded(road, line) {
       var toIndex = null;
       var fromIndex = null;
-      road.includesLines = [];
       for (let i = 0; i < line.stopsAt.length; i++) {
         let iteratedStop = line.stopsAt[i];
         if (iteratedStop === road.to.name) {
