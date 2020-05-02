@@ -4,6 +4,7 @@ import {
   USED_ROAD_OPACITY,
 } from "./RoadConstant";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
+
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
  *
@@ -14,7 +15,6 @@ import { isUndefinedOrNull } from "../../../../util/Utilities";
  *  String color
  * }
  */
-
 export function provideStyles(
   includesLines,
   calculatedRouteNode,
