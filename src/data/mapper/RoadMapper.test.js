@@ -13,6 +13,7 @@ function createMockStopMap() {
   }
   return stopMap;
 }
+
 function createMockRoadJson(from, to, duration) {
   return {
     mista: from,
@@ -28,9 +29,9 @@ test("Can map roads to stops", () => {
   const stopData = createMockStopMap();
 
   mapper.map(stopData, roadData);
-  expect(stopData.get("A").roads.length).toBe(1);
-  expect(stopData.get("B").roads.length).toBe(2);
-  expect(stopData.get("C").roads.length).toBe(1);
+  expect(stopData.get("A").roads).toHaveLength(1);
+  expect(stopData.get("B").roads).toHaveLength(2);
+  expect(stopData.get("C").roads).toHaveLength(1);
 });
 
 test("Reverse roads included", () => {
@@ -53,7 +54,7 @@ test("No roads", () => {
   const stopData = createMockStopMap();
 
   mapper.map(stopData, roadData);
-  expect(stopData.get("A").roads.length).toBe(0);
-  expect(stopData.get("B").roads.length).toBe(0);
-  expect(stopData.get("C").roads.length).toBe(0);
+  expect(stopData.get("A").roads).toHaveLength(0);
+  expect(stopData.get("B").roads).toHaveLength(0);
+  expect(stopData.get("C").roads).toHaveLength(0);
 });
