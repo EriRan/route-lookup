@@ -1,4 +1,4 @@
-import { provideNextLocation } from "./NextLocationProvider";
+import { provideNextLocation } from "./nextLocationProvider";
 import { UPPER_RIGHT, RIGHT, LOWER_RIGHT, DOWN } from "./NextBusStopDirection";
 import { STOP_GAP } from "./BusStopLocationConstant";
 
