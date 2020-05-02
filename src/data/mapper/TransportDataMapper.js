@@ -47,6 +47,7 @@ class TransportDataMapper {
     function addLineIfRoadIncluded(road, line) {
       var toIndex = null;
       var fromIndex = null;
+      road.includesLines = [];
       for (let i = 0; i < line.stopsAt.length; i++) {
         let iteratedStop = line.stopsAt[i];
         if (iteratedStop === road.to.name) {
@@ -60,9 +61,6 @@ class TransportDataMapper {
         !isUndefinedOrNull(fromIndex) &&
         indexesAreNextToEachOther(toIndex, fromIndex)
       ) {
-        if (isUndefinedOrNull(road.includesLines)) {
-          road.includesLines = [];
-        }
         road.includesLines.push(line.name);
       }
     }
