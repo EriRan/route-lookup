@@ -28,7 +28,6 @@ class BusStopLocationProvider {
       FIRST_LOCATION
     );
     const maxCoordinates = this.deduceMaxCoordinates(alreadyDeducedStops);
-    console.log(maxCoordinates);
     return {
       map: alreadyDeducedStops,
       xMax: maxCoordinates.x,
