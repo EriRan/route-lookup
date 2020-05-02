@@ -92,10 +92,10 @@ export function convertCalculation(startStop, nodes) {
     };
   }
 }
-export function createErrorResponse(message) {
+export function createErrorResponse(errorMessage) {
   return {
     totalDuration: null,
     route: null,
-    errorMessage: message,
+    errorMessage: errorMessage,
   };
 }
