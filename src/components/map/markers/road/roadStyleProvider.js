@@ -2,6 +2,8 @@ import {
   UNUSED_ROAD_OPACITY,
   UNUSED_ROAD_OPACITY_YELLOW,
   USED_ROAD_OPACITY,
+  UNUSED_ROAD_COLOR,
+  UNKNOWN_ROAD_COLOR
 } from "./RoadConstant";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 
@@ -21,7 +23,7 @@ export function provideStyles(
   isRouteCalculated
 ) {
   if (!Array.isArray(includesLines) || includesLines.length === 0) {
-    return new Array(createResponse("black", UNUSED_ROAD_OPACITY));
+    return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
   return deduceFromLines(includesLines, calculatedRouteNode, isRouteCalculated);
 
@@ -65,7 +67,7 @@ export function provideStyles(
           colorString,
           " Please define a color for it"
         );
-        return createResponse("black", opacity);
+        return createResponse(UNKNOWN_ROAD_COLOR, opacity);
     }
   }
 
