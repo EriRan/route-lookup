@@ -1,5 +1,5 @@
-import StopDataMapper from "./StopDataMapper";
-import LinesDataMapper from "./LinesDataMapper";
+import StopMapper from "./StopMapper";
+import LineMapper from "./LineMapper";
 
 import { isUndefinedOrNull } from "../../util/Utilities";
 
@@ -29,8 +29,8 @@ import { isUndefinedOrNull } from "../../util/Utilities";
 class TransportDataMapper {
   map(transportData) {
     const mappedTransportData = {};
-    mappedTransportData.stops = new StopDataMapper().map(transportData);
-    mappedTransportData.lines = new LinesDataMapper().map(
+    mappedTransportData.stops = new StopMapper().map(transportData);
+    mappedTransportData.lines = new LineMapper().map(
       transportData.linjastot
     );
     mapLinesToRoads(mappedTransportData);
