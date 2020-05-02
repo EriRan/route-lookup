@@ -1,4 +1,4 @@
-class LinesDataMapper {
+class LineMapper {
   map(linesJson) {
     const mappedLines = [];
     for (const lineName in linesJson) {
@@ -11,4 +11,4 @@ class LinesDataMapper {
   }
 }
 
-export default LinesDataMapper;
+export default LineMapper;
