@@ -4,17 +4,20 @@ import _ from "lodash";
  * Compress results of the route calculation to smaller size by making stops point to the stop at which we must change line or the calculated route ends there.
  */
 export function compressResponse(routes) {
+  if (!_.isArray(routes)) {
+    return [];
+  }
   const compressedResponse = [];
   let currentLine = null;
   let currentLineStartStop = null;
   for (let i = 0; i < routes.length; i++) {
     let iteratedRoute = routes[i];
-    let isFinal = isLastRoute(i, routes);
+    let isLast = isLastRoute(i, routes);
     if (_.isNull(currentLineStartStop)) {
       currentLine = iteratedRoute.line;
       currentLineStartStop = iteratedRoute.from;
     }
-    if (isFinal) {
+    if (isLast) {
       addLastRoutes(iteratedRoute, currentLineStartStop, currentLine);
     } else if (_.isNull(currentLine) || currentLine !== iteratedRoute.line) {
       compressedResponse.push(
