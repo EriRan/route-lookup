@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
 import RouteCalculator from "../../../../reducers/route/calculation/RouteCalculator";
-import { compressResponse } from "./routeResponseCompresser";
+import { compressResponse } from "./routeResponseCompressor";
 
 import {
   isUndefinedOrNull,
