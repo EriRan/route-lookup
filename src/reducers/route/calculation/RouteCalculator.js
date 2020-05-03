@@ -21,22 +21,22 @@ class RouteCalculator {
     }
     const settledNodeNames = [];
     const unsettledNodeNames = [];
-    const allNodesMap = this.createAllNodesStatusMap(this.transportData);
+    const allNodesMap = createAllNodesStatusMap(this.transportData);
     allNodesMap.get(startStop).totalDuration = 0;
     unsettledNodeNames.push(startStop);
     while (unsettledNodeNames.length > 0) {
-      const currentNode = this.findLowestDurationNode(
+      const currentNode = findLowestDurationNode(
         unsettledNodeNames,
         allNodesMap
       );
-      this.removeNode(currentNode, unsettledNodeNames);
+      removeNode(currentNode, unsettledNodeNames);
       for (const road of currentNode.stopData.roads) {
         if (
-          this.isRoadUsable(road) &&
+          isRoadUsable(road) &&
           !settledNodeNames.includes(road.to.name)
         ) {
           const adjacentNode = allNodesMap.get(road.to.name);
-          this.calculateNodeVariables(currentNode, road, adjacentNode);
+          calculateNodeVariables(currentNode, road, adjacentNode);
           unsettledNodeNames.push(adjacentNode.stopData.name);
         }
       }
@@ -48,95 +48,85 @@ class RouteCalculator {
       allNodesMap.get(destinationStop).shortestPath
     );
   }
+}
 
-  createAllNodesStatusMap(transportData) {
-    const allNodesMap = new Map();
-    transportData.stops.forEach((stopData, stopName) => {
-      allNodesMap.set(stopName, {
-        stopData: stopData,
-        totalDuration: Infinity,
-        lineBeingUsed: null,
-        shortestPath: [],
-      });
+function createAllNodesStatusMap(transportData) {
+  const allNodesMap = new Map();
+  transportData.stops.forEach((stopData, stopName) => {
+    allNodesMap.set(stopName, {
+      stopData: stopData,
+      totalDuration: Infinity,
+      lineBeingUsed: null,
+      shortestPath: [],
     });
-    return allNodesMap;
-  }
+  });
+  return allNodesMap;
+}
 
-  getOtherNodes(startStop, stops) {
-    const otherNodes = [];
-    stops.forEach((stop) => {
-      if (stop.name !== startStop) {
-        otherNodes.push(this.nodeFactory.build(stop.name));
-      }
-    });
-    return otherNodes;
-  }
-
-  findLowestDurationNode(unsettledNodeNames, allNodesMap) {
-    var lowestDurationNode = null;
-    var lowestDuration = Infinity;
-    unsettledNodeNames.forEach((unsettledNode) => {
-      const unsettledNodeStatus = allNodesMap.get(unsettledNode);
-      const nodeDuration = unsettledNodeStatus.totalDuration;
-      if (nodeDuration < lowestDuration) {
-        lowestDuration = nodeDuration;
-        lowestDurationNode = unsettledNodeStatus;
-      }
-    });
-    return lowestDurationNode;
-  }
-
-  /**
-   * Calculate whether the path from current to adjacent is the fastest available and if so,
-   * add the path to the node and which line to use to the adjacent node's variables
-   */
-  calculateNodeVariables(currentNode, road, adjacentNode) {
-    if (
-      _.isNull(adjacentNode.totalDuration) ||
-      currentNode.totalDuration + road.duration < adjacentNode.totalDuration
-    ) {
-      adjacentNode.totalDuration = currentNode.totalDuration + road.duration;
-      //Copy the shortest path from the current so that we do not modify existing shortest path
-      const shortestPath = currentNode.shortestPath.slice();
-      shortestPath.push(adjacentNode);
-      adjacentNode.shortestPath = shortestPath;
-      this.deduceWhichLineToUse(currentNode, road, adjacentNode);
+function findLowestDurationNode(unsettledNodeNames, allNodesMap) {
+  var lowestDurationNode = null;
+  var lowestDuration = Infinity;
+  unsettledNodeNames.forEach((unsettledNode) => {
+    const unsettledNodeStatus = allNodesMap.get(unsettledNode);
+    const nodeDuration = unsettledNodeStatus.totalDuration;
+    if (nodeDuration < lowestDuration) {
+      lowestDuration = nodeDuration;
+      lowestDurationNode = unsettledNodeStatus;
     }
-  }
+  });
+  return lowestDurationNode;
+}
 
-  deduceWhichLineToUse(currentNode, road, adjacentNode) {
-    if (_.isNull(currentNode.lineBeingUsed)) {
-      adjacentNode.lineBeingUsed = road.includesLines[0];
+/**
+ * Calculate whether the path from current to adjacent is the fastest available and if so,
+ * add the path to the node and which line to use to the adjacent node's variables
+ */
+function calculateNodeVariables(currentNode, road, adjacentNode) {
+  if (
+    _.isNull(adjacentNode.totalDuration) ||
+    currentNode.totalDuration + road.duration < adjacentNode.totalDuration
+  ) {
+    adjacentNode.totalDuration = currentNode.totalDuration + road.duration;
+    //Copy the shortest path from the current so that we do not modify existing shortest path
+    const shortestPath = currentNode.shortestPath.slice();
+    shortestPath.push(adjacentNode);
+    adjacentNode.shortestPath = shortestPath;
+    deduceWhichLineToUse(currentNode, road, adjacentNode);
+  }
+}
+
+function deduceWhichLineToUse(currentNode, road, adjacentNode) {
+  if (_.isNull(currentNode.lineBeingUsed)) {
+    adjacentNode.lineBeingUsed = road.includesLines[0];
+  } else {
+    //Try to use currentNode's line if it is available
+    if (canUseSameLine(road, currentNode)) {
+      adjacentNode.lineBeingUsed = currentNode.lineBeingUsed;
     } else {
-      //Try to use currentNode's line if it is available
-      if (this.canUseSameLine(road, currentNode)) {
-        adjacentNode.lineBeingUsed = currentNode.lineBeingUsed;
-      } else {
-        //This part could use optimization if we had a view in future:
-        //Which line takes us furthest to our destination so that we
-        //have to do the least amount of transfers to different lines.
-        adjacentNode.lineBeingUsed = road.includesLines[0];
-      }
+      //This part could use optimization if we had a view in future:
+      //Which line takes us furthest to our destination so that we
+      //have to do the least amount of transfers to different lines.
+      adjacentNode.lineBeingUsed = road.includesLines[0];
     }
   }
+}
 
-  isRoadUsable(road) {
-    return (
-      !isUndefinedOrNull(road) &&
-      !isUndefinedOrNull(road.includesLines) &&
-      road.includesLines.length !== 0
-    );
-  }
+function isRoadUsable(road) {
+  return (
+    !isUndefinedOrNull(road) &&
+    !isUndefinedOrNull(road.includesLines) &&
+    road.includesLines.length !== 0
+  );
+}
 
-  canUseSameLine(road, currentNode) {
-    return road.includesLines.some(
-      (line) => line === currentNode.lineBeingUsed
-    );
-  }
+function canUseSameLine(road, currentNode) {
+  return road.includesLines.some(
+    (line) => line === currentNode.lineBeingUsed
+  );
+}
 
-  removeNode(nodeToRemove, nodeNames) {
-    nodeNames.splice(nodeNames.indexOf(nodeToRemove.stopData.name), 1);
-  }
+function removeNode(nodeToRemove, nodeNames) {
+  nodeNames.splice(nodeNames.indexOf(nodeToRemove.stopData.name), 1);
 }
 
 export default RouteCalculator;
