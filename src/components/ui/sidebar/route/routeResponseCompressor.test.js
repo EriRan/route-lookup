@@ -1,4 +1,4 @@
-import { compressResponse } from "./routeResponseCompresser";
+import { compressResponse } from "./routeResponseCompressor";
 
 test("Empty array", () => {
   const compressedResponse = compressResponse([
