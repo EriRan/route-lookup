@@ -3,7 +3,7 @@
 
 ## In English
 
-This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. It was developed with Windows 10 operating system.
+This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines.
 
 ### Description
 
@@ -19,6 +19,8 @@ This application uses the provided route data json to first render the bus stops
   * User Interface components
 * Lodash
   * General purpose conditions
+
+Developed on Windows 10 Home version 1909.
 
 ### How to run
 
@@ -36,7 +38,7 @@ This application uses the provided route data json to first render the bus stops
 
 ## Suomeksi
 
-Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja. Sovellus koodattiin Windows 10 -käyttöjärjestelmällä.
+Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja.
 
 ### Kuvaus
 
@@ -52,6 +54,8 @@ Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jo
   * Käyttöliittymäkomponentit
 * Lodash
   * Yleiskäyttöiset ehtolauseet
+
+Koodattu Windows 10 Home:n versiolla 1909.
 
 ### Käyttöohjeet
 
