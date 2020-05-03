@@ -14,6 +14,7 @@ function createMockLinesJson() {
 test("Can map lines", () => {
   mapper.map(mockLineData).forEach((mappedLine) => {
     expect(mappedLine.name).toBeDefined();
+    expect(mappedLine.name[0]).toBe("L");
     expect(mappedLine.stopsAt).toBeInstanceOf(Array);
     expect(mappedLine.stopsAt.length).toBeGreaterThan(0);
   });

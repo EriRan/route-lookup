@@ -53,13 +53,13 @@ export function provideStyles(
   }
   function returnColorDependingOnLine(colorString, opacity) {
     switch (colorString) {
-      case "keltainen":
+      case "Keltainen":
         return createResponse("yellow", opacity);
-      case "punainen":
+      case "Punainen":
         return createResponse("red", opacity);
-      case "vihreä":
+      case "Vihreä":
         return createResponse("green", opacity);
-      case "sininen":
+      case "Sininen":
         return createResponse("blue", opacity);
       default:
         console.log(
@@ -91,7 +91,7 @@ export function provideStyles(
   }
 
   function deduceUnusedRoadOpacity(colorString) {
-    if (colorString === "keltainen") {
+    if (colorString === "Keltainen") {
       return UNUSED_ROAD_OPACITY_YELLOW;
     } else {
       return UNUSED_ROAD_OPACITY;

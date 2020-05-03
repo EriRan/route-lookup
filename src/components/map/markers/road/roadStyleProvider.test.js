@@ -26,7 +26,7 @@ test("Road with no lines", () => {
 });
 
 test("Has lines and route is not calculated", () => {
-  const includesLines = ["punainen", "sininen"];
+  const includesLines = ["Punainen", "Sininen"];
   const calculatedRouteNode = null; //Does not matter, so should not be needed
   const isRouteCalculated = false;
 
@@ -45,7 +45,7 @@ test("Has lines and route is not calculated", () => {
 });
 
 test("Has lines, route is calculated but not for current route node", () => {
-  const includesLines = ["punainen", "sininen"];
+  const includesLines = ["Punainen", "Sininen"];
   const calculatedRouteNode = null; //Calculated route does not include this node
   const isRouteCalculated = true;
 
@@ -64,7 +64,7 @@ test("Has lines, route is calculated but not for current route node", () => {
 });
 
 test("Has lines, route is calculated but not for current route node with yellow special case", () => {
-  const includesLines = ["keltainen"];
+  const includesLines = ["Keltainen"];
   const calculatedRouteNode = null; //Calculated route does not include this node
   const isRouteCalculated = true;
 
@@ -82,8 +82,8 @@ test("Has lines, route is calculated but not for current route node with yellow 
 });
 
 test("Has lines, route is calculated for current node", () => {
-  const includesLines = ["punainen", "sininen"];
-  const calculatedRouteNode = { line: "punainen" };
+  const includesLines = ["Punainen", "Sininen"];
+  const calculatedRouteNode = { line: "Punainen" };
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
@@ -105,7 +105,7 @@ test("Has lines, route is calculated for current node", () => {
 });
 
 test("Line with undefined color", () => {
-  const includesLines = ["jokeri"];
+  const includesLines = ["Jokeri"];
   const calculatedRouteNode = null;
   const isRouteCalculated = false;
 
