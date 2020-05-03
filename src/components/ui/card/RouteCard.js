@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
     position: "fixed",
     zIndex: 1,
-    top: "15%",
+    top: "10%",
   },
 }));
 
