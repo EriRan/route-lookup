@@ -1,4 +1,5 @@
-# Solidabis Code Challenge of April - Solidabiksen Huhtikuun koodihaaste
+# Solidabis Code Challenge of April
+# Solidabiksen Huhtikuun koodihaaste
 
 ## In English
 
