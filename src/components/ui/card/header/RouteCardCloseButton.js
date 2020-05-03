@@ -5,7 +5,7 @@ import { changeSidebarOpenState } from "../../../../actions/sidebar";
 import { Typography, IconButton } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
 
-class SidebarCloseButton extends React.Component {
+class RouteCardCloseButton extends React.Component {
   render() {
     return (
       <Typography align="right">
@@ -21,4 +21,4 @@ class SidebarCloseButton extends React.Component {
   };
 }
 
-export default connect(null, { changeSidebarOpenState })(SidebarCloseButton);
+export default connect(null, { changeSidebarOpenState })(RouteCardCloseButton);
