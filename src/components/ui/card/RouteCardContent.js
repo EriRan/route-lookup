@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import {
   CardContent,
-  CardHeader,
+  Collapse,
   Divider,
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -14,12 +14,13 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
+import RouteCardHeader from "./header/RouteCardHeader"
 
 class RouteCardContent extends React.Component {
   render() {
     return (
       <CardContent>
-        <CardHeader />
+        <RouteCardHeader />
         <Divider />
         <RouteForm possibleStops={this.props.transportData.stops} />
         <RouteResult transportData={this.props.transportData} />
@@ -33,7 +34,7 @@ class RouteCardContent extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Tehty Solidabiksen koodihaastetta varten <br />
+              Tehty Solidabiksen koodihaastetta varten. <br />
               Koodaus ja ulkoasu: Erik Rantanen
             </Typography>
           </ExpansionPanelDetails>
