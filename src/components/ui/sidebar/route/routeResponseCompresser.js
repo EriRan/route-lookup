@@ -5,7 +5,6 @@ import _ from "lodash";
  */
 export function compressResponse(route) {
   const routes = Array.from(route.values());
-  console.log(routes);
   const compressedResponse = [];
   let currentLine = null;
   let currentLineStartStop = null;
@@ -16,50 +15,48 @@ export function compressResponse(route) {
       currentLine = iteratedRoute.line;
       currentLineStartStop = iteratedRoute.from;
     }
-    if (
-      _.isNull(currentLine) ||
-      currentLine !== iteratedRoute.line ||
-      isFinal
-    ) {
-      if (isFinal) {
-        if (currentLine === iteratedRoute.line) {
-          compressedResponse.push(
-            createCompressedNode(
-              currentLineStartStop,
-              iteratedRoute.to,
-              currentLine
-            )
-          );
-        } else {
-          compressedResponse.push(
-            createCompressedNode(
-              currentLineStartStop,
-              iteratedRoute.from,
-              currentLine
-            )
-          );
-          compressedResponse.push(
-            createCompressedNode(
-              iteratedRoute.from,
-              iteratedRoute.to,
-              iteratedRoute.line
-            )
-          );
-        }
-      } else {
-        compressedResponse.push(
-          createCompressedNode(
-            currentLineStartStop,
-            iteratedRoute.from,
-            currentLine
-          )
-        );
-        currentLine = iteratedRoute.line;
-        currentLineStartStop = iteratedRoute.from;
-      }
+    if (isFinal) {
+      addLastRoutes(iteratedRoute, currentLineStartStop, currentLine);
+    } else if (_.isNull(currentLine) || currentLine !== iteratedRoute.line) {
+      compressedResponse.push(
+        createCompressedNode(
+          currentLineStartStop,
+          iteratedRoute.from,
+          currentLine
+        )
+      );
+      currentLine = iteratedRoute.line;
+      currentLineStartStop = iteratedRoute.from;
     }
   }
   return compressedResponse;
+
+  function addLastRoutes(iteratedRoute, currentLineStartStop, currentLine) {
+    if (currentLine === iteratedRoute.line) {
+      compressedResponse.push(
+        createCompressedNode(
+          currentLineStartStop,
+          iteratedRoute.to,
+          currentLine
+        )
+      );
+    } else {
+      compressedResponse.push(
+        createCompressedNode(
+          currentLineStartStop,
+          iteratedRoute.from,
+          currentLine
+        )
+      );
+      compressedResponse.push(
+        createCompressedNode(
+          iteratedRoute.from,
+          iteratedRoute.to,
+          iteratedRoute.line
+        )
+      );
+    }
+  }
 
   function isLastRoute(i, routes) {
     return i === routes.length - 1;
