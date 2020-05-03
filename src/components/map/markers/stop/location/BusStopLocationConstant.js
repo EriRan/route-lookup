@@ -1,5 +1,5 @@
 export const FIRST_LOCATION = {
-  x: 400,
+  x: 50,
   y: 650
 }
 
