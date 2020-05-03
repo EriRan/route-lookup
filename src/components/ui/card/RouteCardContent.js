@@ -1,8 +1,10 @@
 import React from "react";
 
 import {
+  Divider,
   ExpansionPanel,
   ExpansionPanelDetails,
+  Grid,
 } from "@material-ui/core";
 
 import RouteForm from "./route/RouteForm";
@@ -15,8 +17,11 @@ class RouteCardContent extends React.Component {
       <ExpansionPanel>
         <RouteCardHeader />
         <ExpansionPanelDetails>
+          <Grid direction="column">
           <RouteForm possibleStops={this.props.transportData.stops} />
+          <Divider />
           <RouteResult transportData={this.props.transportData} />
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
