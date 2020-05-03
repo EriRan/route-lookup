@@ -36,7 +36,7 @@ Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 20
 
 ### Kuvaus
 
-Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jotka yhdistävät niitä. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjan, jota käytetään pysäkkien välillä.
+Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jotka yhdistävät niitä. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjat, joita käytetään pysäkkien välillä.
 
 ### Käytetyt teknologiat
 
