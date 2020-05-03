@@ -10,23 +10,23 @@ test("Route with no lines is not used", () => {
     const key = entry[0];
     const value = entry[1];
     expect(key).not.toBe("A-D")
-    expect(value.line).toBe("vihreä");
+    expect(value.line).toBe("Vihreä");
   })
 });
 
 test("Optimal route is deduced", () => {
   const response = calculator.calculate("A", "R");
   validateResponse(response, 11, 3);
-  expect(response.route.get("A-B").line).toBe("vihreä");
-  expect(response.route.get("B-D").line).toBe("vihreä");
-  expect(response.route.get("D-R").line).toBe("punainen");
+  expect(response.route.get("A-B").line).toBe("Vihreä");
+  expect(response.route.get("B-D").line).toBe("Vihreä");
+  expect(response.route.get("D-R").line).toBe("Punainen");
 })
 
 test("Changing bus lines is avoided", () => {
   const response = calculator.calculate("A", "J");
   validateResponse(response, 10, 7);
   Array.from(response.route.values(route => {
-    expect(route.line).toBe("vihreä");
+    expect(route.line).toBe("Vihreä");
   }))
 })
 
