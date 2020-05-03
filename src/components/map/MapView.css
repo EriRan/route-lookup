@@ -1,6 +1,15 @@
 .map-view {
   position: absolute;
-  background-color: #d4d9d9;
   top: 0;
   left: 0;
+}
+
+.map-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background-color: #d4d9d9;
 }

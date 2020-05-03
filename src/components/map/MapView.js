@@ -12,16 +12,18 @@ class MapView extends React.Component {
       this.props.transportData.stops.values().next().value
     );
     return (
-      <svg
-        className="map-view"
-        width={busStopLocations.xMax + MAP_PADDING}
-        height={busStopLocations.yMax + MAP_PADDING}
-      >
-        <TrafficNetworkContainer
-          stops={this.props.transportData.stops}
-          busStopLocationsMap={busStopLocations.map}
-        />
-      </svg>
+      <div className="map-background">
+        <svg
+          className="map-view"
+          width={busStopLocations.xMax + MAP_PADDING}
+          height={busStopLocations.yMax + MAP_PADDING}
+        >
+          <TrafficNetworkContainer
+            stops={this.props.transportData.stops}
+            busStopLocationsMap={busStopLocations.map}
+          />
+        </svg>
+      </div>
     );
   }
 
