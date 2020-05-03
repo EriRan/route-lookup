@@ -1,11 +1,15 @@
 import React from "react";
 
-import { CardHeader } from "@material-ui/core";
-import RouteCardCloseButton from "./RouteCardCloseButton";
+import { ExpansionPanelSummary, Typography } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class RouteCardHeader extends React.Component {
   render() {
-    return <CardHeader action={<RouteCardCloseButton />} />;
+    return (
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography>Reittihaku</Typography>
+      </ExpansionPanelSummary>
+    );
   }
 }
 
