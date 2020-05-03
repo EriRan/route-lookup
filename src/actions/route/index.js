@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { SET_START_STOP, SET_DESTINATION_STOP } from "./types";
+import { SET_START_STOP, SET_DESTINATION_STOP, STOP_CLICKED } from "./types";
 
 export const setStartStop = (startStop, hasError) => {
   return {
@@ -18,6 +18,16 @@ export const setDestinationStop = (destinationStop, hasError) => {
     payload: {
       name: _.upperCase(destinationStop),
       hasError: hasError,
+    },
+  };
+};
+
+export const stopClicked = (stopName) => {
+  return {
+    type: STOP_CLICKED,
+    payload: {
+      name: _.upperCase(stopName),
+      hasError: null,
     },
   };
 };
