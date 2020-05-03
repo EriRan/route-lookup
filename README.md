@@ -36,6 +36,8 @@ Developed on Windows 10 Home version 1909.
 4. After installation is complete, type `npm start`
 5. Browser window should now open with the application
 
+---
+
 ## Suomeksi
 
 Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja.
