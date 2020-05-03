@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Typography } from "@material-ui/core";
+import { Divider, Typography } from "@material-ui/core";
 
 import { compressResponse } from "./routeResponseCompressor";
 import {
@@ -39,6 +39,7 @@ class RouteResult extends React.Component {
       return (
         <div>
           {routeData}
+          <Divider />
           <Typography>
             Kesto yhteensä: {calculatedRoute.totalDuration}
           </Typography>
