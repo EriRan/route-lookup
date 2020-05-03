@@ -14,7 +14,6 @@ class MapView extends React.Component {
     return (
       <div className="map-background">
         <svg
-          className="map-view"
           width={busStopLocations.xMax + MAP_PADDING}
           height={busStopLocations.yMax + MAP_PADDING}
         >
