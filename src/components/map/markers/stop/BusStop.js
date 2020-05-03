@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { stopClicked } from "../../../../actions/route/";
+import { stopClicked } from "../../../../actions";
 import { SELECTED_COLOR } from "./BusStopConstant";
 import "./BusStop.css";
 
