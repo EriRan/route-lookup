@@ -1,31 +1,26 @@
 import React from "react";
-import {connect} from "react-redux";
 
 import {
-  CardContent,
-  Divider,
+  ExpansionPanel,
+  ExpansionPanelDetails,
 } from "@material-ui/core";
+
 import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
-import RouteCardHeader from "./header/RouteCardHeader"
+import RouteCardHeader from "./header/RouteCardHeader";
 
 class RouteCardContent extends React.Component {
   render() {
     return (
-      <CardContent>
+      <ExpansionPanel>
         <RouteCardHeader />
-        <Divider />
-        <RouteForm possibleStops={this.props.transportData.stops} />
-        <RouteResult transportData={this.props.transportData} />
-      </CardContent>
+        <ExpansionPanelDetails>
+          <RouteForm possibleStops={this.props.transportData.stops} />
+          <RouteResult transportData={this.props.transportData} />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isSidebarOpen: state.sidebar.isOpen,
-  };
-};
-
-export default connect(mapStateToProps, {})(RouteCardContent);
+export default RouteCardContent;
