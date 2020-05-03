@@ -1,12 +1,12 @@
 import React from "react";
 
-import Sidebar from "./sidebar/Sidebar";
+import RouteCard from "./card/RouteCard";
 import KuutiolaAppBar from "./appbar/KuutiolaAppBar";
 
 const UiContainer = ({transportData}) => (
   <div>
     <KuutiolaAppBar />
-    <Sidebar transportData={transportData}/>
+    <RouteCard transportData={transportData}/>
   </div>
 );
 
