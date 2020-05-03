@@ -3,8 +3,7 @@ import _ from "lodash";
 /**
  * Compress results of the route calculation to smaller size by making stops point to the stop at which we must change line or the calculated route ends there.
  */
-export function compressResponse(route) {
-  const routes = Array.from(route.values());
+export function compressResponse(routes) {
   const compressedResponse = [];
   let currentLine = null;
   let currentLineStartStop = null;

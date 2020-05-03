@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
 import RouteCalculator from "../../../../reducers/route/calculation/RouteCalculator";
-import {compressResponse} from "./routeResponseCompresser";
+import { compressResponse } from "./routeResponseCompresser";
 
 import {
   isUndefinedOrNull,
@@ -30,8 +30,9 @@ class RouteResult extends React.Component {
         </Typography>
       );
     } else {
-      
-      const routeData = compressResponse(calculatedRoute.route).map((stopRoute) => {
+      const routeData = compressResponse(
+        Array.from(calculatedRoute.route.values())
+      ).map((stopRoute) => {
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
             Pysäkkiltä: {stopRoute.from} pysäkkiin {stopRoute.to} linjalla:{" "}
@@ -42,7 +43,9 @@ class RouteResult extends React.Component {
       return (
         <div>
           {routeData}
-          <Typography>Kesto yhteensä: {calculatedRoute.totalDuration}</Typography>
+          <Typography>
+            Kesto yhteensä: {calculatedRoute.totalDuration}
+          </Typography>
         </div>
       );
     }
