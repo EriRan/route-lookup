@@ -26,17 +26,34 @@ export default (state = INITIAL_STATE, action) => {
         destinationStop: action.payload,
       });
     case STOP_CLICKED:
-      return appendStartOrDestination(state, action.payload);
+      return changeStartOrDestination(state, action.payload);
     default:
       return state;
   }
 };
 
-function appendStartOrDestination(currentState, payload) {
+function changeStartOrDestination(currentState, payload) {
   if (payload.hasError) {
     return currentState;
   }
-  if (!hasUsableInput(currentState.startStop)) {
+  const isStartStopUsable = hasUsableInput(currentState.startStop);
+  if (isStartStopUsable && currentState.startStop.name === payload.name) {
+    return appendCalculatedRoute({
+      ...currentState,
+      startStop: createEmptyStopData(),
+    });
+  }
+  if (
+    hasUsableInput(currentState.destinationStop) &&
+    currentState.destinationStop.name === payload.name
+  ) {
+    return appendCalculatedRoute({
+      ...currentState,
+      destinationStop: createEmptyStopData(),
+    });
+  }
+
+  if (!isStartStopUsable) {
     return appendCalculatedRoute({
       ...currentState,
       startStop: payload,
@@ -67,4 +84,8 @@ function hasUsableInput(targetStop) {
   return (
     !isUndefinedOrNullOrEmptyString(targetStop.name) && !targetStop.hasError
   );
+}
+
+function createEmptyStopData() {
+  return { name: null, hasErrors: false };
 }
