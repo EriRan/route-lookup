@@ -9,7 +9,7 @@ class RouteForm extends React.Component {
   render() {
     return (
       <form>
-        <Grid container alignItems="center" direction="column">
+        <Grid container alignItems="center" direction="row">
           <Typography color="primary">Mistä lähdet?</Typography>
           <RouteInput
             id="outlined-basic"
