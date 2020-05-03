@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import RouteInput from "./RouteInput";
-import { setStartStop, setDestinationStop } from "../../../../actions/route";
+import { setStartStop, setDestinationStop } from "../../../../actions";
 import { Typography, Grid } from "@material-ui/core";
 
 class RouteForm extends React.Component {
