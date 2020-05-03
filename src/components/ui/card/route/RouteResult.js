@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
-import { compressResponse } from "./routeResponseCompressor";
 
+import { compressResponse } from "./routeResponseCompressor";
 import {
   isUndefinedOrNull,
   isUndefinedOrNullOrEmptyString,
@@ -31,7 +31,7 @@ class RouteResult extends React.Component {
       ).map((stopRoute) => {
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            Pysäkkiltä {stopRoute.from} pysäkkiin {stopRoute.to} linjalla{" "}
+            {stopRoute.from} -> {stopRoute.to} linjalla{" "}
             {stopRoute.line}
           </Typography>
         );
