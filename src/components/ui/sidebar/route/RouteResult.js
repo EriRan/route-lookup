@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Typography } from "@material-ui/core";
-import RouteCalculator from "../../../../reducers/route/calculation/RouteCalculator";
 import { compressResponse } from "./routeResponseCompressor";
 
 import {
@@ -11,9 +10,6 @@ import {
 } from "../../../../util/Utilities";
 
 class RouteResult extends React.Component {
-  componentDidMount() {
-    this.routeCalculator = new RouteCalculator(this.props.transportData);
-  }
 
   render() {
     if (!isUndefinedOrNull(this.props.calculatedRoute)) {

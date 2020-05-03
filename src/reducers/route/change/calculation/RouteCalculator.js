@@ -4,7 +4,7 @@ import NodeFactory from "./NodeFactory";
 import { convertCalculation, createErrorResponse } from "./responseConverter";
 import { ALREADY_AT_DESTINATION } from "./ErrorMessageConstant";
 
-import { isUndefinedOrNull } from "../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../util/Utilities";
 
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.
