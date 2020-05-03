@@ -1,18 +1,23 @@
 import React from "react";
 
-import {
-  Card,
-} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Card } from "@material-ui/core";
 import RouteCardContent from "./RouteCardContent";
 
-class RouteCard extends React.Component {
-  render() {
-    return (
-      <Card>
-        <RouteCardContent transportData={this.props.transportData}/>
-      </Card>
-    );
-  }
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 300,
+    position: "fixed",
+    zIndex: 1,
+    top: "15%",
+  },
+}));
 
-export default (RouteCard);
+export default function RouteCard({ transportData }) {
+  const classes = useStyles();
+  return (
+    <Card className={classes.root} raised={true}>
+      <RouteCardContent transportData={transportData} />
+    </Card>
+  );
+}
