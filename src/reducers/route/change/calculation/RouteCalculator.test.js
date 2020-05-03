@@ -1,5 +1,5 @@
 import RouteCalculator from "./RouteCalculator";
-import TransportDataSingleton from "../../../data/TransportDataSingleton";
+import TransportDataSingleton from "../../../../data/TransportDataSingleton";
 
 const calculator = new RouteCalculator(TransportDataSingleton.getInstance());
 
