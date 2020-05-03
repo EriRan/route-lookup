@@ -1,5 +1,5 @@
-# Solidabis Code Challenge of April
-# Solidabiksen Huhtikuun koodihaaste
+# Solidabis Code Challenge of April 2020
+# Solidabiksen 2020 Huhtikuun koodihaaste
 
 ## In English
 
