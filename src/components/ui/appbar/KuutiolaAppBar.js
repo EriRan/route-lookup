@@ -10,7 +10,7 @@ const styles = {
 };
 
 const KuutiolaAppBar = ({ classes }) => (
-  <AppBar position="fixed" color="primary">
+  <AppBar color="primary">
     <Toolbar>
       <Typography variant="h5" align="right" className={classes.centeredTitle}>
         Kuutiola reittiopas
