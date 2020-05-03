@@ -7,7 +7,7 @@ class RouteCardHeader extends React.Component {
   render() {
     return (
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>Reittihaku</Typography>
+        <Typography variant="h5">Reittihaku</Typography>
       </ExpansionPanelSummary>
     );
   }
