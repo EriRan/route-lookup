@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 import {
-  Drawer,
+  CardContent,
+  CardHeader,
   Divider,
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -11,19 +12,14 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import SidebarHeader from "./header/SidebarHeader";
 import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
 
-class Sidebar extends React.Component {
+class RouteCardContent extends React.Component {
   render() {
     return (
-      <Drawer
-        anchor={"left"}
-        open={this.props.isSidebarOpen}
-        variant="persistent"
-      >
-        <SidebarHeader />
+      <CardContent>
+        <CardHeader />
         <Divider />
         <RouteForm possibleStops={this.props.transportData.stops} />
         <RouteResult transportData={this.props.transportData} />
@@ -42,7 +38,7 @@ class Sidebar extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </Drawer>
+      </CardContent>
     );
   }
 }
@@ -53,4 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(Sidebar);
+export default connect(mapStateToProps, {})(RouteCardContent);
