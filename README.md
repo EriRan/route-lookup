@@ -7,7 +7,7 @@ This is a submission to Solidabis' code challenge that was posted in April of 20
 
 ### Description
 
-This application uses the provided route data json to first render the bus stops and the roads between them. Bus stops are rendered in a crawling style: we first start from one of the stops and then render the neighbouring stops and their neighbours and so on. Neighbours are placed in one of the eight available directions and the duration between the stops affects the lenght of the road when possible. Route calculation between the stops is done using adapted [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) which takes into account which bus line should be used between the roads as well.
+This application uses the provided route data json to first render the bus stops and the roads between them. JSON data is not used as it is but is mapped to a more easily handleable format with mapper classes. Bus stops are rendered in a crawling style: we first start from one of the stops and then render the neighbouring stops and their neighbours and so on. Neighbours are placed in one of the eight available directions and the duration between the stops affects the lenght of the road when possible. Route calculation between the stops is done using adapted [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) which takes into account which bus line should be used between the roads as well.
 
 ### Technologies used
 
@@ -44,7 +44,7 @@ Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 20
 
 ### Kuvaus
 
-Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jotka yhdistävät niitä. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjat, joita käytetään pysäkkien välillä.
+Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja niitä yhdistävät tiet. JSON dataa ei käytetä sellaisenaan, vaan sen rakennetta muutetaan mapper-luokissa helpommin käsiteltäväksi. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään sovellettua [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjat, joita käytetään pysäkkien välillä.
 
 ### Käytetyt teknologiat
 
