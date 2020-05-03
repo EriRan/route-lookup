@@ -11,10 +11,14 @@ This application uses the provided route data json to first render the bus stops
 
 ### Technologies used
 
-* React
-* React-Redux
+* React ja React-Redux
+  * Core of the application
 * Jest
+  * Testing
 * Material UI
+  * User Interface components
+* Lodash
+  * General purpose conditions
 
 ### How to run
 
@@ -40,10 +44,14 @@ Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jo
 
 ### Käytetyt teknologiat
 
-* React
-* React-Redux
+* React ja React-Redux
+  * Sovelluksen ydin
 * Jest
+  * Testaus
 * Material UI
+  * Käyttöliittymäkomponentit
+* Lodash
+  * Yleiskäyttöiset ehtolauseet
 
 ### Käyttöohjeet
 
