@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Solidabis Code Challenge of April - Solidabiksen Huhtikuun koodihaaste
 
-## Available Scripts
+## In English
 
-In the project directory, you can run:
+This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. It was developed with Windows 10 operating system.
 
-### `npm start`
+### Description
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This application uses the provided route data json to first render the bus stops and the roads between them. Bus stops are rendered in a crawling style: we first start from one of the stops and then render the neighbouring stops and their neighbours and so on. Neighbours are placed in one of the eight available directions and the duration between the stops affects the lenght of the road when possible. Route calculation between the stops is done using adapted [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) which takes into account which bus line should be used between the roads as well.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Technologies used
 
-### `npm test`
+* React
+* React-Redux
+* Jest
+* Material UI
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### How to run
 
-### `npm run build`
+#### Required dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. If you do not have Node.js or npm on your computer, start by downloading it from here: https://www.npmjs.com/get-npm
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Running the application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Download this repository and extract it
+2. Open your preferred command line at the extracted folder
+3. Type `npm install`
+4. After installation is complete, type `npm start`
+5. Browser window should now open with the application
 
-### `npm run eject`
+## Suomeksi
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja. Sovellus koodattiin Windows 10 -käyttöjärjestelmällä.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Kuvaus
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja tiet, jotka yhdistävät niitä. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjan, jota käytetään pysäkkien välillä.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Käytetyt teknologiat
 
-## Learn More
+* React
+* React-Redux
+* Jest
+* Material UI
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Käyttöohjeet
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Tarvitut muut sovellukset
 
-### Code Splitting
+1. Jos sinulla ei ole Node.js eikä npm:ää tietokoneellasi, lataa ja asenna se täältä: https://www.npmjs.com/get-npm
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+#### Miten ajaa
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Lataa tämä repositorio ja pura se
+2. Avaa jokin komentokehoite puretussa kansiossa
+3. Kirjoita komentokehoitteeseen `npm install`
+4. Kun asennus on valmis, kirjoita `npm start`
+5. Sovelluksen pitäisi nyt aueta selaimeesi
