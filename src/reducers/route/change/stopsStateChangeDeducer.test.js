@@ -1,7 +1,4 @@
-import {
-  appendCalculatedRoute,
-  changeStartOrDestination,
-} from "./stopsStateChangeDeducer";
+import { changeStartOrDestination } from "./stopsStateChangeDeducer";
 
 test("Set start stop to null", () => {
   const stateChange = changeStartOrDestination(
@@ -43,6 +40,8 @@ test("Do nothing if payload has an error", () => {
 });
 
 test("Calculation is done if updates to a new stop", () => {
+  //Would be nice to mock the calculation function somehow so that it doesn't get called for real.
+  //We would then save a few milliseconds.
   const stateChange = changeStartOrDestination(
     createCurrentState("A", "C"),
     createPayload("B", false)
