@@ -1,6 +1,7 @@
 import {
   SET_START_STOP,
   SET_DESTINATION_STOP,
+  STOP_CLICKED,
 } from "../../actions/route/types";
 import RouteCalculator from "./calculation/RouteCalculator";
 import TransportDataSingleton from "../../data/TransportDataSingleton";
@@ -24,10 +25,29 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         destinationStop: action.payload,
       });
+    case STOP_CLICKED:
+      return appendStartOrDestination(state, action.payload);
     default:
       return state;
   }
 };
+
+function appendStartOrDestination(currentState, payload) {
+  if (payload.hasError) {
+    return currentState;
+  }
+  if (!hasUsableInput(currentState.startStop)) {
+    return appendCalculatedRoute({
+      ...currentState,
+      startStop: payload,
+    });
+  } else {
+    return appendCalculatedRoute({
+      ...currentState,
+      destinationStop: payload,
+    });
+  }
+}
 
 function appendCalculatedRoute(currentState) {
   if (

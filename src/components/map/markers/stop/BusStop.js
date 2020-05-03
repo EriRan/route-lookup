@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {SELECTED_COLOR} from "./BusStopConstant";
+import { stopClicked } from "../../../../actions/route/";
+import { SELECTED_COLOR } from "./BusStopConstant";
 import "./BusStop.css";
 
 class BusStop extends React.Component {
   render() {
     return (
-      <g className="bus-stop">
+      <g className="bus-stop" onClick={this.handleClick.bind(this, this.props.name)}>
         <circle
           cx={this.props.x}
           cy={this.props.y}
@@ -26,11 +27,17 @@ class BusStop extends React.Component {
   }
 
   deduceStrokeColor(currentStopName, startStop, destinationStop) {
-    if (currentStopName === startStop.name
-      || currentStopName === destinationStop.name) {
-        return SELECTED_COLOR;
-      }
-      return "black";
+    if (
+      currentStopName === startStop.name ||
+      currentStopName === destinationStop.name
+    ) {
+      return SELECTED_COLOR;
+    }
+    return "black";
+  }
+
+  handleClick(stopName, event) {
+    this.props.stopClicked(stopName);
   }
 }
 
@@ -41,4 +48,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(BusStop);
+export default connect(mapStateToProps, {stopClicked})(BusStop);

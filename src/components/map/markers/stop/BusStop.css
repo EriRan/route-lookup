@@ -1,8 +1,10 @@
 circle {
   fill: white;
   stroke-width: 2;
+  cursor: pointer;
 }
 text {
   text-anchor: middle;
   stroke: black;
+  cursor: pointer;
 }
