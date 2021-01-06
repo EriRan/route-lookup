@@ -5,6 +5,8 @@
 
 This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines.
 
+This web page can be tried out from here: https://goofy-meitner-a2c969.netlify.app/
+
 ### Description
 
 This application uses the provided route data json to first render the bus stops and the roads between them. JSON data is not used as it is but is mapped to a more easily handleable format with mapper classes. Bus stops are rendered in a crawling style: we first start from one of the stops and then render the neighbouring stops and their neighbours and so on. Neighbours are placed in one of the eight available directions and the duration between the stops affects the lenght of the road when possible. Route calculation between the stops is done using adapted [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) which takes into account which bus line should be used between the roads as well.
@@ -41,6 +43,8 @@ Developed on Windows 10 Home version 1909.
 ## Suomeksi
 
 Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja.
+
+Verkkosivua voi testata täältä: https://goofy-meitner-a2c969.netlify.app/
 
 ### Kuvaus
 
