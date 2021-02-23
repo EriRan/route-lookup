@@ -1,6 +1,6 @@
-/** 
+/**
  * Creates objects for stops that contain variables that Djikstra's algorithm ran in RouteCalculator needs.
-*/
+ */
 class NodeFactory {
   build(stopData) {
     return {
@@ -9,7 +9,7 @@ class NodeFactory {
       nodeDuration: null,
       lineBeingUsed: null,
       shortestPath: [],
-    }
+    };
   }
 
   buildAdjacent(stopData, duration) {
@@ -19,7 +19,7 @@ class NodeFactory {
       nodeDuration: duration,
       lineBeingUsed: null,
       shortestPath: [],
-    }
+    };
   }
 
   buildStartNode(stopData) {
@@ -29,7 +29,7 @@ class NodeFactory {
       nodeDuration: null,
       lineBeingUsed: null,
       shortestPath: [],
-    }
+    };
   }
 }
 

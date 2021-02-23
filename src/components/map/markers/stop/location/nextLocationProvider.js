@@ -12,7 +12,7 @@ import {
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 
 /**
- * Provide location for the next bus stop. Each bus stop can be placed to 8 different directions from the current one. 
+ * Provide location for the next bus stop. Each bus stop can be placed to 8 different directions from the current one.
  * We start selecting directions from Upper right and then go in clockwise direction to select the first available direction.
  */
 export function provideNextLocation(

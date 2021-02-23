@@ -30,9 +30,7 @@ class TransportDataMapper {
   map(transportData) {
     const mappedTransportData = {};
     mappedTransportData.stops = new StopMapper().map(transportData);
-    mappedTransportData.lines = new LineMapper().map(
-      transportData.linjastot
-    );
+    mappedTransportData.lines = new LineMapper().map(transportData.linjastot);
     mapLinesToRoads(mappedTransportData);
     return mappedTransportData;
 

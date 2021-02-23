@@ -1,4 +1,5 @@
 # Solidabis Code Challenge of April 2020
+
 # Solidabiksen 2020 Huhtikuun koodihaaste
 
 ## In English
@@ -13,14 +14,14 @@ This application uses the provided route data json to first render the bus stops
 
 ### Technologies used
 
-* React ja React-Redux
-  * Core of the application
-* Jest
-  * Testing
-* Material UI
-  * User Interface components
-* Lodash
-  * General purpose conditions
+- React ja React-Redux
+  - Core of the application
+- Jest
+  - Testing
+- Material UI
+  - User Interface components
+- Lodash
+  - General purpose conditions
 
 Developed on Windows 10 Home version 1909.
 
@@ -52,14 +53,14 @@ Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja niitä y
 
 ### Käytetyt teknologiat
 
-* React ja React-Redux
-  * Sovelluksen ydin
-* Jest
-  * Testaus
-* Material UI
-  * Käyttöliittymäkomponentit
-* Lodash
-  * Yleiskäyttöiset ehtolauseet
+- React ja React-Redux
+  - Sovelluksen ydin
+- Jest
+  - Testaus
+- Material UI
+  - Käyttöliittymäkomponentit
+- Lodash
+  - Yleiskäyttöiset ehtolauseet
 
 Koodattu Windows 10 Home:n versiolla 1909.
 

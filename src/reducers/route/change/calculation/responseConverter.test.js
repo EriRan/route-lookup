@@ -23,7 +23,7 @@ test("Valid route", () => {
   expect(response.errorMessage).toBeNull();
   expect(response.totalDuration).toBe(12);
   expect(response.route).toBeInstanceOf(Map);
-  
+
   //Validate keys created from paths between stops exist
   expect(response.route.get("A-B")).toBeDefined();
   expect(response.route.get("B-C")).toBeDefined();
@@ -73,14 +73,13 @@ function pushNextNode(
 
 function createRoadToNextAndPrevious(previousName, fromName, toName) {
   if (toName == null) {
-    return [createOneRoad(fromName, previousName, true)]
+    return [createOneRoad(fromName, previousName, true)];
   } else {
     return [
       createOneRoad(fromName, toName, false),
       createOneRoad(fromName, previousName, true),
     ];
   }
-  
 }
 
 function createOneRoad(fromName, toName, isReverse) {

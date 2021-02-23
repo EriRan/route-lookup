@@ -2,7 +2,10 @@ import React from "react";
 import _ from "lodash";
 
 import { TextField } from "@material-ui/core";
-import { isUndefinedOrNull, isUndefinedOrNullOrEmptyString } from "../../../../util/Utilities";
+import {
+  isUndefinedOrNull,
+  isUndefinedOrNullOrEmptyString,
+} from "../../../../util/Utilities";
 
 class RouteInput extends React.Component {
   render() {
@@ -26,7 +29,10 @@ class RouteInput extends React.Component {
   }
 
   getCurrentValue() {
-    if (!isUndefinedOrNull(this.props.inputStopData) && !isUndefinedOrNull(this.props.inputStopData.name)) {
+    if (
+      !isUndefinedOrNull(this.props.inputStopData) &&
+      !isUndefinedOrNull(this.props.inputStopData.name)
+    ) {
       return this.props.inputStopData.name;
     }
     return "";

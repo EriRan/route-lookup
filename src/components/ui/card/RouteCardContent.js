@@ -19,9 +19,9 @@ class RouteCardContent extends React.Component {
         <Divider />
         <ExpansionPanelDetails>
           <Grid direction="column">
-          <RouteForm possibleStops={this.props.transportData.stops} />
-          <Divider />
-          <RouteResult transportData={this.props.transportData} />
+            <RouteForm possibleStops={this.props.transportData.stops} />
+            <Divider />
+            <RouteResult transportData={this.props.transportData} />
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>

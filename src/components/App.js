@@ -1,6 +1,6 @@
 import React from "react";
 
-import TransportDataSingleton from "../data/TransportDataSingleton"
+import TransportDataSingleton from "../data/TransportDataSingleton";
 import UiContainer from "./ui/UiContainer";
 import MapView from "./map/MapView";
 

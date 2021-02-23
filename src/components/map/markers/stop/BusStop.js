@@ -8,7 +8,10 @@ import "./BusStop.css";
 class BusStop extends React.Component {
   render() {
     return (
-      <g className="bus-stop" onClick={this.handleClick.bind(this, this.props.name)}>
+      <g
+        className="bus-stop"
+        onClick={this.handleClick.bind(this, this.props.name)}
+      >
         <circle
           cx={this.props.x}
           cy={this.props.y}
@@ -48,4 +51,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {stopClicked})(BusStop);
+export default connect(mapStateToProps, { stopClicked })(BusStop);

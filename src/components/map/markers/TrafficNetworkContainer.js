@@ -16,7 +16,10 @@ class BusTrafficContainer extends React.Component {
     if (_.isMap(this.props.busStopLocationsMap)) {
       return (
         <g className="bus-traffic-container">
-          <RoadContainer busStopLocationMap={this.props.busStopLocationsMap} stops={this.props.stops} />
+          <RoadContainer
+            busStopLocationMap={this.props.busStopLocationsMap}
+            stops={this.props.stops}
+          />
           {this.renderBusStops(this.props.busStopLocationsMap)}
         </g>
       );

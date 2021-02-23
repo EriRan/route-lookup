@@ -10,7 +10,6 @@ import {
 } from "../../../../util/Utilities";
 
 class RouteResult extends React.Component {
-
   render() {
     if (!isUndefinedOrNull(this.props.calculatedRoute)) {
       return this.renderRoute(this.props.calculatedRoute);
@@ -31,8 +30,7 @@ class RouteResult extends React.Component {
       ).map((stopRoute) => {
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            {stopRoute.from} -> {stopRoute.to} linjalla{" "}
-            {stopRoute.line}
+            {stopRoute.from} -> {stopRoute.to} linjalla {stopRoute.line}
           </Typography>
         );
       });

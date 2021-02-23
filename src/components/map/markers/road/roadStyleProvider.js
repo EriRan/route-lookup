@@ -3,7 +3,7 @@ import {
   UNUSED_ROAD_OPACITY_YELLOW,
   USED_ROAD_OPACITY,
   UNUSED_ROAD_COLOR,
-  UNKNOWN_ROAD_COLOR
+  UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 

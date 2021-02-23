@@ -45,7 +45,7 @@ test("Included lines", () => {
       if (stop.name === "X") {
         //Unreachable stop
         expect(stop.roads).toHaveLength(0);
-        continue
+        continue;
       }
       stop.roads.forEach((road) => {
         expect(road.to).toBeDefined();
