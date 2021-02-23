@@ -1,8 +1,8 @@
-import {isUndefinedOrNull} from "../../util/Utilities";
+import { isUndefinedOrNull } from "../../util/Utilities";
 
-/** 
- * Append road data to the provided stops 
-*/
+/**
+ * Append road data to the provided stops
+ */
 class RoadMapper {
   map(mappedStops, roadsJson) {
     if (isUndefinedOrNull(roadsJson)) {

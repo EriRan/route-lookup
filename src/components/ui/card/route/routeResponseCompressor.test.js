@@ -1,8 +1,7 @@
 import { compressResponse } from "./routeResponseCompressor";
 
 test("Empty array", () => {
-  const compressedResponse = compressResponse([
-  ]);
+  const compressedResponse = compressResponse([]);
   expect(compressedResponse).toBeInstanceOf(Array);
   expect(compressedResponse).toHaveLength(0);
 });

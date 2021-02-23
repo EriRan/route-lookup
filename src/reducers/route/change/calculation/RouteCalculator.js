@@ -31,10 +31,7 @@ class RouteCalculator {
       );
       removeNode(currentNode, unsettledNodeNames);
       for (const road of currentNode.stopData.roads) {
-        if (
-          isRoadUsable(road) &&
-          !settledNodeNames.includes(road.to.name)
-        ) {
+        if (isRoadUsable(road) && !settledNodeNames.includes(road.to.name)) {
           const adjacentNode = allNodesMap.get(road.to.name);
           calculateNodeVariables(currentNode, road, adjacentNode);
           unsettledNodeNames.push(adjacentNode.stopData.name);
@@ -120,9 +117,7 @@ function isRoadUsable(road) {
 }
 
 function canUseSameLine(road, currentNode) {
-  return road.includesLines.some(
-    (line) => line === currentNode.lineBeingUsed
-  );
+  return road.includesLines.some((line) => line === currentNode.lineBeingUsed);
 }
 
 function removeNode(nodeToRemove, nodeNames) {

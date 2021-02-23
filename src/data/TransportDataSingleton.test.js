@@ -28,5 +28,7 @@ test("Transport Data integration", () => {
 });
 
 test("Is singleton", () => {
-  expect(TransportDataSingleton.getInstance()).toEqual(TransportDataSingleton.getInstance());
+  expect(TransportDataSingleton.getInstance()).toEqual(
+    TransportDataSingleton.getInstance()
+  );
 });

@@ -28,7 +28,7 @@ function validateLocations(stopsMap, busStopLocationMap) {
   });
 
   function validateAllStopsHaveLocation(stopsMap, busStopLocationMap) {
-    Array.from(stopsMap.keys()).forEach(stopName => {
+    Array.from(stopsMap.keys()).forEach((stopName) => {
       expect(busStopLocationMap.get(stopName)).toBeDefined();
     });
   }

@@ -16,7 +16,7 @@ class RouteForm extends React.Component {
             className="center-input"
             label="Lähtöpaikka"
             autoFocus={true}
-            onChangeFunction = {this.props.setStartStop}
+            onChangeFunction={this.props.setStartStop}
             possibleStops={this.props.possibleStops}
             inputStopData={this.props.startStop}
           />
@@ -26,7 +26,7 @@ class RouteForm extends React.Component {
             id="outlined-basic"
             className="center-input"
             label="Määränpää"
-            onChangeFunction = {this.props.setDestinationStop}
+            onChangeFunction={this.props.setDestinationStop}
             possibleStops={this.props.possibleStops}
             inputStopData={this.props.destinationStop}
           />

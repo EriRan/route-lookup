@@ -101,11 +101,7 @@ export function provideBusStopLocations(firstStop) {
       road.duration,
       occupiedDirections.get(road.from)
     );
-    addOccupiedDirection(
-      road.from,
-      nextLocation.direction,
-      occupiedDirections
-    );
+    addOccupiedDirection(road.from, nextLocation.direction, occupiedDirections);
     return nextLocation;
   }
 
