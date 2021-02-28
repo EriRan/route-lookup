@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: "public/index.html" }],
+      patterns: [{ from: "public/" }],
     }),
   ],
   module: {
@@ -41,6 +41,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"], //Todo: Minimize css?
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
     ],
   },
