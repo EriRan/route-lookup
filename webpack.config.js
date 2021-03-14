@@ -11,6 +11,15 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "*.{png,json,txt}",
+          context: path.resolve(__dirname, "public"),
+          to: "",
+        },
+      ], //Copy all contents of public except index.html because it is handled by HtmlWebpackPlugin
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       filename: "index.html",
