@@ -4,7 +4,7 @@
 
 ## In English
 
-This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines.
+This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. I have improved this app after the challange was over but the implementation at the time of submit can be found from the releases.
 
 This web page can be tried out from here: https://goofy-meitner-a2c969.netlify.app/
 
@@ -43,7 +43,7 @@ Developed on Windows 10 Home version 1909.
 
 ## Suomeksi
 
-Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja.
+Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja. Olen parantanut tätä sovellusta haasteen päätyttyä, mutta haasteen palautuksen aikaisen koodin voit löytää releaseista.
 
 Verkkosivua voi testata täältä: https://goofy-meitner-a2c969.netlify.app/
 
