@@ -14,9 +14,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: "*.{png,json,txt}",
-          context: path.resolve(__dirname, "public"),
-          to: "",
+          from: "*.{png,json,txt}", //Get all files except favicon and index.html from public folder
+          context: path.resolve(__dirname, "public"), //Move to public folder
+          to: "", //Move all files to the root of dist folder
         },
       ], //Copy all contents of public except index.html because it is handled by HtmlWebpackPlugin
     }),
