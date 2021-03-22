@@ -19,7 +19,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: "*.{png,json,txt}", //Get all files except favicon and index.html from public folder
+          from: "*.{png,json,txt}", //Get all files except .ico:s (favicon.ico) and .html:s (index.html) from public folder
           context: path.resolve(__dirname, "public"), //Move to public folder
           to: "", //Move all files to the root of dist folder
         },
