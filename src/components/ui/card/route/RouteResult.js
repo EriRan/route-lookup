@@ -30,7 +30,7 @@ class RouteResult extends React.Component {
       ).map((stopRoute) => {
         return (
           <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-            {stopRoute.from} -> {stopRoute.to} linjalla {stopRoute.line}
+            {stopRoute.from} → {stopRoute.to} linjalla {stopRoute.line}
           </Typography>
         );
       });
