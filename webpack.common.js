@@ -5,11 +5,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   target: "web",
-  entry: "./src/index.js",
+  entry: "./src/index.js", //Todo: Change this to .ts file when Typescript conversion for it is done
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   plugins: [
     new CopyPlugin({
@@ -30,27 +33,18 @@ module.exports = {
   ],
   module: {
     rules: [
-      //React requirements
+      //Typescript requirements
       {
-        test: /\.(jsx|js)$/,
-        include: path.resolve(__dirname, "src"),
+        test: /\.(t|j)sx?$/,
+        use: { loader: "ts-loader" },
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: [
-                [
-                  "@babel/preset-env",
-                  {
-                    targets: "defaults",
-                  },
-                ],
-                "@babel/preset-react",
-              ],
-            },
-          },
-        ],
+      },
+
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "source-map-loader",
       },
       {
         test: /\.css$/i,
@@ -61,5 +55,9 @@ module.exports = {
         type: "asset/resource",
       },
     ],
+  },
+  externals: {
+    react: "React",
+    "react-dom": "ReactDOM",
   },
 };
