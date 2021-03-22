@@ -33,13 +33,11 @@ module.exports = {
   ],
   module: {
     rules: [
-      //Typescript requirements
       {
         test: /\.(t|j)sx?$/,
         use: { loader: "ts-loader" },
         exclude: /node_modules/,
       },
-
       {
         enforce: "pre",
         test: /\.js$/,
@@ -55,9 +53,5 @@ module.exports = {
         type: "asset/resource",
       },
     ],
-  },
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
   },
 };
