@@ -22,7 +22,6 @@ class RoadContainer extends React.Component {
               this.props.calculatedRoute
             );
           })}
-        )
       </g>
     );
   }
