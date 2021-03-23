@@ -17,6 +17,8 @@ export type RoadUnmapped = {
   kesto: number;
 };
 
+//Unmapped stops are stored in a array of Strings
+
 /**
  * Busline that runs on the roads
  */
