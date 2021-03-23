@@ -1,8 +1,9 @@
 import transportData from "./json/reittiopas.json";
 import TransportDataMapper from "./mapper/TransportDataMapper";
+import { TransportData } from "./mapper/types";
 
 export default (function () {
-  var instance;
+  var instance: TransportData;
 
   function createInstance() {
     //Validate response contains: 1. Stops 2. Connections between stops 3. Public transport routes
