@@ -5,7 +5,7 @@ import { TransportData } from "./mapper/types";
 import _ from "lodash";
 
 export default (function () {
-  var instance: TransportData;
+  let instance: TransportData;
 
   function createInstance() {
     const transportData = new TransportDataMapper().map(unmappedTransportData);
