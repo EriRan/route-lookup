@@ -35,12 +35,14 @@ class TransportDataMapper {
     return mappedTransportData;
 
     function mapLinesToRoads(mappedData) {
-      for (const stop of mappedData.stops.values()) {
+      mappedData.stops.forEach((stop) => {
+        //Only the map value is needed here, so other parameters are omitted
         stop.roads.forEach((road) => {
           road.includesLines = [];
           mappedData.lines.forEach((line) => addLineIfRoadIncluded(road, line));
+          console.log(road);
         });
-      }
+      });
     }
 
     function addLineIfRoadIncluded(road, line) {
