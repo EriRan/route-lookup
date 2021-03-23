@@ -40,7 +40,6 @@ class TransportDataMapper {
         stop.roads.forEach((road) => {
           road.includesLines = [];
           mappedData.lines.forEach((line) => addLineIfRoadIncluded(road, line));
-          console.log(road);
         });
       });
     }
