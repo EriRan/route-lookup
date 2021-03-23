@@ -1,14 +1,22 @@
-import transportData from "./json/reittiopas.json";
+import unmappedTransportData from "./json/reittiopas.json";
 import TransportDataMapper from "./mapper/TransportDataMapper";
 import { TransportData } from "./mapper/types";
+
+import _ from "lodash";
 
 export default (function () {
   var instance: TransportData;
 
   function createInstance() {
-    //Validate response contains: 1. Stops 2. Connections between stops 3. Public transport routes
-    //If no response, use local backup
-    return new TransportDataMapper().map(transportData);
+    const transportData = new TransportDataMapper().map(unmappedTransportData);
+    //Quick validations to create warnings to console if something seems to be wrong with the data
+    if (_.isEmpty(transportData.lines)) {
+      console.error("No lines were included in the transport data!");
+    }
+    if (_.isEmpty(transportData.stops)) {
+      console.error("No stops were included in the transport data!");
+    }
+    return transportData;
   }
 
   return {
