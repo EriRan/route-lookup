@@ -1,20 +1,21 @@
 import LineMapper from "./LineMapper";
+import { LinesUnmapped } from "./types";
 
 const mapper = new LineMapper();
 const mockLineData = createMockLinesJson();
 
-function createMockLinesJson() {
+function createMockLinesJson(): LinesUnmapped {
   return {
-    lineOne: ["A", "B", "C"],
-    lineTwo: ["Z", "X", "Y"],
-    lineThree: ["C", "D", "Z"],
+    punainen: ["A", "B", "C"],
+    keltainen: ["Z", "X", "Y"],
+    vihreä: ["C", "D", "Z"],
+    sininen: ["R", "F", "S"],
   };
 }
 
 test("Can map lines", () => {
   mapper.map(mockLineData).forEach((mappedLine) => {
     expect(mappedLine.name).toBeDefined();
-    expect(mappedLine.name[0]).toBe("L");
     expect(mappedLine.stopsAt).toBeInstanceOf(Array);
     expect(mappedLine.stopsAt.length).toBeGreaterThan(0);
   });

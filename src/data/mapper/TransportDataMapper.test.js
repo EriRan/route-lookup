@@ -29,8 +29,10 @@ function createMockData() {
       },
     ],
     linjastot: {
-      lineOne: ["A", "B", "C", "D"],
-      lineTwo: ["C", "D"],
+      punainen: ["A", "B", "C", "D"],
+      vihreä: ["C", "D"],
+      sininen: ["B", "C"],
+      keltainen: ["C", "A"],
     },
   };
 }
