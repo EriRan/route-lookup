@@ -29,7 +29,10 @@ import { isUndefinedOrNull } from "../../util/Utilities";
 class TransportDataMapper {
   map(transportData) {
     const mappedTransportData = {};
-    mappedTransportData.stops = new StopMapper().map(transportData);
+    mappedTransportData.stops = new StopMapper().map(
+      transportData.pysakit,
+      transportData.tiet
+    );
     mappedTransportData.lines = new LineMapper().map(transportData.linjastot);
     mapLinesToRoads(mappedTransportData);
     return mappedTransportData;
