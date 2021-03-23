@@ -1,4 +1,13 @@
 /**
+ * Full data coming from reittiopas.json mapped as a Typescript type
+ */
+export type TransportDataUnmapped = {
+  pysakit: Array<String>; //Unmapped stops
+  tiet: Array<RoadUnmapped>;
+  linjastot: LinesUnmapped;
+};
+
+/**
  * Linjastot in reittiopas.json which provide all available buslines and the bus stops they stop on
  */
 export type LinesUnmapped = {
@@ -20,6 +29,14 @@ export type RoadUnmapped = {
 //Unmapped stops are stored in a array of Strings
 
 /**
+ * Full transport data from reittiopas.json mapped into a more convenient format
+ */
+export type TransportData = {
+  stops: Map<String, Stop>;
+  lines: Array<Line>;
+};
+
+/**
  * Busline that runs on the roads
  */
 export type Line = {
@@ -35,6 +52,7 @@ export type Road = {
   to: Stop;
   duration: number;
   isReverse: boolean;
+  includesLines?: Array<String>;
 };
 
 export type Stop = {
