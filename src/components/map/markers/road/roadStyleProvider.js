@@ -22,7 +22,11 @@ export function provideStyles(
   calculatedRouteNode,
   isRouteCalculated
 ) {
-  if (!Array.isArray(includesLines) || includesLines.length === 0) {
+  if (!Array.isArray(includesLines)) {
+    console.error("Received non array as parameter! Creating an unused road.");
+    return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
+  }
+  if (includesLines.length === 0) {
     return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
   return deduceFromLines(includesLines, calculatedRouteNode, isRouteCalculated);
