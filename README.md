@@ -39,6 +39,13 @@ Developed on Windows 10 Home version 1909.
 4. After installation is complete, type `npm start`
 5. Browser window should now open with the application
 
+### Other commands
+
+- npm test
+  - Run tests to ensure the application is working correctly. All of the tests should pass.
+- npm run build
+  - Create a production bundle to /dist folder
+
 ---
 
 ## Suomeksi
@@ -77,3 +84,10 @@ Koodattu Windows 10 Home:n versiolla 1909.
 3. Kirjoita komentokehoitteeseen `npm install`
 4. Kun asennus on valmis, kirjoita `npm start`
 5. Sovelluksen pitäisi nyt aueta selaimeesi
+
+### Muita komentoja
+
+- npm test
+  - Aja testit varmistaaksesi, jotta sovellus toimii oikein. Kaikkien testien pitäisi mennä läpi.
+- npm run build
+  - Luo tuotantopaketti /dist -kansioon
