@@ -1,3 +1,4 @@
+import { Line, Stop } from "./mapper/types";
 import TransportDataSingleton from "./TransportDataSingleton";
 
 test("Transport Data integration", () => {
@@ -9,19 +10,19 @@ test("Transport Data integration", () => {
   validateStops(transportDataSingleton.stops);
   validateHasLines(transportDataSingleton.lines);
 
-  function validateStops(stops) {
+  function validateStops(stops: Map<String, Stop>) {
     expect(stops.size).toBeGreaterThan(0);
     Array.from(stops.values()).forEach((stop) => {
       validateStopHasRoads(stop);
     });
   }
 
-  function validateStopHasRoads(stop) {
+  function validateStopHasRoads(stop: Stop) {
     expect(stop.roads).toBeInstanceOf(Array);
     expect(stop.roads.length).toBeGreaterThan(0);
   }
 
-  function validateHasLines(lines) {
+  function validateHasLines(lines: Array<Line>) {
     expect(lines).toBeInstanceOf(Array);
     expect(lines.length).toBeGreaterThan(0);
   }
