@@ -14,7 +14,7 @@ This application uses the provided route data json to first render the bus stops
 
 ### Technologies used
 
-- React ja React-Redux
+- React and React-Redux
   - Core of the application
 - Jest
   - Testing
