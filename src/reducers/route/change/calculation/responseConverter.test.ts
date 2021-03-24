@@ -1,9 +1,11 @@
 import { convertCalculation } from "./responseConverter";
 
 import { ROUTE_NOT_FOUND } from "./ErrorMessageConstant";
+import { RouteNode } from "./types";
+import { Road } from "../../../../data/mapper/types";
 
 test("Route not found error", () => {
-  const nodes = [];
+  const nodes: RouteNode[] = [];
   const startStop = "A";
   const response = convertCalculation(startStop, nodes);
   expect(response).toBeDefined();
@@ -11,7 +13,7 @@ test("Route not found error", () => {
 });
 
 test("Valid route", () => {
-  const nodes = [];
+  const nodes: RouteNode[] = [];
   const startStop = "A";
   pushNextNode(nodes, startStop, "B", "C", 2, "line1");
   pushNextNode(nodes, startStop, "C", "D", 4, "line1");
@@ -25,25 +27,25 @@ test("Valid route", () => {
   expect(response.route).toBeInstanceOf(Map);
 
   //Validate keys created from paths between stops exist
-  expect(response.route.get("A-B")).toBeDefined();
-  expect(response.route.get("B-C")).toBeDefined();
-  expect(response.route.get("C-D")).toBeDefined();
-  expect(response.route.get("D-E")).toBeDefined();
+  expect(response.route!.get("A-B")).toBeDefined();
+  expect(response.route!.get("B-C")).toBeDefined();
+  expect(response.route!.get("C-D")).toBeDefined();
+  expect(response.route!.get("D-E")).toBeDefined();
 });
 
 /**
- * Push the same kind of data that would come from RouteCalculator to a array. Links the nodes together with a
+ * Push the same kind of data to a array that would come from RouteCalculator to responseConverter. Links the nodes together with
  * roads that are created to both previous and next after the first added node.
  *
  * First pushed node is a special case because we need to create a link to the start node which is where the route calculation starts from.
  */
 function pushNextNode(
-  currentNodes,
-  startStop,
-  fromName,
-  toName,
-  totalDuration,
-  lineBeingUsed
+  currentNodes: RouteNode[],
+  startStop: String,
+  fromName: String,
+  toName: String | null,
+  nodeDuration: number,
+  lineBeingUsed: String
 ) {
   if (currentNodes.length === 0) {
     currentNodes.push({
@@ -51,8 +53,9 @@ function pushNextNode(
         name: fromName,
         roads: createRoadToNextAndPrevious(startStop, fromName, toName),
       },
-      totalDuration: totalDuration,
+      nodeDuration: nodeDuration,
       lineBeingUsed: lineBeingUsed,
+      shortestPath: [],
     });
   } else {
     const previousNode = currentNodes[currentNodes.length - 1];
@@ -65,13 +68,25 @@ function pushNextNode(
           toName
         ),
       },
-      totalDuration: totalDuration,
+      nodeDuration: nodeDuration,
       lineBeingUsed: lineBeingUsed,
+      shortestPath: [],
     });
   }
 }
 
-function createRoadToNextAndPrevious(previousName, fromName, toName) {
+/**
+ * Create roads between two stops. If toName is null, just create a reverse road to the previous stop
+ * @param previousName
+ * @param fromName
+ * @param toName
+ * @returns
+ */
+function createRoadToNextAndPrevious(
+  previousName: String,
+  fromName: String,
+  toName: String | null
+): Road[] {
   if (toName == null) {
     return [createOneRoad(fromName, previousName, true)];
   } else {
@@ -82,14 +97,21 @@ function createRoadToNextAndPrevious(previousName, fromName, toName) {
   }
 }
 
-function createOneRoad(fromName, toName, isReverse) {
+function createOneRoad(
+  fromName: String,
+  toName: String,
+  isReverse: boolean
+): Road {
   return {
     from: {
       name: fromName,
+      roads: [],
     },
     to: {
       name: toName,
+      roads: [],
     },
     isReverse: isReverse,
+    duration: 2, //Irrelevant for the test
   };
 }
