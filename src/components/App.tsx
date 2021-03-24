@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="ui container">
       <UiContainer transportData={transportData} />
-      <MapView transportData={transportData} />
+      <MapView stops={transportData.stops} />
     </div>
   );
 };
