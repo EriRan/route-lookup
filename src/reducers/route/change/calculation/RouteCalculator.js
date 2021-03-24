@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-import NodeFactory from "./NodeFactory";
 import { convertCalculation, createErrorResponse } from "./responseConverter";
 import { ALREADY_AT_DESTINATION } from "./ErrorMessageConstant";
 
@@ -12,7 +11,6 @@ import { isUndefinedOrNull } from "../../../../util/Utilities";
 class RouteCalculator {
   constructor(transportData) {
     this.transportData = transportData;
-    this.nodeFactory = new NodeFactory();
   }
 
   calculate(startStop, destinationStop) {
