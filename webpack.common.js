@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   target: "web",
-  entry: "./src/index.js", //Todo: Change this to .ts file when Typescript conversion for it is done
+  entry: "./src/index",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
