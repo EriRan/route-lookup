@@ -20,7 +20,7 @@ export default (function () {
   }
 
   return {
-    getInstance: function () {
+    getInstance: function (): TransportData {
       if (!instance) {
         instance = createInstance();
       }
