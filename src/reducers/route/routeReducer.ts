@@ -2,20 +2,21 @@ import {
   SET_START_STOP,
   SET_DESTINATION_STOP,
   STOP_CLICKED,
-} from "../../actions/types";
+} from "../../actions/actions";
 
 import {
   appendCalculatedRoute,
   changeStartOrDestination,
 } from "./change/stopsStateChangeDeducer";
+import { Action, CurrentState } from "./types";
 
-const INITIAL_STATE = {
+const INITIAL_STATE: CurrentState = {
   calculatedRoute: null,
   startStop: { name: null, hasErrors: false },
   destinationStop: { name: null, hasErrors: false },
 };
 
-export default (state = INITIAL_STATE, action) => {
+export const REDUCERS = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case SET_START_STOP:
       return appendCalculatedRoute({
