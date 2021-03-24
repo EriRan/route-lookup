@@ -2,7 +2,7 @@ import { provideBusStopLocations } from "./busStopLocationProvider";
 import TransportDataSingleton from "../../../../../data/TransportDataSingleton";
 
 test("Integration test", () => {
-  const stopsMap = TransportDataSingleton.getInstance().stops;
+  const stopsMap = TransportDataSingleton.getInstance().stopMap;
   const busStopLocations = provideBusStopLocations(
     stopsMap.values().next().value
   );

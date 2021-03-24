@@ -30,14 +30,14 @@ import { Line, Road, TransportData, TransportDataUnmapped } from "./types";
 class TransportDataMapper {
   map(transportData: TransportDataUnmapped) {
     const mappedTransportData: TransportData = {
-      stops: new StopMapper().map(transportData.pysakit, transportData.tiet),
+      stopMap: new StopMapper().map(transportData.pysakit, transportData.tiet),
       lines: new LineMapper().map(transportData.linjastot),
     };
     mapLinesToRoads(mappedTransportData);
     return mappedTransportData;
 
     function mapLinesToRoads(mappedData: TransportData) {
-      mappedData.stops.forEach((stop) => {
+      mappedData.stopMap.forEach((stop) => {
         //Only the map value is needed here, so other parameters are omitted
         stop.roads.forEach((road) => {
           road.includesLines = [];

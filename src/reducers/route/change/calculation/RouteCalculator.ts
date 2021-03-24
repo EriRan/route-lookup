@@ -86,7 +86,7 @@ class RouteCalculator {
 
 function createAllNodesStatusMap(transportData: TransportData) {
   const allNodesMap = new Map<String, RouteNode>();
-  transportData.stops.forEach((stopData, stopName) => {
+  transportData.stopMap.forEach((stopData, stopName) => {
     allNodesMap.set(stopName, {
       stopData: stopData,
       nodeDuration: Infinity,
