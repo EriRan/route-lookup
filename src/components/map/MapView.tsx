@@ -1,15 +1,16 @@
-import React from "react";
+import * as React from "react";
 
 import TrafficNetworkContainer from "./markers/TrafficNetworkContainer";
 import { provideBusStopLocations } from "./markers/stop/location/busStopLocationProvider";
 import { MAP_PADDING } from "./MapViewConstant";
 import "./MapView.css";
+import { MapProps } from "./types";
 
-class MapView extends React.Component {
+class MapView extends React.Component<MapProps, {}> {
   render() {
     //Start from the first bus stop in the props and crawl to next ones through the roads.
     const busStopLocations = provideBusStopLocations(
-      this.props.transportData.stops.values().next().value
+      this.props.stops.values().next().value
     );
     return (
       <div className="map-background">
@@ -18,7 +19,7 @@ class MapView extends React.Component {
           height={busStopLocations.yMax + MAP_PADDING}
         >
           <TrafficNetworkContainer
-            stops={this.props.transportData.stops}
+            stops={this.props.stops}
             busStopLocationsMap={busStopLocations.map}
           />
         </svg>
