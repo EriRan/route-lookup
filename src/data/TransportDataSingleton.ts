@@ -13,7 +13,7 @@ export default (function () {
     if (_.isEmpty(transportData.lines)) {
       console.error("No lines were included in the transport data!");
     }
-    if (_.isEmpty(transportData.stops)) {
+    if (_.isEmpty(transportData.stopMap)) {
       console.error("No stops were included in the transport data!");
     }
     return transportData;

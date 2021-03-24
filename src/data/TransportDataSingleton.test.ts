@@ -4,10 +4,10 @@ import TransportDataSingleton from "./TransportDataSingleton";
 test("Transport Data integration", () => {
   const transportDataSingleton = TransportDataSingleton.getInstance();
   expect(transportDataSingleton).toBeDefined();
-  expect(transportDataSingleton.stops).toBeInstanceOf(Map);
+  expect(transportDataSingleton.stopMap).toBeInstanceOf(Map);
   expect(transportDataSingleton.lines).toBeInstanceOf(Array);
 
-  validateStops(transportDataSingleton.stops);
+  validateStops(transportDataSingleton.stopMap);
   validateHasLines(transportDataSingleton.lines);
 
   function validateStops(stops: Map<String, Stop>) {

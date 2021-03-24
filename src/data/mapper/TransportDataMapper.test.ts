@@ -10,7 +10,7 @@ test("Included lines", () => {
 });
 
 function validateIncludedLines(mappedTransportData: TransportData) {
-  mappedTransportData.stops.forEach((stop) => {
+  mappedTransportData.stopMap.forEach((stop) => {
     if (stop.name === "X") {
       //Unreachable stop
       expect(stop.roads).toHaveLength(0);

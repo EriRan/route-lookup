@@ -32,7 +32,7 @@ export type RoadUnmapped = {
  * Full transport data from reittiopas.json mapped into a more convenient format
  */
 export type TransportData = {
-  stops: Map<String, Stop>;
+  stopMap: Map<String, Stop>;
   lines: Array<Line>;
 };
 
