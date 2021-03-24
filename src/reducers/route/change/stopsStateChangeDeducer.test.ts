@@ -1,3 +1,4 @@
+import { CurrentState, StopState } from "../types";
 import { changeStartOrDestination } from "./stopsStateChangeDeducer";
 
 test("Set start stop to null", () => {
@@ -8,9 +9,9 @@ test("Set start stop to null", () => {
 
   expect(stateChange).toBeDefined();
   expect(stateChange.startStop).toBeDefined();
-  expect(stateChange.startStop.name).toBeNull();
+  expect(stateChange.startStop!.name).toBeNull();
   expect(stateChange.destinationStop).toBeDefined();
-  expect(stateChange.destinationStop.name).toBe("B");
+  expect(stateChange.destinationStop!.name).toBe("B");
 });
 
 test("Set destination stop to null", () => {
@@ -21,9 +22,9 @@ test("Set destination stop to null", () => {
 
   expect(stateChange).toBeDefined();
   expect(stateChange.startStop).toBeDefined();
-  expect(stateChange.startStop.name).toBe("A");
+  expect(stateChange.startStop!.name).toBe("A");
   expect(stateChange.destinationStop).toBeDefined();
-  expect(stateChange.destinationStop.name).toBeNull();
+  expect(stateChange.destinationStop!.name).toBeNull();
 });
 
 test("Do nothing if payload has an error", () => {
@@ -34,9 +35,9 @@ test("Do nothing if payload has an error", () => {
 
   expect(stateChange).toBeDefined();
   expect(stateChange.startStop).toBeDefined();
-  expect(stateChange.startStop.name).toBe("A");
+  expect(stateChange.startStop!.name).toBe("A");
   expect(stateChange.destinationStop).toBeDefined();
-  expect(stateChange.destinationStop.name).toBe("B");
+  expect(stateChange.destinationStop!.name).toBe("B");
 });
 
 test("Calculation is done if updates to a new stop", () => {
@@ -49,15 +50,18 @@ test("Calculation is done if updates to a new stop", () => {
 
   expect(stateChange).toBeDefined();
   expect(stateChange.startStop).toBeDefined();
-  expect(stateChange.startStop.name).toBe("A");
+  expect(stateChange.startStop!.name).toBe("A");
   expect(stateChange.destinationStop).toBeDefined();
-  expect(stateChange.destinationStop.name).toBe("B");
+  expect(stateChange.destinationStop!.name).toBe("B");
   expect(stateChange.calculatedRoute).toBeDefined();
-  expect(stateChange.calculatedRoute.route).toBeDefined();
-  expect(stateChange.calculatedRoute.totalDuration).toBeDefined();
+  expect(stateChange.calculatedRoute!.route).toBeDefined();
+  expect(stateChange.calculatedRoute!.totalDuration).toBeDefined();
 });
 
-function createCurrentState(startStop, destinationStop) {
+function createCurrentState(
+  startStop: string,
+  destinationStop: string
+): CurrentState {
   return {
     startStop: {
       name: startStop,
@@ -65,12 +69,13 @@ function createCurrentState(startStop, destinationStop) {
     destinationStop: {
       name: destinationStop,
     },
+    calculatedRoute: null,
   };
 }
 
-function createPayload(stopName, hasError) {
+function createPayload(stopName: string, hasErrors: boolean): StopState {
   return {
     name: stopName,
-    hasError: hasError,
+    hasErrors: hasErrors,
   };
 }

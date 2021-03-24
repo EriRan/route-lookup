@@ -1,8 +1,8 @@
 import _ from "lodash";
 
-import { SET_START_STOP, SET_DESTINATION_STOP, STOP_CLICKED } from "./types";
+import { SET_START_STOP, SET_DESTINATION_STOP, STOP_CLICKED } from "./actions";
 
-export const setStartStop = (startStop, hasError) => {
+export const setStartStop = (startStop: string, hasError: boolean) => {
   return {
     type: SET_START_STOP,
     payload: {
@@ -12,7 +12,10 @@ export const setStartStop = (startStop, hasError) => {
   };
 };
 
-export const setDestinationStop = (destinationStop, hasError) => {
+export const setDestinationStop = (
+  destinationStop: string,
+  hasError: boolean
+) => {
   return {
     type: SET_DESTINATION_STOP,
     payload: {
@@ -22,7 +25,7 @@ export const setDestinationStop = (destinationStop, hasError) => {
   };
 };
 
-export const stopClicked = (stopName) => {
+export const stopClicked = (stopName: string) => {
   return {
     type: STOP_CLICKED,
     payload: {
