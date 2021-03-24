@@ -19,7 +19,7 @@ class MapView extends React.Component<MapProps, {}> {
           height={busStopLocations.yMax + MAP_PADDING}
         >
           <TrafficNetworkContainer
-            stops={this.props.stopMap}
+            stopMap={this.props.stopMap}
             busStopLocationsMap={busStopLocations.map}
           />
         </svg>
