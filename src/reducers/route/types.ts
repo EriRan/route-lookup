@@ -5,14 +5,13 @@ export type Action = {
   payload: Payload;
 };
 
-export type Payload = StopState;
-
-//Todo: There was a clever trick in react redux documentation, where the type was got with <typeof store.getState>. Make use of this
-export type RootState = {
+export type RouteStore = {
   startStop: StopState | null;
   destinationStop: StopState | null;
   calculatedRoute: CalculationResponse | null;
 };
+
+export type Payload = StopState;
 
 export type StopState = {
   name: string | null;

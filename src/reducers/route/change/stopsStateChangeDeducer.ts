@@ -1,7 +1,7 @@
 import RouteCalculator from "./calculation/RouteCalculator";
 import TransportDataSingleton from "../../../data/TransportDataSingleton";
 import { isUndefinedOrNullOrEmptyString } from "../../../util/Utilities";
-import { RootState, Payload, StopState } from "../types";
+import { RouteStore, Payload, StopState } from "../types";
 
 /**
  * Handles changes that happen to startStop, destinationStop and calculatedRoute states when it is not immediately known did the start or the destination stop change. This is used when user clicks one of the bus stops on the map
@@ -9,7 +9,7 @@ import { RootState, Payload, StopState } from "../types";
  * @param {*} payload
  */
 export function changeStartOrDestination(
-  currentState: RootState,
+  currentState: RouteStore,
   payload: Payload
 ) {
   if (payload.hasErrors) {
@@ -52,7 +52,7 @@ export function changeStartOrDestination(
 /**
  * Calculate and set route for the provided state if possible
  */
-export function appendCalculatedRoute(currentState: RootState) {
+export function appendCalculatedRoute(currentState: RouteStore) {
   if (
     hasUsableInput(currentState.startStop) &&
     hasUsableInput(currentState.destinationStop)
