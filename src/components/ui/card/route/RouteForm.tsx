@@ -14,8 +14,6 @@ class RouteForm extends React.Component<Props, {}> {
         <Grid container alignItems="center" direction="row">
           <Typography color="primary">Mistä lähdet?</Typography>
           <RouteInput
-            id="outlined-basic"
-            className="center-input"
             label="Lähtöpaikka"
             autoFocus={true}
             onChangeFunction={this.props.setStartStop}
@@ -25,8 +23,6 @@ class RouteForm extends React.Component<Props, {}> {
 
           <Typography color="primary">Minne haluat mennä?</Typography>
           <RouteInput
-            id="outlined-basic"
-            className="center-input"
             label="Määränpää"
             onChangeFunction={this.props.setDestinationStop}
             stopMap={this.props.stopMap}
