@@ -1,7 +1,7 @@
 import { provideNextLocation } from "./nextLocationProvider";
 import { UPPER_RIGHT, RIGHT, LOWER_RIGHT, DOWN } from "./NextBusStopDirection";
 import { STOP_GAP } from "./BusStopLocationConstant";
-import { Direction, NextLocation } from "./types";
+import { RoadDirection, NextLocation } from "./types";
 
 test("No existing locations", () => {
   const location = {
@@ -9,7 +9,7 @@ test("No existing locations", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop = Array<Direction>();
+  const occupiedDirectionsForStop = Array<RoadDirection>();
   const nextLocation = provideNextLocation(
     location,
     duration,
@@ -30,7 +30,7 @@ test("Next location down", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop: Array<Direction> = [
+  const occupiedDirectionsForStop: Array<RoadDirection> = [
     UPPER_RIGHT,
     RIGHT,
     LOWER_RIGHT,
@@ -51,7 +51,7 @@ test("Take first in a gap", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop: Array<Direction> = [
+  const occupiedDirectionsForStop: Array<RoadDirection> = [
     UPPER_RIGHT,
     LOWER_RIGHT,
   ];
