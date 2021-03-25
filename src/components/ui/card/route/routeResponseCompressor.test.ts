@@ -1,4 +1,6 @@
+import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 import { compressResponse } from "./routeResponseCompressor";
+import { CompressedRoute } from "./types";
 
 test("Empty array", () => {
   const compressedResponse = compressResponse([]);
@@ -30,25 +32,33 @@ test("Multiple lines", () => {
 });
 
 function validateSingleRoute(
-  singleRoute,
-  expectedFrom,
-  expectedTo,
-  expectedLine
+  singleRoute: CompressedRoute,
+  expectedFrom: string,
+  expectedTo: string,
+  expectedLine: string
 ) {
   expect(singleRoute.from).toBe(expectedFrom);
   expect(singleRoute.to).toBe(expectedTo);
   expect(singleRoute.line).toBe(expectedLine);
 }
 
-function validateResponse(compressedResponse, expectedLength) {
+function validateResponse(
+  compressedResponse: Array<CompressedRoute>,
+  expectedLength: number
+) {
   expect(compressedResponse).toBeInstanceOf(Array);
   expect(compressedResponse).toHaveLength(expectedLength);
 }
 
-function createOneRoute(fromName, toName, line) {
+function createOneRoute(
+  fromName: string,
+  toName: string,
+  line: string
+): ResponseDirection {
   return {
     from: fromName,
     to: toName,
     line: line,
+    duration: 1,
   };
 }
