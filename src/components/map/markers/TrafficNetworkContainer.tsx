@@ -30,7 +30,7 @@ class BusTrafficContainer extends React.Component<TrafficMapProps, {}> {
     }
   }
 
-  private renderBusStops(busStopLocationsMap: Map<String, BusStopLocation>) {
+  private renderBusStops(busStopLocationsMap: Map<string, BusStopLocation>) {
     return (
       <g className="bus-stop-container">
         {Array.from(busStopLocationsMap.entries()).map((entry) => {
