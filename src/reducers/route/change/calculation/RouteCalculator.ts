@@ -22,11 +22,11 @@ class RouteCalculator {
     this.transportData = transportData;
   }
 
-  calculate(startStop: String, destinationStop: String): CalculationResponse {
+  calculate(startStop: string, destinationStop: string): CalculationResponse {
     if (startStop === destinationStop) {
       return createErrorResponse(ALREADY_AT_DESTINATION);
     }
-    const allNodesMap: Map<String, RouteNode> = createAllNodesStatusMap(
+    const allNodesMap: Map<string, RouteNode> = createAllNodesStatusMap(
       this.transportData
     );
     if (!allNodesMap.get(startStop)) {
@@ -39,8 +39,8 @@ class RouteCalculator {
       );
       return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
     }
-    const settledNodeNames: Array<String> = [];
-    const unsettledNodeNames: Array<String> = [];
+    const settledNodeNames: Array<string> = [];
+    const unsettledNodeNames: Array<string> = [];
 
     allNodesMap.get(startStop)!.nodeDuration = 0;
     unsettledNodeNames.push(startStop);
@@ -85,7 +85,7 @@ class RouteCalculator {
 }
 
 function createAllNodesStatusMap(transportData: TransportData) {
-  const allNodesMap = new Map<String, RouteNode>();
+  const allNodesMap = new Map<string, RouteNode>();
   transportData.stopMap.forEach((stopData, stopName) => {
     allNodesMap.set(stopName, {
       stopData: stopData,
@@ -98,8 +98,8 @@ function createAllNodesStatusMap(transportData: TransportData) {
 }
 
 function findLowestDurationNode(
-  unsettledNodeNames: Array<String>,
-  allNodesMap: Map<String, RouteNode>
+  unsettledNodeNames: Array<string>,
+  allNodesMap: Map<string, RouteNode>
 ): RouteNode | null {
   let lowestDurationNode = null;
   let lowestDuration = Infinity;
@@ -188,7 +188,7 @@ function canUseSameLine(road: Road, currentNode: RouteNode) {
  * @param nodeNameToRemove
  * @param nodeNames
  */
-function removeNode(nodeNameToRemove: String, nodeNames: Array<String>) {
+function removeNode(nodeNameToRemove: string, nodeNames: Array<string>) {
   nodeNames.splice(nodeNames.indexOf(nodeNameToRemove), 1);
 }
 

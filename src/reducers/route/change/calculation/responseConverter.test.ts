@@ -41,11 +41,11 @@ test("Valid route", () => {
  */
 function pushNextNode(
   currentNodes: RouteNode[],
-  startStop: String,
-  fromName: String,
-  toName: String | null,
+  startStop: string,
+  fromName: string,
+  toName: string | null,
   nodeDuration: number,
-  lineBeingUsed: String
+  lineBeingUsed: string
 ) {
   if (currentNodes.length === 0) {
     currentNodes.push({
@@ -83,9 +83,9 @@ function pushNextNode(
  * @returns
  */
 function createRoadToNextAndPrevious(
-  previousName: String,
-  fromName: String,
-  toName: String | null
+  previousName: string,
+  fromName: string,
+  toName: string | null
 ): Road[] {
   if (toName == null) {
     return [createOneRoad(fromName, previousName, true)];
@@ -98,8 +98,8 @@ function createRoadToNextAndPrevious(
 }
 
 function createOneRoad(
-  fromName: String,
-  toName: String,
+  fromName: string,
+  toName: string,
   isReverse: boolean
 ): Road {
   return {

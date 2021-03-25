@@ -19,7 +19,7 @@ test("Stops contain required variables", () => {
 
 test("Empty content provided", () => {
   //Road array mapped in the RoadMapper inside the StopMapper but let's not focus to it here
-  const stopMap = mapper.map(new Array<String>(), new Array<RoadUnmapped>());
+  const stopMap = mapper.map(new Array<string>(), new Array<RoadUnmapped>());
   expect(stopMap).toBeInstanceOf(Map);
   expect(stopMap.size).toBe(0);
 });

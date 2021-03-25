@@ -1,11 +1,11 @@
 import { Stop } from "../../data/mapper/types";
 
 export interface MapProps {
-  stopMap: Map<String, Stop>;
+  stopMap: Map<string, Stop>;
 }
 
 export type BusStopLocations = {
-  busStopLocationMap: Map<String, BusStopLocation>;
+  busStopLocationMap: Map<string, BusStopLocation>;
   xMax: number;
   yMax: number;
 };
