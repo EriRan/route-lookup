@@ -42,12 +42,12 @@ class RouteInput extends React.Component {
     const value = _.upperCase(event.target.value);
     this.props.onChangeFunction(
       value,
-      this.isInputInvalid(value, this.props.possibleStops)
+      this.isInputInvalid(value, this.props.stopMap)
     );
   }
 
-  isInputInvalid(input, possibleStops) {
-    return !isUndefinedOrNullOrEmptyString(input) && !possibleStops.has(input);
+  isInputInvalid(input, stopMap) {
+    return !isUndefinedOrNullOrEmptyString(input) && !stopMap.has(input);
   }
 }
 
