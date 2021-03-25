@@ -14,3 +14,9 @@ export type RouteInputEvent = {
     value: unknown;
   };
 };
+
+export type CompressedRoute = {
+  from: string;
+  to: string;
+  line: string;
+};
