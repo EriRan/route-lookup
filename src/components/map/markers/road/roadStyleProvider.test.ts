@@ -6,17 +6,15 @@ import {
   UNUSED_ROAD_COLOR,
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
+import {
+  CalculationResponse,
+  ResponseDirection,
+} from "../../../../reducers/route/change/calculation/types";
 
 test("Road with no lines", () => {
-  const includesLines = [];
-  const calculatedRouteNode = null; //Does not matter, so should not be needed
-  const isRouteCalculated = null; //Does not matter, so should not be needed
+  const isRouteCalculated = false; //Does not matter, so should not be needed
 
-  const styleObjects = provideStyles(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
-  );
+  const styleObjects = provideStyles(isRouteCalculated);
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(1);
 
@@ -27,13 +25,12 @@ test("Road with no lines", () => {
 
 test("Has lines and route is not calculated", () => {
   const includesLines = ["Punainen", "Sininen"];
-  const calculatedRouteNode = null; //Does not matter, so should not be needed
   const isRouteCalculated = false;
 
   const styleObjects = provideStyles(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
+    isRouteCalculated,
+    undefined, //Does not matter here
+    includesLines
   );
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(2);
@@ -46,13 +43,12 @@ test("Has lines and route is not calculated", () => {
 
 test("Has lines, route is calculated but not for current route node", () => {
   const includesLines = ["Punainen", "Sininen"];
-  const calculatedRouteNode = null; //Calculated route does not include this node
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
+    isRouteCalculated,
+    undefined, //Calculated route does not include this node
+    includesLines
   );
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(2);
@@ -65,13 +61,12 @@ test("Has lines, route is calculated but not for current route node", () => {
 
 test("Has lines, route is calculated but not for current route node with yellow special case", () => {
   const includesLines = ["Keltainen"];
-  const calculatedRouteNode = null; //Calculated route does not include this node
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
+    isRouteCalculated,
+    undefined, //Calculated route does not include this node
+    includesLines
   );
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(1);
@@ -83,13 +78,18 @@ test("Has lines, route is calculated but not for current route node with yellow 
 
 test("Has lines, route is calculated for current node", () => {
   const includesLines = ["Punainen", "Sininen"];
-  const calculatedRouteNode = { line: "Punainen" };
+  const calculatedRouteNode: ResponseDirection = {
+    from: "A",
+    to: "B",
+    line: "Punainen",
+    duration: 123,
+  };
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
-    includesLines,
+    isRouteCalculated,
     calculatedRouteNode,
-    isRouteCalculated
+    includesLines
   );
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(2);
@@ -106,13 +106,12 @@ test("Has lines, route is calculated for current node", () => {
 
 test("Line with undefined color", () => {
   const includesLines = ["Jokeri"];
-  const calculatedRouteNode = null;
   const isRouteCalculated = false;
 
   const styleObjects = provideStyles(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
+    isRouteCalculated,
+    undefined, //Not relevant
+    includesLines
   );
   expect(styleObjects).toBeInstanceOf(Array);
   expect(styleObjects).toHaveLength(1);
