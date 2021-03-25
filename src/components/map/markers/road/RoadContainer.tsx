@@ -1,16 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import _ from "lodash";
 
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 
 import RoadLine from "./RoadLine";
+import { RootState } from "../../../../reducers/types";
+import { BusStopLocation } from "../../types";
+import { Road, Stop } from "../../../../data/mapper/types";
+import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 
-class RoadContainer extends React.Component {
+class RoadContainer extends React.Component<Props, {}> {
   render() {
     return (
       <g>
-        {Array.from(this.props.stops.values())
+        {Array.from(this.props.stopMap.values())
           .flatMap((stop) => stop.roads)
           .filter((road) => {
             return road.isReverse === false;
@@ -26,7 +30,11 @@ class RoadContainer extends React.Component {
     );
   }
 
-  renderRoad(road, busStopLocationMap, calculatedRoute) {
+  private renderRoad(
+    road: Road,
+    busStopLocationMap: Map<string, BusStopLocation>,
+    calculatedRoute: CalculationResponse | null
+  ) {
     const startPointLocation = busStopLocationMap.get(road.from.name);
     const endPointLocation = busStopLocationMap.get(road.to.name);
     if (isUndefinedOrNull(startPointLocation)) {
@@ -48,7 +56,7 @@ class RoadContainer extends React.Component {
       return null;
     }
     if (this.hasRouteBeenCalculated(calculatedRoute)) {
-      const calculatedRouteNode = calculatedRoute.route.get(
+      const calculatedRouteNode = calculatedRoute!.route!.get(
         road.from.name + "-" + road.to.name
       );
       return (
@@ -75,20 +83,33 @@ class RoadContainer extends React.Component {
     );
   }
 
-  hasRouteBeenCalculated(calculatedRoute) {
+  /**
+   * Validate that the calculatedRoute contains calculated route. This should include a total duration and a route map with content
+   */
+  private hasRouteBeenCalculated(calculatedRoute: CalculationResponse | null) {
     return (
       !isUndefinedOrNull(calculatedRoute) &&
-      calculatedRoute.totalDuration > 0 &&
-      _.isMap(calculatedRoute.route) &&
-      calculatedRoute.route.size > 0
+      !isUndefinedOrNull(calculatedRoute!.totalDuration) &&
+      calculatedRoute!.totalDuration! > 0 &&
+      _.isMap(calculatedRoute!.route) &&
+      calculatedRoute!.route.size > 0
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     calculatedRoute: state.route.calculatedRoute,
   };
 };
 
-export default connect(mapStateToProps, {})(RoadContainer);
+const connector = connect(mapStateToProps, {});
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux & {
+  busStopLocationMap: Map<string, BusStopLocation>;
+  stopMap: Map<string, Stop>;
+};
+
+export default connector(RoadContainer);
