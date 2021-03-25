@@ -101,6 +101,9 @@ test("Has lines, route is calculated for current node", () => {
   });
 });
 
+/**
+ * This will output a console.error because a warning is outputted about an unrecognised line. Only the lines provided in the original reittiopas.json are supported
+ */
 test("Line with undefined color", () => {
   const includesLines = ["Jokeri"];
   const isRouteCalculated = false;
