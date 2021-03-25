@@ -20,7 +20,7 @@ class MapView extends React.Component<MapProps, {}> {
         >
           <TrafficNetworkContainer
             stopMap={this.props.stopMap}
-            busStopLocationsMap={busStopLocations.map}
+            busStopLocationsMap={busStopLocations.busStopLocationMap}
           />
         </svg>
       </div>

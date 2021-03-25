@@ -1,6 +1,7 @@
 import { provideNextLocation } from "./nextLocationProvider";
 import { UPPER_RIGHT, RIGHT, LOWER_RIGHT, DOWN } from "./NextBusStopDirection";
 import { STOP_GAP } from "./BusStopLocationConstant";
+import { Direction, NextLocation } from "./types";
 
 test("No existing locations", () => {
   const location = {
@@ -8,18 +9,18 @@ test("No existing locations", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop = [];
+  const occupiedDirectionsForStop = Array<Direction>();
   const nextLocation = provideNextLocation(
     location,
     duration,
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation.direction).toBe(UPPER_RIGHT);
+  expect(nextLocation!.direction).toBe(UPPER_RIGHT);
   validateNextLocationCoordinates(
     duration * STOP_GAP,
     -duration * STOP_GAP,
-    nextLocation
+    nextLocation!
   );
 });
 
@@ -29,15 +30,19 @@ test("Next location down", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop = [UPPER_RIGHT, RIGHT, LOWER_RIGHT];
+  const occupiedDirectionsForStop: Array<Direction> = [
+    UPPER_RIGHT,
+    RIGHT,
+    LOWER_RIGHT,
+  ];
   const nextLocation = provideNextLocation(
     location,
     duration,
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation.direction).toBe(DOWN);
-  validateNextLocationCoordinates(0, duration * STOP_GAP, nextLocation);
+  expect(nextLocation!.direction).toBe(DOWN);
+  validateNextLocationCoordinates(0, duration * STOP_GAP, nextLocation!);
 });
 
 test("Take first in a gap", () => {
@@ -46,21 +51,24 @@ test("Take first in a gap", () => {
     y: 0,
   };
   const duration = 1;
-  const occupiedDirectionsForStop = [UPPER_RIGHT, LOWER_RIGHT];
+  const occupiedDirectionsForStop: Array<Direction> = [
+    UPPER_RIGHT,
+    LOWER_RIGHT,
+  ];
   const nextLocation = provideNextLocation(
     location,
     duration,
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation.direction).toBe(RIGHT);
-  validateNextLocationCoordinates(duration * STOP_GAP, 0, nextLocation);
+  expect(nextLocation!.direction).toBe(RIGHT);
+  validateNextLocationCoordinates(duration * STOP_GAP, 0, nextLocation!);
 });
 
 function validateNextLocationCoordinates(
-  expectedX,
-  expectedY,
-  nextLocationData
+  expectedX: number,
+  expectedY: number,
+  nextLocationData: NextLocation
 ) {
   expect(nextLocationData).toBeDefined();
   expect(nextLocationData.point).toBeDefined();

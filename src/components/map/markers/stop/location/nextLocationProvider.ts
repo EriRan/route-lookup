@@ -10,23 +10,29 @@ import {
   UP,
 } from "./NextBusStopDirection";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
+import { BusStopLocation } from "../../../types";
+import { Direction, NextLocation } from "./types";
 
 /**
  * Provide location for the next bus stop. Each bus stop can be placed to 8 different directions from the current one.
  * We start selecting directions from Upper right and then go in clockwise direction to select the first available direction.
  */
 export function provideNextLocation(
-  location,
-  duration,
-  occupiedDirectionsForStop
-) {
+  location: BusStopLocation,
+  duration: number,
+  occupiedDirectionsForStop?: Array<Direction>
+): NextLocation | null {
   return findFreeLocation(
     location,
     calculatePixelDistance(duration),
     occupiedDirectionsForStop
   );
 
-  function findFreeLocation(location, distance, occupiedDirectionsForStop) {
+  function findFreeLocation(
+    location: BusStopLocation,
+    distance: number,
+    occupiedDirectionsForStop?: Array<Direction>
+  ) {
     //Upper right
     if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
       return createResponseObject(
@@ -75,12 +81,16 @@ export function provideNextLocation(
     else if (isDirectionFree(UP, occupiedDirectionsForStop)) {
       return createResponseObject(location.x, location.y - distance, UP);
     } else {
-      console.log("Unable to find a free location!");
+      console.error("Ran out of possible directions!");
       return null;
     }
   }
 
-  function createResponseObject(x, y, direction) {
+  function createResponseObject(
+    x: number,
+    y: number,
+    direction: Direction
+  ): NextLocation {
     return {
       point: {
         x: x,
@@ -90,14 +100,17 @@ export function provideNextLocation(
     };
   }
 
-  function isDirectionFree(direction, occupiedDirectionsForStop) {
+  function isDirectionFree(
+    direction: Direction,
+    occupiedDirectionsForStop?: Array<Direction>
+  ) {
     return (
       isUndefinedOrNull(occupiedDirectionsForStop) ||
-      !occupiedDirectionsForStop.includes(direction)
+      !occupiedDirectionsForStop!.includes(direction) //Negation and assurance that occupiedDirectionsForStop is not null
     );
   }
 
-  function calculatePixelDistance(duration) {
+  function calculatePixelDistance(duration: number) {
     return STOP_GAP * duration;
   }
 }
