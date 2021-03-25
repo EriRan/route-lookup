@@ -1,11 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 
 import RouteInput from "./RouteInput";
 import { setStartStop, setDestinationStop } from "../../../../actions";
 import { Typography, Grid } from "@material-ui/core";
+import { RootState } from "../../../../reducers/types";
+import { Stop } from "../../../../data/mapper/types";
 
-class RouteForm extends React.Component {
+class RouteForm extends React.Component<Props, {}> {
   render() {
     return (
       <form>
@@ -17,7 +19,7 @@ class RouteForm extends React.Component {
             label="Lähtöpaikka"
             autoFocus={true}
             onChangeFunction={this.props.setStartStop}
-            possibleStops={this.props.possibleStops}
+            stopMap={this.props.stopMap}
             inputStopData={this.props.startStop}
           />
 
@@ -27,7 +29,7 @@ class RouteForm extends React.Component {
             className="center-input"
             label="Määränpää"
             onChangeFunction={this.props.setDestinationStop}
-            possibleStops={this.props.possibleStops}
+            stopMap={this.props.stopMap}
             inputStopData={this.props.destinationStop}
           />
         </Grid>
@@ -36,13 +38,26 @@ class RouteForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     startStop: state.route.startStop,
     destinationStop: state.route.destinationStop,
   };
 };
 
-export default connect(mapStateToProps, { setStartStop, setDestinationStop })(
-  RouteForm
-);
+const mapDispatch = {
+  setStartStop,
+  setDestinationStop,
+};
+
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type PassedProps = {
+  stopMap: Map<string, Stop>;
+};
+
+type Props = PropsFromRedux & PassedProps;
+
+export default connector(RouteForm);
