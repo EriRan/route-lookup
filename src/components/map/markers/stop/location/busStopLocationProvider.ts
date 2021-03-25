@@ -5,7 +5,7 @@ import { Road, Stop } from "../../../../../data/mapper/types";
 import { BusStopLocation, BusStopLocations } from "../../../types";
 import {
   AlreadyIncludedRoad,
-  Direction,
+  RoadDirection,
   NeighbourStop,
   NextLocation,
 } from "./types";
@@ -16,7 +16,7 @@ import {
 export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
   const alreadyDeducedStops = new Map<string, BusStopLocation>();
   const alreadyIncludedRoads = new Array<AlreadyIncludedRoad>();
-  const occupiedDirections = new Map<string, Array<Direction>>();
+  const occupiedDirections = new Map<string, Array<RoadDirection>>();
   alreadyDeducedStops.set(firstStop.name, {
     x: FIRST_LOCATION.x,
     y: FIRST_LOCATION.y,
@@ -38,7 +38,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
   function addNeighbours(
     alreadyDeducedStops: Map<string, BusStopLocation>,
     alreadyIncludedRoads: Array<AlreadyIncludedRoad>,
-    occupiedDirections: Map<string, Array<Direction>>,
+    occupiedDirections: Map<string, Array<RoadDirection>>,
     stop: Stop,
     currentLocation: BusStopLocation
   ) {
@@ -65,7 +65,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
   function deduceNeighbours(
     alreadyDeducedStops: Map<string, BusStopLocation>,
     alreadyIncludedRoads: Array<AlreadyIncludedRoad>,
-    occupiedDirections: Map<string, Array<Direction>>,
+    occupiedDirections: Map<string, Array<RoadDirection>>,
     stop: Stop,
     currentLocation: BusStopLocation,
     neighbourStops: Array<NeighbourStop>
@@ -100,7 +100,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
   function deduceNextLocation(
     currentLocation: BusStopLocation,
     road: Road,
-    occupiedDirections: Map<string, Array<Direction>>
+    occupiedDirections: Map<string, Array<RoadDirection>>
   ): NextLocation | null {
     const nextLocation = provideNextLocation(
       currentLocation,
@@ -120,12 +120,12 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
 
   function addOccupiedDirection(
     stopName: string,
-    direction: Direction,
-    occupiedDirections: Map<string, Array<Direction>>
+    direction: RoadDirection,
+    occupiedDirections: Map<string, Array<RoadDirection>>
   ) {
     const occupiedDirectionsForStop = occupiedDirections.get(stopName);
     if (!occupiedDirectionsForStop) {
-      const newDirectionArray = Array<Direction>();
+      const newDirectionArray = Array<RoadDirection>();
       newDirectionArray.push(direction);
       occupiedDirections.set(stopName, newDirectionArray);
     } else {

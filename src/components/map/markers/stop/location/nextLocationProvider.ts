@@ -11,7 +11,7 @@ import {
 } from "./NextBusStopDirection";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 import { BusStopLocation } from "../../../types";
-import { Direction, NextLocation } from "./types";
+import { RoadDirection, NextLocation } from "./types";
 
 /**
  * Provide location for the next bus stop. Each bus stop can be placed to 8 different directions from the current one.
@@ -20,7 +20,7 @@ import { Direction, NextLocation } from "./types";
 export function provideNextLocation(
   location: BusStopLocation,
   duration: number,
-  occupiedDirectionsForStop?: Array<Direction>
+  occupiedDirectionsForStop?: Array<RoadDirection>
 ): NextLocation | null {
   return findFreeLocation(
     location,
@@ -31,7 +31,7 @@ export function provideNextLocation(
   function findFreeLocation(
     location: BusStopLocation,
     distance: number,
-    occupiedDirectionsForStop?: Array<Direction>
+    occupiedDirectionsForStop?: Array<RoadDirection>
   ) {
     //Upper right
     if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
@@ -89,7 +89,7 @@ export function provideNextLocation(
   function createResponseObject(
     x: number,
     y: number,
-    direction: Direction
+    direction: RoadDirection
   ): NextLocation {
     return {
       point: {
@@ -101,8 +101,8 @@ export function provideNextLocation(
   }
 
   function isDirectionFree(
-    direction: Direction,
-    occupiedDirectionsForStop?: Array<Direction>
+    direction: RoadDirection,
+    occupiedDirectionsForStop?: Array<RoadDirection>
   ) {
     return (
       isUndefinedOrNull(occupiedDirectionsForStop) ||

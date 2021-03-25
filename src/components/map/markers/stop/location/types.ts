@@ -11,7 +11,7 @@ export type AlreadyIncludedRoad = {
 
 export type NextLocation = {
   point: BusStopLocation;
-  direction: Direction;
+  direction: RoadDirection;
 };
 
 export type NeighbourStop = {
@@ -19,5 +19,4 @@ export type NeighbourStop = {
   location: BusStopLocation;
 };
 
-//Todo: Consider renaming this: Material UI is using type with a same name
-export type Direction = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8; //Values are from NextBusStopDirection.ts. Todo: I wonder if there is a better way of doing this
+export type RoadDirection = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8; //Values are from NextBusStopDirection.ts. Todo: I wonder if there is a better way of doing this
