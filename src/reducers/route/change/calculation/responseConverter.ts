@@ -14,12 +14,12 @@ import {
  *
  * Return {
  *  Integer totalDuration
- *  Map<String, StopData> - Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
- *  String errorMessage
+ *  Map<string, StopData> - Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
+ *  string errorMessage
  * }
  */
 export function convertCalculation(
-  startStop: String,
+  startStop: string,
   nodes: RouteNode[]
 ): CalculationResponse {
   if (nodes.length === 0) {
@@ -31,7 +31,7 @@ export function convertCalculation(
     errorMessage: null,
   };
 
-  function buildRoute(startStop: String, nodes: RouteNode[]) {
+  function buildRoute(startStop: string, nodes: RouteNode[]) {
     const route = new Map();
     for (let i = 0; i < nodes.length; i++) {
       let currentNode = nodes[i];
@@ -61,7 +61,7 @@ export function convertCalculation(
     return route;
   }
 
-  function createStartStopKey(fromName: String, toNode: RouteNode) {
+  function createStartStopKey(fromName: string, toNode: RouteNode) {
     return createKeyString(
       toNode.stopData.roads.find((road) => road.to.name === fromName)
     );
@@ -94,9 +94,9 @@ export function convertCalculation(
   }
 
   function createOneDirection(
-    from: String,
-    to: String,
-    line: String | null, //Is not normally null except when the values provided are broken
+    from: string,
+    to: string,
+    line: string | null, //Is not normally null except when the values provided are broken
     duration: number | null
   ): ResponseDirection {
     if (_.isNull(line)) {
@@ -115,7 +115,7 @@ export function convertCalculation(
     };
   }
 }
-export function createErrorResponse(errorMessage: String): CalculationResponse {
+export function createErrorResponse(errorMessage: string): CalculationResponse {
   return {
     totalDuration: null,
     route: null,

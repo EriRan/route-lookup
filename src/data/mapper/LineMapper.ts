@@ -22,8 +22,8 @@ class LineMapper {
    */
   private extractStops(
     linesUnmapped: LinesUnmapped,
-    lineName: String
-  ): Array<String> {
+    lineName: string
+  ): Array<string> {
     switch (lineName) {
       case "keltainen":
         return linesUnmapped.keltainen;
@@ -35,7 +35,7 @@ class LineMapper {
         return linesUnmapped.vihreä;
       default:
         console.error("Encountered unknown bus line: " + lineName);
-        return new Array<String>();
+        return new Array<string>();
     }
   }
 }

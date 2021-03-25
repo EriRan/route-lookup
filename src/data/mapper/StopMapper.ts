@@ -3,10 +3,10 @@ import { RoadUnmapped, Stop } from "./types";
 
 class StopMapper {
   public map(
-    unmappedStops: Array<String>,
+    unmappedStops: Array<string>,
     unmappedRoads: Array<RoadUnmapped>
-  ): Map<String, Stop> {
-    const mappedStops = new Map<String, Stop>();
+  ): Map<string, Stop> {
+    const mappedStops = new Map<string, Stop>();
     unmappedStops.forEach((unmappedStop) => {
       const mappedStop: Stop = {
         name: unmappedStop,

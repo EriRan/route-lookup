@@ -65,8 +65,8 @@ test("Roads refer to stop objects", () => {
   expect(stopData.get("B")!.roads[0].to.name).toBe("A");
 });
 
-function createMockStopMap(): Map<String, Stop> {
-  const stopMap = new Map<String, Stop>();
+function createMockStopMap(): Map<string, Stop> {
+  const stopMap = new Map<string, Stop>();
   const stopNames = ["A", "B", "C"];
   for (let stopName of stopNames) {
     stopMap.set(stopName, {
@@ -78,8 +78,8 @@ function createMockStopMap(): Map<String, Stop> {
 }
 
 function createMockRoadJson(
-  from: String,
-  to: String,
+  from: string,
+  to: string,
   duration: number
 ): RoadUnmapped {
   return {

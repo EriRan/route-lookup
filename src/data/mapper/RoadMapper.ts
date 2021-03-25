@@ -7,7 +7,7 @@ import { RoadUnmapped, Stop, Road } from "./types";
  * Todo: Stop appending to the provided map and instead just return the two created roads. I hope we can do something like addAll in Javascript
  */
 class RoadMapper {
-  map(mappedStops: Map<String, Stop>, roadsJson: Array<RoadUnmapped>): void {
+  map(mappedStops: Map<string, Stop>, roadsJson: Array<RoadUnmapped>): void {
     if (isUndefinedOrNull(roadsJson)) {
       return;
     }
