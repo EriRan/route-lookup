@@ -12,12 +12,6 @@ import {
 
 /**
  * Deduces locations for bustops in a map with the stop names as keys
- *
- * return {
- *  Map<String, BusStopLocation> map with bus stop names as keys and values being their x and y coordinates
- *  Integer xMax maximum z coordinate of the bus stops
- *  Integer yMax maximum y coordinate of the bus stops
- * }
  */
 export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
   const alreadyDeducedStops = new Map<string, BusStopLocation>();
@@ -76,34 +70,31 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
     currentLocation: BusStopLocation,
     neighbourStops: Array<NeighbourStop>
   ) {
-    //Todo: These returns aren't good. This could be done in a functional way by doing map->filter non nulls-> forEach all remaining,
-    //but we still need to pass the road object to the last forEach for this to work. Maybe a for loop inside the road for each?
-    stop.roads.forEach((road) => {
-      if (isRoadAlreadyIncluded(road, alreadyIncludedRoads)) {
-        return;
-      }
-      alreadyIncludedRoads.push({
-        fromName: road.from.name,
-        toName: road.to.name,
+    stop.roads
+      .filter((road) => !isRoadAlreadyIncluded(road, alreadyIncludedRoads))
+      .forEach((road) => {
+        alreadyIncludedRoads.push({
+          fromName: road.from.name,
+          toName: road.to.name,
+        });
+        if (!isUndefinedOrNull(alreadyDeducedStops.get(road.to.name))) {
+          return;
+        }
+        const nextLocation = deduceNextLocation(
+          currentLocation,
+          road,
+          occupiedDirections
+        );
+        if (nextLocation === null) {
+          console.log("No direction for ", road.to.name);
+          return; //Return is equivalent of continue inside a forEach loop
+        }
+        alreadyDeducedStops.set(road.to.name, nextLocation.point);
+        neighbourStops.push({
+          stop: road.to,
+          location: nextLocation.point,
+        });
       });
-      if (!isUndefinedOrNull(alreadyDeducedStops.get(road.to.name))) {
-        return;
-      }
-      const nextLocation = deduceNextLocation(
-        currentLocation,
-        road,
-        occupiedDirections
-      );
-      if (nextLocation === null) {
-        console.log("No direction for ", road.to.name);
-        return; //Return is equivalent of continue inside a forEach loop
-      }
-      alreadyDeducedStops.set(road.to.name, nextLocation!.point);
-      neighbourStops.push({
-        stop: road.to,
-        location: nextLocation!.point,
-      });
-    });
   }
 
   function deduceNextLocation(
@@ -133,7 +124,7 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
     occupiedDirections: Map<string, Array<Direction>>
   ) {
     const occupiedDirectionsForStop = occupiedDirections.get(stopName);
-    if (isUndefinedOrNull(occupiedDirectionsForStop)) {
+    if (!occupiedDirectionsForStop) {
       const newDirectionArray = Array<Direction>();
       newDirectionArray.push(direction);
       occupiedDirections.set(stopName, newDirectionArray);
@@ -142,10 +133,17 @@ export function provideBusStopLocations(firstStop: Stop): BusStopLocations {
     }
   }
 
-  function deduceMaxCoordinates(deducedStops: Map<string, BusStopLocation>) {
+  /**
+   * Go through all bus stops and find out the highest available x and y coordinate from all of them.
+   * @param alreadyDeducedStops
+   * @returns
+   */
+  function deduceMaxCoordinates(
+    alreadyDeducedStops: Map<string, BusStopLocation>
+  ) {
     let xMax = 0;
     let yMax = 0;
-    for (let value of Array.from(deducedStops.values())) {
+    for (let value of Array.from(alreadyDeducedStops.values())) {
       if (xMax < value.x) {
         xMax = value.x;
       }
