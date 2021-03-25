@@ -6,6 +6,8 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
+import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
+import { RoadStyle } from "./types";
 
 /**
  * Deduces styles for roads. The more lines the road is included in, the more style objects will be provided.
@@ -18,44 +20,46 @@ import { isUndefinedOrNull } from "../../../../util/Utilities";
  * }
  */
 export function provideStyles(
-  includesLines,
-  calculatedRouteNode,
-  isRouteCalculated
-) {
+  isRouteCalculated: boolean,
+  calculatedRouteNode?: ResponseDirection,
+  includesLines?: string[]
+): Array<RoadStyle> {
   if (!Array.isArray(includesLines)) {
-    console.error("Received non array as parameter! Creating an unused road.");
+    console.error(
+      "Received non array for included lines. Returning an unused road!"
+    );
     return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
   if (includesLines.length === 0) {
     return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
-  return deduceFromLines(includesLines, calculatedRouteNode, isRouteCalculated);
+  return deduceFromLines(isRouteCalculated, includesLines, calculatedRouteNode);
 
   function deduceFromLines(
-    includesLines,
-    calculatedRouteNode,
-    isRouteCalculated
+    isRouteCalculated: boolean,
+    includesLines: string[],
+    calculatedRouteNode?: ResponseDirection
   ) {
-    const arrayResponse = [];
+    const arrayResponse = new Array<RoadStyle>();
     includesLines.forEach((singleLine) => {
       arrayResponse.push(
-        deduceOneLineStyle(singleLine, calculatedRouteNode, isRouteCalculated)
+        deduceOneLineStyle(singleLine, isRouteCalculated, calculatedRouteNode)
       );
     });
     return arrayResponse;
   }
 
   function deduceOneLineStyle(
-    colorString,
-    calculatedRouteNode,
-    isRouteCalculated
+    colorString: string,
+    isRouteCalculated: boolean,
+    calculatedRouteNode?: ResponseDirection
   ) {
     return returnColorDependingOnLine(
       colorString,
-      deduceCorrectOpacity(colorString, calculatedRouteNode, isRouteCalculated)
+      deduceCorrectOpacity(colorString, isRouteCalculated, calculatedRouteNode)
     );
   }
-  function returnColorDependingOnLine(colorString, opacity) {
+  function returnColorDependingOnLine(colorString: string, opacity: number) {
     switch (colorString) {
       case "Keltainen":
         return createResponse("yellow", opacity);
@@ -76,14 +80,14 @@ export function provideStyles(
   }
 
   function deduceCorrectOpacity(
-    colorString,
-    calculatedRouteNode,
-    isRouteCalculated
-  ) {
+    colorString: string,
+    isRouteCalculated: boolean,
+    calculatedRouteNode?: ResponseDirection
+  ): number {
     if (isRouteCalculated) {
       if (
         !isUndefinedOrNull(calculatedRouteNode) &&
-        calculatedRouteNode.line === colorString
+        calculatedRouteNode!.line === colorString
       ) {
         return USED_ROAD_OPACITY;
       } else {
@@ -94,7 +98,7 @@ export function provideStyles(
     }
   }
 
-  function deduceUnusedRoadOpacity(colorString) {
+  function deduceUnusedRoadOpacity(colorString: string) {
     if (colorString === "Keltainen") {
       return UNUSED_ROAD_OPACITY_YELLOW;
     } else {
@@ -102,7 +106,7 @@ export function provideStyles(
     }
   }
 
-  function createResponse(colorString, opacity) {
+  function createResponse(colorString: string, opacity: number) {
     return {
       color: colorString,
       opacity: opacity,
