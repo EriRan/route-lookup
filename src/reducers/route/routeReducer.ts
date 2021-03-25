@@ -8,9 +8,9 @@ import {
   appendCalculatedRoute,
   changeStartOrDestination,
 } from "./change/stopsStateChangeDeducer";
-import { Action, RootState } from "./types";
+import { Action, RouteStore } from "./types";
 
-const INITIAL_STATE: RootState = {
+const INITIAL_STATE: RouteStore = {
   calculatedRoute: null,
   startStop: { name: null, hasErrors: false },
   destinationStop: { name: null, hasErrors: false },
