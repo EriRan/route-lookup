@@ -6,10 +6,7 @@ import {
   UNUSED_ROAD_COLOR,
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
-import {
-  CalculationResponse,
-  ResponseDirection,
-} from "../../../../reducers/route/change/calculation/types";
+import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 
 test("Road with no lines", () => {
   const isRouteCalculated = false; //Does not matter, so should not be needed

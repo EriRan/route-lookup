@@ -11,6 +11,12 @@ export type RoadLineProps = {
   isRouteCalculated: boolean;
 };
 
+export type RoadDurationProps = {
+  startPointLocation?: BusStopLocation;
+  endPointLocation?: BusStopLocation;
+  duration: number;
+};
+
 export type RoadStyle = {
   color: string;
   opacity: number;

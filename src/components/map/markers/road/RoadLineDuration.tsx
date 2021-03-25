@@ -1,12 +1,26 @@
 import React from "react";
+import { BusStopLocation } from "../../types";
+import { RoadDurationProps } from "./types";
 
-class RoadLineDuration extends React.Component {
+class RoadLineDuration extends React.Component<RoadDurationProps, {}> {
   /**
-   * Render the duration number in middle of the road line.
+   * Render a duration number in the middle of a road line.
    */
   render() {
     const startPointLocation = this.props.startPointLocation;
     const endPointLocation = this.props.endPointLocation;
+    if (!startPointLocation) {
+      console.error(
+        "Start point location missing! Unable to render road duration!"
+      );
+      return null;
+    }
+    if (!endPointLocation) {
+      console.error(
+        "End point location missing! Unable to render road duration!"
+      );
+      return null;
+    }
     if (startPointLocation.x === endPointLocation.x) {
       return this.renderTextInMiddleHorizontal(
         startPointLocation,
@@ -28,7 +42,11 @@ class RoadLineDuration extends React.Component {
     }
   }
 
-  renderTextInMiddleHorizontal(startPointLocation, endPointLocation, duration) {
+  renderTextInMiddleHorizontal(
+    startPointLocation: BusStopLocation,
+    endPointLocation: BusStopLocation,
+    duration: number
+  ) {
     return (
       <text
         x={startPointLocation.x}
@@ -39,7 +57,11 @@ class RoadLineDuration extends React.Component {
     );
   }
 
-  renderTextInMiddleVertical(startPointLocation, endPointLocation, duration) {
+  renderTextInMiddleVertical(
+    startPointLocation: BusStopLocation,
+    endPointLocation: BusStopLocation,
+    duration: number
+  ) {
     return (
       <text
         x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
@@ -50,7 +72,11 @@ class RoadLineDuration extends React.Component {
     );
   }
 
-  renderTextInMiddleDiagonal(startPointLocation, endPointLocation, duration) {
+  renderTextInMiddleDiagonal(
+    startPointLocation: BusStopLocation,
+    endPointLocation: BusStopLocation,
+    duration: number
+  ) {
     return (
       <text
         x={this.calculateMidpoint(startPointLocation.x, endPointLocation.x)}
@@ -61,7 +87,7 @@ class RoadLineDuration extends React.Component {
     );
   }
 
-  calculateMidpoint(startValue, endValue) {
+  calculateMidpoint(startValue: number, endValue: number) {
     return (startValue + endValue) / 2;
   }
 }
