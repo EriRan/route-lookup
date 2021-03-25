@@ -1,10 +1,6 @@
-# Solidabis Code Challenge of April 2020
+# Route Lookup
 
-# Solidabiksen 2020 Huhtikuun koodihaaste
-
-## In English
-
-This is a submission to Solidabis' code challenge that was posted in April of 2020. The challenge page can be found here: https://koodihaaste.solidabis.com/ . Goal of the code challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. I have improved this app after the challange was over but the implementation at the time of submit can be found from the releases.
+This project is a webapp that was originally created for Solidabis' code challenge of April 2020. The original challenge page can be found here: https://koodihaaste.solidabis.com/ (Be wary: their certificate for the page has ran out). Goal of the challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. I've continued the application even after the challenge with various improvements.
 
 This web page can be tried out from here: https://goofy-meitner-a2c969.netlify.app/
 
@@ -16,6 +12,10 @@ This application uses the provided route data json to first render the bus stops
 
 - React and React-Redux
   - Core of the application
+- Typescript
+  - Adds typing to Javascript and makes it easier to write bug free code
+- Webpack
+  - Compresses the codebase into a smaller space and transpiles them to run on older browsers
 - Jest
   - Testing
 - Material UI
@@ -45,49 +45,3 @@ Developed on Windows 10 Home version 1909.
   - Run tests to ensure the application is working correctly. All of the tests should pass.
 - npm run build
   - Create a production bundle to /dist folder
-
----
-
-## Suomeksi
-
-Tämä repositorio on vastaus Solidabiksen koodihaasteeseen, joka julkaistiin 2020 huhtikuussa. Haaste löytyy täältä: https://koodihaaste.solidabis.com/ . Tavoitteena oli toteuttaa verkkosivu, jossa pystyy hakemaan nopeimman reitin kahden valitun bussipysäkin välille käyttäen saatavilla olevia bussilinjoja. Olen parantanut tätä sovellusta haasteen päätyttyä, mutta haasteen palautuksen aikaisen koodin voit löytää releaseista.
-
-Verkkosivua voi testata täältä: https://goofy-meitner-a2c969.netlify.app/
-
-### Kuvaus
-
-Sovellus käyttää haasteen JSON -dataa piirtämään bussipysäkit ja niitä yhdistävät tiet. JSON dataa ei käytetä sellaisenaan, vaan sen rakennetta muutetaan mapper-luokissa helpommin käsiteltäväksi. Piirtäminen aloitetaan ensimmäisestä pysäkistä, jonka jälkeen siirrytään pysäkin naapureihin ja niiden naapureihin. Naapurit sijoitetaan yhteen kahdeksasta mahdollisesta suunnasta ja tiellä olevaa kesto-arvoa käytetään tien pituuden määrittämisessä, kun mahdollista. Reittien laskuun käytetään sovellettua [Dijkstran algoritmia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), joka ottaa huomioon bussilinjat, joita käytetään pysäkkien välillä.
-
-### Käytetyt teknologiat
-
-- React ja React-Redux
-  - Sovelluksen ydin
-- Jest
-  - Testaus
-- Material UI
-  - Käyttöliittymäkomponentit
-- Lodash
-  - Yleiskäyttöiset ehtolauseet
-
-Koodattu Windows 10 Home:n versiolla 1909.
-
-### Käyttöohjeet
-
-#### Tarvitut muut sovellukset
-
-1. Jos sinulla ei ole Node.js eikä npm:ää tietokoneellasi, lataa ja asenna se täältä: https://www.npmjs.com/get-npm
-
-#### Miten ajaa
-
-1. Lataa tämä repositorio ja pura se
-2. Avaa jokin komentokehoite puretussa kansiossa
-3. Kirjoita komentokehoitteeseen `npm install`
-4. Kun asennus on valmis, kirjoita `npm start`
-5. Sovelluksen pitäisi nyt aueta selaimeesi
-
-### Muita komentoja
-
-- npm test
-  - Aja testit varmistaaksesi, jotta sovellus toimii oikein. Kaikkien testien pitäisi mennä läpi.
-- npm run build
-  - Luo tuotantopaketti /dist -kansioon
