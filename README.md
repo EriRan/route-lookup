@@ -27,9 +27,10 @@ Developed on Windows 10 Home version 1909.
 
 ### How to run
 
-#### Required dependencies
+#### Requirements
 
 1. If you do not have Node.js or npm on your computer, start by downloading it from here: https://www.npmjs.com/get-npm
+2. ~ 500 mb storage space
 
 #### Running the application
 
