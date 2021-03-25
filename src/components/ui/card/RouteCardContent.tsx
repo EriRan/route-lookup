@@ -10,8 +10,9 @@ import {
 import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
 import RouteCardHeader from "./header/RouteCardHeader";
+import { UiContainerProps } from "../types";
 
-class RouteCardContent extends React.Component {
+class RouteCardContent extends React.Component<UiContainerProps, {}> {
   render() {
     return (
       <ExpansionPanel>
@@ -19,7 +20,7 @@ class RouteCardContent extends React.Component {
         <Divider />
         <ExpansionPanelDetails>
           <Grid direction="column">
-            <RouteForm possibleStops={this.props.transportData.stops} />
+            <RouteForm possibleStops={this.props.transportData.stopMap} />
             <Divider />
             <RouteResult transportData={this.props.transportData} />
           </Grid>
