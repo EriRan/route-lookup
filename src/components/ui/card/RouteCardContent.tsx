@@ -22,7 +22,7 @@ class RouteCardContent extends React.Component<UiContainerProps, {}> {
           <Grid direction="column">
             <RouteForm possibleStops={this.props.transportData.stopMap} />
             <Divider />
-            <RouteResult transportData={this.props.transportData} />
+            <RouteResult />
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
