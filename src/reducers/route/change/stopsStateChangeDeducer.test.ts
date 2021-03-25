@@ -1,4 +1,4 @@
-import { CurrentState, StopState } from "../types";
+import { RootState, StopState } from "../types";
 import { changeStartOrDestination } from "./stopsStateChangeDeducer";
 
 test("Set start stop to null", () => {
@@ -61,7 +61,7 @@ test("Calculation is done if updates to a new stop", () => {
 function createCurrentState(
   startStop: string,
   destinationStop: string
-): CurrentState {
+): RootState {
   return {
     startStop: {
       name: startStop,
