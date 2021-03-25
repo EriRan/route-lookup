@@ -3,6 +3,7 @@
 This project is a webapp that was originally created for Solidabis' code challenge of April 2020. The original challenge page can be found here: https://koodihaaste.solidabis.com/ (Be wary: their certificate for the page has ran out). Goal of the challenge was to create a route search web application where the user could select a route between two stops and receive the fastest possible route to get between the two stops using the available bus lines. I've continued the application even after the challenge with various improvements. If you want to see how the code was at the time of the submission, check one of the tags.
 
 This web page can be tried out from here: https://goofy-meitner-a2c969.netlify.app/
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f81dae2a-f3d2-46eb-b1d7-69071ee19a4c/deploy-status)](https://app.netlify.com/sites/goofy-meitner-a2c969/deploys)
 
 ### Description
 
