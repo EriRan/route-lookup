@@ -15,14 +15,14 @@ class BusTrafficContainer extends React.Component<TrafficMapProps, {}> {
   }
 
   renderTrafficNetwork() {
-    if (_.isMap(this.props.busStopLocationsMap)) {
+    if (_.isMap(this.props.busStopLocationMap)) {
       return (
         <g className="bus-traffic-container">
           <RoadContainer
-            busStopLocationMap={this.props.busStopLocationsMap}
-            stops={this.props.stopMap}
+            busStopLocationMap={this.props.busStopLocationMap}
+            stopMap={this.props.stopMap}
           />
-          {this.renderBusStops(this.props.busStopLocationsMap)}
+          {this.renderBusStops(this.props.busStopLocationMap)}
         </g>
       );
     } else {
@@ -30,10 +30,10 @@ class BusTrafficContainer extends React.Component<TrafficMapProps, {}> {
     }
   }
 
-  private renderBusStops(busStopLocationsMap: Map<string, BusStopLocation>) {
+  private renderBusStops(busStopLocationMap: Map<string, BusStopLocation>) {
     return (
       <g className="bus-stop-container">
-        {Array.from(busStopLocationsMap.entries()).map((entry) => {
+        {Array.from(busStopLocationMap.entries()).map((entry) => {
           return (
             //entry[0] == name of the bus stop, entry[1] == coordinates of the bus stop
             <BusStop
