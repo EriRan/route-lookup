@@ -9,6 +9,9 @@ import { BusStopLocation } from "../../types";
 import { Road } from "../../../../data/mapper/types";
 import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 
+/**
+ * One or more lines and a duration number in the middle of them. The amount of lines depends on how many bus lines run between the road between two bus stops
+ */
 class RoadLine extends React.Component<RoadLineProps, {}> {
   render() {
     return (
@@ -44,7 +47,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
       calculatedRouteNode,
       roadData.includesLines
     );
-    const objectsToRender = Array<React.SVGProps<SVGLineElement>>(); //Todo: Which type to use here?
+    const objectsToRender = Array<JSX.Element>();
     for (let i = 0; i < styleObjects.length; i++) {
       objectsToRender.push(
         this.renderOneLine(
@@ -92,7 +95,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
     roadData: Road,
     styleObject: RoadStyle,
     index: number
-  ): React.SVGProps<SVGLineElement> {
+  ): JSX.Element {
     if (this.isLineHorizontal(startPointLocation.x, endPointLocation.x)) {
       return (
         <line
@@ -124,12 +127,15 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
   }
 
   /**
+   * Deduce whether the two provided x coordinates would form a horizontal line, if a line was drawn between those two x coordinates.
+   * See below ASCII image for illustration
+   *
    * ***x***
    * ***|***
    * ***|***
    * ***x***
-   * @param xOne
-   * @param xTwo
+   * @param xOne the first x coordinate
+   * @param xTwo the second x coordinate
    * @returns
    */
   isLineHorizontal(xOne: number, xTwo: number) {
