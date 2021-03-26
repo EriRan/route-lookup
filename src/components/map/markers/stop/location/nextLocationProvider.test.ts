@@ -1,5 +1,4 @@
 import { provideNextLocation } from "./nextLocationProvider";
-import { UPPER_RIGHT, RIGHT, LOWER_RIGHT, DOWN } from "./NextBusStopDirection";
 import { STOP_GAP } from "./BusStopLocationConstant";
 import { RoadDirection, NextLocation } from "./types";
 
@@ -16,7 +15,7 @@ test("No existing locations", () => {
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation!.direction).toBe(UPPER_RIGHT);
+  expect(nextLocation!.direction).toBe(RoadDirection.UPPER_RIGHT);
   validateNextLocationCoordinates(
     duration * STOP_GAP,
     -duration * STOP_GAP,
@@ -31,9 +30,9 @@ test("Next location down", () => {
   };
   const duration = 1;
   const occupiedDirectionsForStop: Array<RoadDirection> = [
-    UPPER_RIGHT,
-    RIGHT,
-    LOWER_RIGHT,
+    RoadDirection.UPPER_RIGHT,
+    RoadDirection.RIGHT,
+    RoadDirection.LOWER_RIGHT,
   ];
   const nextLocation = provideNextLocation(
     location,
@@ -41,7 +40,7 @@ test("Next location down", () => {
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation!.direction).toBe(DOWN);
+  expect(nextLocation!.direction).toBe(RoadDirection.DOWN);
   validateNextLocationCoordinates(0, duration * STOP_GAP, nextLocation!);
 });
 
@@ -52,8 +51,8 @@ test("Take first in a gap", () => {
   };
   const duration = 1;
   const occupiedDirectionsForStop: Array<RoadDirection> = [
-    UPPER_RIGHT,
-    LOWER_RIGHT,
+    RoadDirection.UPPER_RIGHT,
+    RoadDirection.LOWER_RIGHT,
   ];
   const nextLocation = provideNextLocation(
     location,
@@ -61,7 +60,7 @@ test("Take first in a gap", () => {
     occupiedDirectionsForStop
   );
   expect(nextLocation).toBeDefined();
-  expect(nextLocation!.direction).toBe(RIGHT);
+  expect(nextLocation!.direction).toBe(RoadDirection.RIGHT);
   validateNextLocationCoordinates(duration * STOP_GAP, 0, nextLocation!);
 });
 
