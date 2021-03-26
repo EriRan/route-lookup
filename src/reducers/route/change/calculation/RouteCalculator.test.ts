@@ -1,6 +1,11 @@
 import RouteCalculator from "./RouteCalculator";
 import TransportDataSingleton from "../../../../data/TransportDataSingleton";
 import { CalculationResponse } from "./types";
+import {
+  ALREADY_AT_DESTINATION,
+  UNKNOWN_END_STOP_INPUTED,
+  UNKNOWN_START_STOP_INPUTED,
+} from "./ErrorMessageConstant";
 
 const calculator = new RouteCalculator(TransportDataSingleton.getInstance());
 
@@ -29,6 +34,27 @@ test("Changing bus lines is avoided", () => {
   response.route!.forEach((singleDirection) => {
     expect(singleDirection.line).toBe("Vihreä");
   });
+});
+
+test("Unknown start stop", () => {
+  const response = calculator.calculate("Railway station", "R");
+  expect(response).toBeDefined();
+  expect(response.errorMessage).toBeDefined();
+  expect(response.errorMessage).toBe(UNKNOWN_START_STOP_INPUTED);
+});
+
+test("Unknown end stop", () => {
+  const response = calculator.calculate("A", "Railway station");
+  expect(response).toBeDefined();
+  expect(response.errorMessage).toBeDefined();
+  expect(response.errorMessage).toBe(UNKNOWN_END_STOP_INPUTED);
+});
+
+test("Already at the destination", () => {
+  const response = calculator.calculate("A", "A");
+  expect(response).toBeDefined();
+  expect(response.errorMessage).toBeDefined();
+  expect(response.errorMessage).toBe(ALREADY_AT_DESTINATION);
 });
 
 function validateResponse(
