@@ -8,13 +8,11 @@ export type TransportDataUnmapped = {
 };
 
 /**
- * Linjastot in reittiopas.json which provide all available buslines and the bus stops they stop on
+ * Linjastot in reittiopas.json which provide all available buslines and the bus stops they stop on. Buslines names are defined by their variable name and the stops they run on in an array as the value of the variable.
+ * This is not a good way to define bus lines but thats the way they were in the original JSON.
  */
 export type LinesUnmapped = {
-  keltainen: Array<string>;
-  punainen: Array<string>;
-  vihreä: Array<string>;
-  sininen: Array<string>;
+  [key: string]: string[];
 };
 
 /**
