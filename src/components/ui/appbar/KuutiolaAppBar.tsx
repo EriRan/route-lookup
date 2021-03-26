@@ -16,7 +16,7 @@ const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = ({
 }) => (
   <AppBar color="primary">
     <Toolbar>
-      <Typography variant="h5" align="right" className={classes.centeredTitle}>
+      <Typography variant="h5" align="center" className={classes.centeredTitle}>
         Kuutiola reittiopas
       </Typography>
       <KuutiolaAppBarSubtitle />
