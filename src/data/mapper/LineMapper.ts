@@ -15,7 +15,7 @@ class LineMapper {
   }
 
   /**
-   * Todo: This is dumb. Adding new lines should not require changes to this class. Maybe one small transformation should be ran for the linjastot from reittiopas.json
+   * Extract available lines from the unmapped data. The lines are the variable names and the values of the variable are arrays which contain the stops a busline goes through
    * @param linesUnmapped
    * @param lineName
    * @returns
