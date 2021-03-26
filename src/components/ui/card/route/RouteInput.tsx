@@ -13,7 +13,6 @@ class RouteInput extends React.Component<RouteInputProps, {}> {
   render() {
     return (
       <TextField
-        id="outlined-basic"
         className="center-input"
         label={this.props.label}
         autoFocus={this.props.autoFocus}

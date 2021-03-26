@@ -10,26 +10,24 @@ import { Stop } from "../../../../data/mapper/types";
 class RouteForm extends React.Component<Props, {}> {
   render() {
     return (
-      <form>
-        <Grid container alignItems="center" direction="row">
-          <Typography color="primary">Mistä lähdet?</Typography>
-          <RouteInput
-            label="Lähtöpaikka"
-            autoFocus={true}
-            onChangeFunction={this.props.setStartStop}
-            stopMap={this.props.stopMap}
-            inputStopData={this.props.startStop}
-          />
+      <Grid container alignItems="center" direction="row">
+        <Typography color="primary">Mistä lähdet?</Typography>
+        <RouteInput
+          label="Lähtöpaikka"
+          autoFocus={true}
+          onChangeFunction={this.props.setStartStop}
+          stopMap={this.props.stopMap}
+          inputStopData={this.props.startStop}
+        />
 
-          <Typography color="primary">Minne haluat mennä?</Typography>
-          <RouteInput
-            label="Määränpää"
-            onChangeFunction={this.props.setDestinationStop}
-            stopMap={this.props.stopMap}
-            inputStopData={this.props.destinationStop}
-          />
-        </Grid>
-      </form>
+        <Typography color="primary">Minne haluat mennä?</Typography>
+        <RouteInput
+          label="Määränpää"
+          onChangeFunction={this.props.setDestinationStop}
+          stopMap={this.props.stopMap}
+          inputStopData={this.props.destinationStop}
+        />
+      </Grid>
     );
   }
 }
