@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  Divider,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  Grid,
-} from "@material-ui/core";
+import { Divider, Accordion, Grid, AccordionDetails } from "@material-ui/core";
 
 import RouteForm from "./route/RouteForm";
 import RouteResult from "./route/RouteResult";
@@ -15,17 +10,17 @@ import { UiContainerProps } from "../types";
 class RouteCardContent extends React.Component<UiContainerProps, {}> {
   render() {
     return (
-      <ExpansionPanel>
+      <Accordion>
         <RouteCardHeader />
         <Divider />
-        <ExpansionPanelDetails>
+        <AccordionDetails>
           <Grid container direction="column">
             <RouteForm stopMap={this.props.transportData.stopMap} />
             <Divider />
             <RouteResult />
           </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+        </AccordionDetails>
+      </Accordion>
     );
   }
 }
