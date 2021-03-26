@@ -1,16 +1,13 @@
 import _ from "lodash";
 
 import { convertCalculation, createErrorResponse } from "./responseConverter";
-import {
-  ALREADY_AT_DESTINATION,
-  ERROR_DURING_ROUTE_SEARCH,
-  UNKNOWN_END_STOP_INPUTED,
-  UNKNOWN_START_STOP_INPUTED,
-} from "./ErrorMessageConstant";
+import { ERROR_DURING_ROUTE_SEARCH } from "./ErrorMessageConstant";
 
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 import { Road, TransportData } from "../../../../data/mapper/types";
 import { CalculationResponse, RouteNode } from "./types";
+import { StopState } from "../../types";
+import RouteCalculatorInputValidator from "./validation/RouteCalculatorInputValidator";
 
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.
@@ -24,24 +21,28 @@ class RouteCalculator {
     this.transportData = transportData;
   }
 
-  calculate(startStop: string, destinationStop: string): CalculationResponse {
+  calculate(
+    startStop: StopState,
+    destinationStop: StopState
+  ): CalculationResponse {
     const allNodesMap: Map<string, RouteNode> = createAllNodesStatusMap(
       this.transportData
     );
-    if (!allNodesMap.get(startStop)) {
-      return createErrorResponse(UNKNOWN_START_STOP_INPUTED);
+    const errorResponse = new RouteCalculatorInputValidator().validate(
+      startStop,
+      destinationStop,
+      allNodesMap
+    );
+    if (!_.isNull(errorResponse)) {
+      return errorResponse;
     }
-    if (!allNodesMap.get(destinationStop)) {
-      return createErrorResponse(UNKNOWN_END_STOP_INPUTED);
-    }
-    if (startStop === destinationStop) {
-      return createErrorResponse(ALREADY_AT_DESTINATION);
-    }
+    const startStopName = startStop.name!;
+    const destinationStopName = destinationStop.name!;
     const settledNodeNames: Array<string> = [];
     const unsettledNodeNames: Array<string> = [];
 
-    allNodesMap.get(startStop)!.nodeDuration = 0;
-    unsettledNodeNames.push(startStop);
+    allNodesMap.get(startStopName)!.nodeDuration = 0;
+    unsettledNodeNames.push(startStopName);
     while (unsettledNodeNames.length > 0) {
       const currentNode = findLowestDurationNode(
         unsettledNodeNames,
@@ -76,8 +77,8 @@ class RouteCalculator {
     }
 
     return convertCalculation(
-      startStop,
-      allNodesMap.get(destinationStop)!.shortestPath
+      startStopName,
+      allNodesMap.get(destinationStopName)!.shortestPath
     );
   }
 }

@@ -6,11 +6,18 @@ import {
   UNKNOWN_END_STOP_INPUTED,
   UNKNOWN_START_STOP_INPUTED,
 } from "./ErrorMessageConstant";
+import { StopState } from "../../types";
 
 const calculator = new RouteCalculator(TransportDataSingleton.getInstance());
 
 test("Route with no lines is not used", () => {
-  const response = calculator.calculate("A", "D");
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState("D");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+
   validateResponse(response, 5, 2);
   Array.from(response.route!.entries()).forEach((entry) => {
     const key = entry[0];
@@ -21,7 +28,13 @@ test("Route with no lines is not used", () => {
 });
 
 test("Optimal route is deduced", () => {
-  const response = calculator.calculate("A", "R");
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState("R");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+
   validateResponse(response, 11, 3);
   expect(response.route!.get("A-B")!.line).toBe("Vihreä");
   expect(response.route!.get("B-D")!.line).toBe("Vihreä");
@@ -29,7 +42,16 @@ test("Optimal route is deduced", () => {
 });
 
 test("Changing bus lines is avoided", () => {
-  const response: CalculationResponse = calculator.calculate("A", "J");
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState("J");
+  const response: CalculationResponse = calculator.calculate(
+    startStopState,
+    destinationStopState
+  );
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+
   validateResponse(response, 10, 7);
   response.route!.forEach((singleDirection) => {
     expect(singleDirection.line).toBe("Vihreä");
@@ -37,24 +59,45 @@ test("Changing bus lines is avoided", () => {
 });
 
 test("Unknown start stop", () => {
-  const response = calculator.calculate("Railway station", "R");
+  const startStopState = createStopState("Railway station");
+  const destinationStopState = createStopState("A");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(true);
+  expect(destinationStopState.hasErrors).toBe(false);
+
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBeDefined();
-  expect(response.errorMessage).toBe(UNKNOWN_START_STOP_INPUTED);
+  expect(response.errorMessages).toBeDefined();
+  expect(response.errorMessages.length).toBe(1);
+  expect(response.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
 });
 
 test("Unknown end stop", () => {
-  const response = calculator.calculate("A", "Railway station");
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState("Railway station");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(true);
+
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBeDefined();
-  expect(response.errorMessage).toBe(UNKNOWN_END_STOP_INPUTED);
+  expect(response.errorMessages).toBeDefined();
+  expect(response.errorMessages.length).toBe(1);
+  expect(response.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
 });
 
 test("Already at the destination", () => {
-  const response = calculator.calculate("A", "A");
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState("A");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBeDefined();
-  expect(response.errorMessage).toBe(ALREADY_AT_DESTINATION);
+  expect(response.errorMessages).toBeDefined();
+  expect(response.errorMessages.length).toBe(1);
+  expect(response.errorMessages).toContain(ALREADY_AT_DESTINATION);
 });
 
 function validateResponse(
@@ -63,9 +106,17 @@ function validateResponse(
   routeSize: number
 ) {
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBeNull();
+  expect(response.errorMessages).toBeDefined();
+  expect(response.errorMessages.length).toBe(0);
   expect(response.totalDuration).toBeDefined();
   expect(response.totalDuration).toBe(totalDuration);
   expect(response.route).toBeDefined();
   expect(response.route!.size).toBe(routeSize);
+}
+
+function createStopState(name: string): StopState {
+  return {
+    name: name,
+    hasErrors: false,
+  };
 }

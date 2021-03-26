@@ -11,12 +11,6 @@ import {
 
 /**
  * Convert the response from calculator to a more compact format for the state and element rendering.
- *
- * Return {
- *  Integer totalDuration
- *  Map<string, StopData> - Key is made of the name of the start stop, a dash and the name of the destination stop. Eg. A-C
- *  string errorMessage
- * }
  */
 export function convertCalculation(
   startStop: string,
@@ -28,7 +22,7 @@ export function convertCalculation(
   return {
     totalDuration: nodes[nodes.length - 1].nodeDuration,
     route: buildRoute(startStop, nodes),
-    errorMessage: null,
+    errorMessages: [],
   };
 
   function buildRoute(startStop: string, nodes: RouteNode[]) {
@@ -115,10 +109,19 @@ export function convertCalculation(
     };
   }
 }
-export function createErrorResponse(errorMessage: string): CalculationResponse {
+export function createErrorResponse(
+  errorMessage?: string
+): CalculationResponse {
+  if (_.isUndefined(errorMessage) || _.isEmpty(errorMessage)) {
+    return {
+      totalDuration: null,
+      route: null,
+      errorMessages: [],
+    };
+  }
   return {
     totalDuration: null,
     route: null,
-    errorMessage: errorMessage,
+    errorMessages: new Array<string>(errorMessage),
   };
 }

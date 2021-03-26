@@ -9,7 +9,7 @@ test("Route not found error", () => {
   const startStop = "A";
   const response = convertCalculation(startStop, nodes);
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBe(ROUTE_NOT_FOUND);
+  expect(response.errorMessages).toContain(ROUTE_NOT_FOUND);
 });
 
 test("Valid route", () => {
@@ -22,7 +22,8 @@ test("Valid route", () => {
   const response = convertCalculation(startStop, nodes);
 
   expect(response).toBeDefined();
-  expect(response.errorMessage).toBeNull();
+  expect(response.errorMessages).toBeDefined();
+  expect(response.errorMessages.length).toBe(0);
   expect(response.totalDuration).toBe(12);
   expect(response.route).toBeInstanceOf(Map);
 
