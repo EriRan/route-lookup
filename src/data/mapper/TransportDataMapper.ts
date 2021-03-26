@@ -6,26 +6,6 @@ import { Line, Road, TransportData, TransportDataUnmapped } from "./types";
 
 /**
  * Map the data provided in JSON to a object that can be handled more easily
- *
- * Response:
- * Object {
- *  Map<String, Stop> stops
- *  Array<Line> lines
- * }
- * Stop {
- *  String name
- *  Array<Road> roads
- * }
- * Road {
- *  Stop to
- *  Stop from
- *  Array<String> includesLines
- *  Boolean isReverse
- * }
- * Line {
- *  String name
- *  Array[] stopsAt
- * }
  */
 class TransportDataMapper {
   map(transportData: TransportDataUnmapped) {

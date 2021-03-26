@@ -24,19 +24,7 @@ class LineMapper {
     linesUnmapped: LinesUnmapped,
     lineName: string
   ): Array<string> {
-    switch (lineName) {
-      case "keltainen":
-        return linesUnmapped.keltainen;
-      case "punainen":
-        return linesUnmapped.punainen;
-      case "sininen":
-        return linesUnmapped.sininen;
-      case "vihreä":
-        return linesUnmapped.vihreä;
-      default:
-        console.error("Encountered unknown bus line: " + lineName);
-        return new Array<string>();
-    }
+    return linesUnmapped[lineName];
   }
 }
 
