@@ -10,7 +10,7 @@ export type RouteNode = {
 export type CalculationResponse = {
   totalDuration: number | null;
   route: Map<string, ResponseDirection> | null; //Todo: Change to the logic to use empty map instead of null instead
-  errorMessage: string | null;
+  errorMessages: Array<string>;
 };
 
 export type RouteKey = string; //Todo: Have this as a full object instead to make it very clear what the format is

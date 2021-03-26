@@ -4,12 +4,10 @@ import { connect, ConnectedProps } from "react-redux";
 import { Divider, Typography } from "@material-ui/core";
 
 import { compressResponse } from "./routeResponseCompressor";
-import {
-  isUndefinedOrNull,
-  isUndefinedOrNullOrEmptyString,
-} from "../../../../util/Utilities";
+import { isUndefinedOrNull } from "../../../../util/Utilities";
 import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
+import _ from "lodash";
 
 class RouteResult extends React.Component<Props, {}> {
   render() {
@@ -20,10 +18,10 @@ class RouteResult extends React.Component<Props, {}> {
   }
 
   renderRoute(calculatedRoute: CalculationResponse) {
-    if (!isUndefinedOrNullOrEmptyString(calculatedRoute.errorMessage)) {
+    if (!_.isEmpty(calculatedRoute.errorMessages)) {
       return (
         <Typography key={`result-stop-no-route`}>
-          {calculatedRoute.errorMessage}
+          {calculatedRoute.errorMessages}
         </Typography>
       );
     }
