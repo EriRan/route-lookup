@@ -6,6 +6,7 @@ import {
   UNUSED_ROAD_COLOR,
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
+import { BLUE_LINE, GREEN_LINE, RED_LINE, YELLOW_LINE } from "./KnownLines";
 import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 
 test("Road with no lines", () => {
@@ -21,7 +22,7 @@ test("Road with no lines", () => {
 });
 
 test("Has lines and route is not calculated", () => {
-  const includesLines = ["Punainen", "Sininen"];
+  const includesLines = [RED_LINE, BLUE_LINE];
   const isRouteCalculated = false;
 
   const styleObjects = provideStyles(
@@ -39,7 +40,7 @@ test("Has lines and route is not calculated", () => {
 });
 
 test("Has lines, route is calculated but not for current route node", () => {
-  const includesLines = ["Punainen", "Sininen"];
+  const includesLines = [RED_LINE, BLUE_LINE];
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
@@ -57,7 +58,7 @@ test("Has lines, route is calculated but not for current route node", () => {
 });
 
 test("Has lines, route is calculated but not for current route node with yellow special case", () => {
-  const includesLines = ["Keltainen"];
+  const includesLines = [YELLOW_LINE];
   const isRouteCalculated = true;
 
   const styleObjects = provideStyles(
@@ -74,11 +75,11 @@ test("Has lines, route is calculated but not for current route node with yellow 
 });
 
 test("Has lines, route is calculated for current node", () => {
-  const includesLines = ["Punainen", "Sininen"];
+  const includesLines = [RED_LINE, BLUE_LINE];
   const calculatedRouteNode: ResponseDirection = {
     from: "A",
     to: "B",
-    line: "Punainen",
+    line: RED_LINE,
     duration: 123,
   };
   const isRouteCalculated = true;

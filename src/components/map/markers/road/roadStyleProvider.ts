@@ -5,6 +5,7 @@ import {
   UNUSED_ROAD_COLOR,
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
+import { BLUE_LINE, GREEN_LINE, RED_LINE, YELLOW_LINE } from "./KnownLines";
 import { isUndefinedOrNull } from "../../../../util/Utilities";
 import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 import { RoadStyle } from "./types";
@@ -41,38 +42,38 @@ export function provideStyles(
     calculatedRouteNode?: ResponseDirection
   ) {
     const arrayResponse = new Array<RoadStyle>();
-    includesLines.forEach((singleLine) => {
+    includesLines.forEach((lineName) => {
       arrayResponse.push(
-        deduceOneLineStyle(singleLine, isRouteCalculated, calculatedRouteNode)
+        deduceOneLineStyle(lineName, isRouteCalculated, calculatedRouteNode)
       );
     });
     return arrayResponse;
   }
 
   function deduceOneLineStyle(
-    colorString: string,
+    lineName: string,
     isRouteCalculated: boolean,
     calculatedRouteNode?: ResponseDirection
   ) {
     return returnColorDependingOnLine(
-      colorString,
-      deduceCorrectOpacity(colorString, isRouteCalculated, calculatedRouteNode)
+      lineName,
+      deduceCorrectOpacity(lineName, isRouteCalculated, calculatedRouteNode)
     );
   }
-  function returnColorDependingOnLine(colorString: string, opacity: number) {
-    switch (colorString) {
-      case "Keltainen":
+  function returnColorDependingOnLine(lineName: string, opacity: number) {
+    switch (lineName) {
+      case YELLOW_LINE:
         return createResponse("yellow", opacity);
-      case "Punainen":
+      case RED_LINE:
         return createResponse("red", opacity);
-      case "Vihreä":
+      case GREEN_LINE:
         return createResponse("green", opacity);
-      case "Sininen":
+      case BLUE_LINE:
         return createResponse("blue", opacity);
       default:
         console.log(
           "Unrecognised line name: ",
-          colorString,
+          lineName,
           " Please define a color for it"
         );
         return createResponse(UNKNOWN_ROAD_COLOR, opacity);
@@ -80,35 +81,31 @@ export function provideStyles(
   }
 
   function deduceCorrectOpacity(
-    colorString: string,
+    lineName: string,
     isRouteCalculated: boolean,
     calculatedRouteNode?: ResponseDirection
   ): number {
-    if (isRouteCalculated) {
-      if (
-        !isUndefinedOrNull(calculatedRouteNode) &&
-        calculatedRouteNode!.line === colorString
-      ) {
-        return USED_ROAD_OPACITY;
-      } else {
-        return deduceUnusedRoadOpacity(colorString);
-      }
-    } else {
+    if (
+      !isRouteCalculated ||
+      (!isUndefinedOrNull(calculatedRouteNode) &&
+        calculatedRouteNode!.line === lineName)
+    ) {
       return USED_ROAD_OPACITY;
     }
+    return deduceUnusedRoadOpacity(lineName);
   }
 
-  function deduceUnusedRoadOpacity(colorString: string) {
-    if (colorString === "Keltainen") {
+  function deduceUnusedRoadOpacity(lineName: string) {
+    if (lineName === YELLOW_LINE) {
       return UNUSED_ROAD_OPACITY_YELLOW;
     } else {
       return UNUSED_ROAD_OPACITY;
     }
   }
 
-  function createResponse(colorString: string, opacity: number) {
+  function createResponse(lineName: string, opacity: number): RoadStyle {
     return {
-      color: colorString,
+      color: lineName,
       opacity: opacity,
     };
   }
