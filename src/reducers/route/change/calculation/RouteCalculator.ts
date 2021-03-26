@@ -4,6 +4,8 @@ import { convertCalculation, createErrorResponse } from "./responseConverter";
 import {
   ALREADY_AT_DESTINATION,
   ERROR_DURING_ROUTE_SEARCH,
+  UNKNOWN_END_STOP_INPUTED,
+  UNKNOWN_START_STOP_INPUTED,
 } from "./ErrorMessageConstant";
 
 import { isUndefinedOrNull } from "../../../../util/Utilities";
@@ -23,21 +25,17 @@ class RouteCalculator {
   }
 
   calculate(startStop: string, destinationStop: string): CalculationResponse {
-    if (startStop === destinationStop) {
-      return createErrorResponse(ALREADY_AT_DESTINATION);
-    }
     const allNodesMap: Map<string, RouteNode> = createAllNodesStatusMap(
       this.transportData
     );
     if (!allNodesMap.get(startStop)) {
-      console.error("Unknown startStop inputted to algorithm: " + startStop);
-      return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
+      return createErrorResponse(UNKNOWN_START_STOP_INPUTED);
     }
     if (!allNodesMap.get(destinationStop)) {
-      console.error(
-        "Unknown destination stop inputted to algorithm: " + destinationStop
-      );
-      return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
+      return createErrorResponse(UNKNOWN_END_STOP_INPUTED);
+    }
+    if (startStop === destinationStop) {
+      return createErrorResponse(ALREADY_AT_DESTINATION);
     }
     const settledNodeNames: Array<string> = [];
     const unsettledNodeNames: Array<string> = [];
