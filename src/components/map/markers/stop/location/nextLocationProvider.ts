@@ -1,14 +1,4 @@
 import { STOP_GAP } from "./BusStopLocationConstant";
-import {
-  UPPER_RIGHT,
-  RIGHT,
-  LOWER_RIGHT,
-  DOWN,
-  LOWER_LEFT,
-  LEFT,
-  UPPER_LEFT,
-  UP,
-} from "./NextBusStopDirection";
 import { isUndefinedOrNull } from "../../../../../util/Utilities";
 import { BusStopLocation } from "../../../types";
 import { RoadDirection, NextLocation } from "./types";
@@ -34,52 +24,74 @@ export function provideNextLocation(
     occupiedDirectionsForStop?: Array<RoadDirection>
   ) {
     //Upper right
-    if (isDirectionFree(UPPER_RIGHT, occupiedDirectionsForStop)) {
+    if (isDirectionFree(RoadDirection.UPPER_RIGHT, occupiedDirectionsForStop)) {
       return createResponseObject(
         location.x + distance,
         location.y - distance,
-        UPPER_RIGHT
+        RoadDirection.UPPER_RIGHT
       );
     }
     //Right
-    else if (isDirectionFree(RIGHT, occupiedDirectionsForStop)) {
-      return createResponseObject(location.x + distance, location.y, RIGHT);
+    else if (isDirectionFree(RoadDirection.RIGHT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x + distance,
+        location.y,
+        RoadDirection.RIGHT
+      );
     }
     //Lower right
-    else if (isDirectionFree(LOWER_RIGHT, occupiedDirectionsForStop)) {
+    else if (
+      isDirectionFree(RoadDirection.LOWER_RIGHT, occupiedDirectionsForStop)
+    ) {
       return createResponseObject(
         location.x + distance,
         location.y + distance,
-        LOWER_RIGHT
+        RoadDirection.LOWER_RIGHT
       );
     }
     //Down
-    else if (isDirectionFree(DOWN, occupiedDirectionsForStop)) {
-      return createResponseObject(location.x, location.y + distance, DOWN);
+    else if (isDirectionFree(RoadDirection.DOWN, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x,
+        location.y + distance,
+        RoadDirection.DOWN
+      );
     }
     //Lower left
-    else if (isDirectionFree(LOWER_LEFT, occupiedDirectionsForStop)) {
+    else if (
+      isDirectionFree(RoadDirection.LOWER_LEFT, occupiedDirectionsForStop)
+    ) {
       return createResponseObject(
         location.x - distance,
         location.y - distance,
-        LOWER_LEFT
+        RoadDirection.LOWER_LEFT
       );
     }
     //Left
-    else if (isDirectionFree(LEFT, occupiedDirectionsForStop)) {
-      return createResponseObject(location.x - distance, location.y, LEFT);
+    else if (isDirectionFree(RoadDirection.LEFT, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x - distance,
+        location.y,
+        RoadDirection.LEFT
+      );
     }
     //Upper left
-    else if (isDirectionFree(UPPER_LEFT, occupiedDirectionsForStop)) {
+    else if (
+      isDirectionFree(RoadDirection.UPPER_LEFT, occupiedDirectionsForStop)
+    ) {
       return createResponseObject(
         location.x - distance,
         location.y + distance,
-        UPPER_LEFT
+        RoadDirection.UPPER_LEFT
       );
     }
     //UP
-    else if (isDirectionFree(UP, occupiedDirectionsForStop)) {
-      return createResponseObject(location.x, location.y - distance, UP);
+    else if (isDirectionFree(RoadDirection.UP, occupiedDirectionsForStop)) {
+      return createResponseObject(
+        location.x,
+        location.y - distance,
+        RoadDirection.UP
+      );
     } else {
       console.error("Ran out of possible directions!");
       return null;
