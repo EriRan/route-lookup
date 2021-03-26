@@ -13,9 +13,10 @@ class RouteResultErrors extends React.Component<Props, {}> {
   }
 
   private createItems(): JSX.Element[] {
+    let errorIndex = 1;
     return this.props.errorMessages.map((errorMessage) => {
       return (
-        <ListItem>
+        <ListItem key={`input-error-${errorIndex++}`}>
           <ListItemText primary={errorMessage} />
         </ListItem>
       );
