@@ -10,10 +10,7 @@ import { StopState } from "../../../../reducers/route/types";
 class BusStop extends React.Component<Props, any> {
   public render() {
     return (
-      <g
-        className="bus-stop"
-        onClick={this.handleClick.bind(this, this.props.name)}
-      >
+      <g onClick={this.handleClick.bind(this, this.props.name)}>
         <circle
           cx={this.props.x}
           cy={this.props.y}
@@ -24,7 +21,7 @@ class BusStop extends React.Component<Props, any> {
             this.props.destinationStop
           )}
         ></circle>
-        <text x={this.props.x} y={this.props.y + 5} className="heavy">
+        <text x={this.props.x} y={this.props.y + 5}>
           {this.props.name}
         </text>
       </g>
