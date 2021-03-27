@@ -10,9 +10,11 @@ import {
 import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
+import { createStyles, makeStyles, Theme } from "@material-ui/core";
 
-//Todo: Okay now this is a functional component. Next try to apply the typography theme to the bus stop character
 const BusStop: FunctionComponent<Props> = (props) => {
+  //Create style class with font from Material UI. We want the default button text style from here
+  const classes = useStyles();
   return (
     <g onClick={() => handleClick(props.name, props.stopClicked)}>
       <circle
@@ -25,12 +27,20 @@ const BusStop: FunctionComponent<Props> = (props) => {
           props.destinationStop
         )}
       ></circle>
-      <text x={props.x} y={props.y + 5}>
+      <text x={props.x} y={props.y + 5} className={classes.root}>
         {props.name}
       </text>
     </g>
   );
 };
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      ...theme.typography.button,
+    },
+  })
+);
 
 const deduceStrokeColor = (
   currentStopName: string,
