@@ -2,7 +2,11 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import { stopClicked } from "../../../../actions";
-import { SELECTED_STOP_COLOR, UNSELECTED_STOP_COLOR } from "./BusStopConstant";
+import {
+  BUS_STOP_CIRCLE_RADIUS,
+  SELECTED_STOP_COLOR,
+  UNSELECTED_STOP_COLOR,
+} from "./BusStopConstant";
 import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
@@ -14,7 +18,7 @@ class BusStop extends React.Component<Props, {}> {
         <circle
           cx={this.props.x}
           cy={this.props.y}
-          r="20"
+          r={BUS_STOP_CIRCLE_RADIUS.toString()}
           stroke={this.deduceStrokeColor(
             this.props.name,
             this.props.startStop,
