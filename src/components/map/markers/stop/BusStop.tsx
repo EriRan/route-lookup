@@ -8,7 +8,7 @@ import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
 
 class BusStop extends React.Component<Props, any> {
-  render() {
+  public render() {
     return (
       <g
         className="bus-stop"
@@ -31,7 +31,7 @@ class BusStop extends React.Component<Props, any> {
     );
   }
 
-  deduceStrokeColor(
+  private deduceStrokeColor(
     currentStopName: string,
     startStop: StopState | null,
     destinationStop: StopState | null
@@ -45,7 +45,7 @@ class BusStop extends React.Component<Props, any> {
     return "black";
   }
 
-  handleClick(stopName: string) {
+  private handleClick(stopName: string) {
     this.props.stopClicked(stopName);
   }
 }
