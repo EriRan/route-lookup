@@ -28,6 +28,7 @@ class RoadMapper {
         to: mappedPointTwoStop,
         duration: road.kesto,
         isReverse: false,
+        includesLines: Array<string>(),
       };
 
       mappedPointOneStop.roads.push(mappedRoad);
@@ -53,6 +54,7 @@ class RoadMapper {
         to: mappedPointOneStop,
         duration: mappedRoad.duration,
         isReverse: true,
+        includesLines: Array<string>(),
       };
     }
   }

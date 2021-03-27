@@ -50,7 +50,7 @@ export type Road = {
   to: Stop;
   duration: number;
   isReverse: boolean;
-  includesLines?: Array<string>;
+  includesLines: Array<string>;
 };
 
 export type Stop = {
