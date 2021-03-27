@@ -8,6 +8,7 @@ import { Road, TransportData } from "../../../../data/mapper/types";
 import { CalculationResponse, RouteNode } from "./types";
 import { StopState } from "../../types";
 import RouteCalculatorInputValidator from "./validation/RouteCalculatorInputValidator";
+import RouteCalculatorUsedLineDeducer from "./RouteCalculatorUsedLineDeducer";
 
 /**
  * Calculates the shortest path from start point to the destionation using adapted Dijikstra's algorithm.
@@ -78,10 +79,11 @@ class RouteCalculator {
       settledNodeNames.push(currentNode.stopData.name);
     }
 
-    return convertCalculation(
-      startStopName,
-      allNodesMap.get(destinationStopName)!.shortestPath
-    );
+    const shortestPath = allNodesMap.get(destinationStopName)!.shortestPath;
+    //Phase2: Optimize lines used
+    new RouteCalculatorUsedLineDeducer().deduce(shortestPath);
+
+    return convertCalculation(startStopName, shortestPath);
   }
 }
 
@@ -91,7 +93,8 @@ function createAllNodesStatusMap(transportData: TransportData) {
     allNodesMap.set(stopName, {
       stopData: stopData,
       nodeDuration: Infinity,
-      lineBeingUsed: null,
+      linesAvailable: [],
+      selectedLine: null,
       shortestPath: [],
     });
   });
@@ -137,47 +140,12 @@ function calculateNodeVariables(
     const shortestPath = currentNode.shortestPath.slice();
     shortestPath.push(adjacentNode);
     adjacentNode.shortestPath = shortestPath;
-    if (_.isUndefined(road.includesLines)) {
-      console.error(
-        "Current road has no included lines! This was encountered on stop: " +
-          currentNode.stopData.name
-      );
-      //Todo: Stop the run here
-    }
-    deduceWhichLineToUse(currentNode, road, adjacentNode);
-  }
-}
-
-function deduceWhichLineToUse(
-  currentNode: RouteNode,
-  road: Road,
-  adjacentNode: RouteNode
-) {
-  if (_.isNull(currentNode.lineBeingUsed)) {
-    adjacentNode.lineBeingUsed = road.includesLines![0];
-  } else {
-    //Try to use currentNode's line if it is available so that we keep avoid unnecessary transfers
-    if (canUseSameLine(road, currentNode)) {
-      adjacentNode.lineBeingUsed = currentNode.lineBeingUsed;
-    } else {
-      //This part could use optimization:
-      //Which line takes us furthest to our destination so that we
-      //have to do the least amount of transfers to different lines.
-      adjacentNode.lineBeingUsed = road.includesLines![0];
-    }
+    adjacentNode.linesAvailable = road.includesLines;
   }
 }
 
 function doAnyLinesRunOnRoad(road: Road) {
   return !isUndefinedOrNull(road) && road.includesLines.length !== 0;
-}
-
-function canUseSameLine(road: Road, currentNode: RouteNode) {
-  return (
-    !isUndefinedOrNull(road) &&
-    !_.isEmpty(road.includesLines) &&
-    road.includesLines.some((line) => line === currentNode.lineBeingUsed)
-  );
 }
 
 /**

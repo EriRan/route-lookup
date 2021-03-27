@@ -46,7 +46,7 @@ test("Optimal route is deduced", () => {
  * when there are more than one available, it can select a different line than a line that could be
  * used through the whole route.
  */
-test("Same line can be used all the way", () => {
+test("Same line can be used all the way with two line options at start", () => {
   const startStopState = createStopState("E");
   const destinationStopState = createStopState("H");
   const response = calculator.calculate(startStopState, destinationStopState);
@@ -54,11 +54,13 @@ test("Same line can be used all the way", () => {
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  validateResponse(response, 4, 1);
-  expect(response.route!.get("E-H")!.line).toBe("Vihreä");
+  validateResponse(response, 4, 3);
+  response.route!.forEach((singleDirection) => {
+    expect(singleDirection.line).toBe("Vihreä");
+  });
 });
 
-test("Changing bus lines is avoided", () => {
+test("Same line can be used all the way with one line option at start", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("J");
   const response: CalculationResponse = calculator.calculate(
