@@ -1,5 +1,5 @@
 import RoadMapper from "./RoadMapper";
-import { RoadUnmapped, Stop } from "./types";
+import { Road, RoadUnmapped, Stop } from "./types";
 
 class StopMapper {
   public map(
@@ -10,7 +10,7 @@ class StopMapper {
     unmappedStops.forEach((unmappedStop) => {
       const mappedStop: Stop = {
         name: unmappedStop,
-        roads: [],
+        roads: new Array<Road>(),
       };
       mappedStops.set(mappedStop.name, mappedStop);
     });

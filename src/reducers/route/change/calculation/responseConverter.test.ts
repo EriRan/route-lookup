@@ -112,7 +112,8 @@ function createOneRoad(
       name: toName,
       roads: [],
     },
-    isReverse: isReverse,
     duration: 2, //Irrelevant for the test
+    isReverse: isReverse,
+    includesLines: new Array<string>(),
   };
 }
