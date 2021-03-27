@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import { stopClicked } from "../../../../actions";
@@ -11,45 +11,44 @@ import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
 
-class BusStop extends React.Component<Props, {}> {
-  public render() {
-    return (
-      <g onClick={this.handleClick.bind(this, this.props.name)}>
-        <circle
-          cx={this.props.x}
-          cy={this.props.y}
-          r={BUS_STOP_CIRCLE_RADIUS.toString()}
-          stroke={this.deduceStrokeColor(
-            this.props.name,
-            this.props.startStop,
-            this.props.destinationStop
-          )}
-        ></circle>
-        <text x={this.props.x} y={this.props.y + 5}>
-          {this.props.name}
-        </text>
-      </g>
-    );
-  }
+//Todo: Okay now this is a functional component. Next try to apply the typography theme to the bus stop character
+const BusStop: FunctionComponent<Props> = (props) => {
+  return (
+    <g onClick={() => handleClick(props.name, props.stopClicked)}>
+      <circle
+        cx={props.x}
+        cy={props.y}
+        r={BUS_STOP_CIRCLE_RADIUS.toString()}
+        stroke={deduceStrokeColor(
+          props.name,
+          props.startStop,
+          props.destinationStop
+        )}
+      ></circle>
+      <text x={props.x} y={props.y + 5}>
+        {props.name}
+      </text>
+    </g>
+  );
+};
 
-  private deduceStrokeColor(
-    currentStopName: string,
-    startStop: StopState | null,
-    destinationStop: StopState | null
+const deduceStrokeColor = (
+  currentStopName: string,
+  startStop: StopState | null,
+  destinationStop: StopState | null
+) => {
+  if (
+    (startStop && currentStopName === startStop.name) ||
+    (destinationStop && currentStopName === destinationStop.name)
   ) {
-    if (
-      (startStop && currentStopName === startStop.name) ||
-      (destinationStop && currentStopName === destinationStop.name)
-    ) {
-      return SELECTED_STOP_COLOR;
-    }
-    return UNSELECTED_STOP_COLOR;
+    return SELECTED_STOP_COLOR;
   }
+  return UNSELECTED_STOP_COLOR;
+};
 
-  private handleClick(stopName: string) {
-    this.props.stopClicked(stopName);
-  }
-}
+const handleClick = (name: string, stopClicked: Function) => {
+  stopClicked(name);
+};
 
 //Let's create a Typescript type from redux props and the props that are provided to this bus stop
 type PropsFromRedux = ConnectedProps<typeof connector>;
