@@ -55,7 +55,8 @@ function pushNextNode(
         roads: createRoadToNextAndPrevious(startStop, fromName, toName),
       },
       nodeDuration: nodeDuration,
-      lineBeingUsed: lineBeingUsed,
+      selectedLine: lineBeingUsed,
+      linesAvailable: [], //Not important here
       shortestPath: [],
     });
   } else {
@@ -70,7 +71,8 @@ function pushNextNode(
         ),
       },
       nodeDuration: nodeDuration,
-      lineBeingUsed: lineBeingUsed,
+      selectedLine: lineBeingUsed,
+      linesAvailable: [], //Not important here
       shortestPath: [],
     });
   }

@@ -35,7 +35,7 @@ export function convertCalculation(
           createOneDirection(
             startStop,
             currentNode.stopData.name,
-            currentNode.lineBeingUsed,
+            currentNode.selectedLine,
             null
           )
         );
@@ -46,7 +46,7 @@ export function convertCalculation(
           createOneDirection(
             previousNode.stopData.name,
             currentNode.stopData.name,
-            currentNode.lineBeingUsed,
+            currentNode.selectedLine,
             null
           )
         );

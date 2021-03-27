@@ -3,7 +3,8 @@ import { Stop } from "../../../../data/mapper/types";
 export type RouteNode = {
   stopData: Stop;
   nodeDuration: number;
-  lineBeingUsed: string | null;
+  linesAvailable: Array<string>;
+  selectedLine: string | null;
   shortestPath: Array<RouteNode>;
 };
 

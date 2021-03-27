@@ -143,7 +143,8 @@ function createRouteNode(name: string): RouteNode {
       roads: [],
     },
     nodeDuration: 2,
-    lineBeingUsed: null,
+    selectedLine: null, //Normally not available to the validator
+    linesAvailable: [], //Not important in the validator
     shortestPath: [],
   };
 }
