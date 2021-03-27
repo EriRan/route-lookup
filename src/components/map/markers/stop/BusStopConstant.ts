@@ -6,3 +6,5 @@ export const SELECTED_STOP_COLOR = "#BBFF99";
  * Color for the bus stops that have not been selected as start or destination
  */
 export const UNSELECTED_STOP_COLOR = "black";
+
+export const BUS_STOP_CIRCLE_RADIUS = 20;
