@@ -2,7 +2,7 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import { stopClicked } from "../../../../actions";
-import { SELECTED_STOP_COLOR } from "./BusStopConstant";
+import { SELECTED_STOP_COLOR, UNSELECTED_STOP_COLOR } from "./BusStopConstant";
 import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
@@ -39,7 +39,7 @@ class BusStop extends React.Component<Props, {}> {
     ) {
       return SELECTED_STOP_COLOR;
     }
-    return "black";
+    return UNSELECTED_STOP_COLOR;
   }
 
   private handleClick(stopName: string) {
