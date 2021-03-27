@@ -41,6 +41,23 @@ test("Optimal route is deduced", () => {
   expect(response.route!.get("D-R")!.line).toBe("Punainen");
 });
 
+/**
+ * Encountered this when browsing routes: If the first available line is selected for the first stop
+ * when there are more than one available, it can select a different line than a line that could be
+ * used through the whole route.
+ */
+test("Same line can be used all the way", () => {
+  const startStopState = createStopState("E");
+  const destinationStopState = createStopState("H");
+  const response = calculator.calculate(startStopState, destinationStopState);
+
+  expect(startStopState.hasErrors).toBe(false);
+  expect(destinationStopState.hasErrors).toBe(false);
+
+  validateResponse(response, 4, 1);
+  expect(response.route!.get("E-H")!.line).toBe("Vihreä");
+});
+
 test("Changing bus lines is avoided", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("J");
