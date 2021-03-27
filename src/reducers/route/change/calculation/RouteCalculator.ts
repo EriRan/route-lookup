@@ -41,6 +41,7 @@ class RouteCalculator {
     const settledNodeNames: Array<string> = [];
     const unsettledNodeNames: Array<string> = [];
 
+    //Already validated in the validator that startStopName is contained
     allNodesMap.get(startStopName)!.nodeDuration = 0;
     unsettledNodeNames.push(startStopName);
     while (unsettledNodeNames.length > 0) {
@@ -49,7 +50,8 @@ class RouteCalculator {
         allNodesMap
       );
       if (!currentNode) {
-        //Error scenario when lowest duration node is not found for some reason
+        //Error scenario when lowest duration node is not found for some reason. findLowestDurationNode does a
+        //console.error already so no need to do it again in here
         return createErrorResponse(ERROR_DURING_ROUTE_SEARCH);
       }
       //Remove a node from the unsettled ones
@@ -167,18 +169,14 @@ function deduceWhichLineToUse(
 }
 
 function doAnyLinesRunOnRoad(road: Road) {
-  return (
-    !isUndefinedOrNull(road) &&
-    !isUndefinedOrNull(road.includesLines) &&
-    road.includesLines!.length !== 0
-  );
+  return !isUndefinedOrNull(road) && road.includesLines.length !== 0;
 }
 
 function canUseSameLine(road: Road, currentNode: RouteNode) {
   return (
     !isUndefinedOrNull(road) &&
-    !isUndefinedOrNull(road.includesLines) &&
-    road.includesLines!.some((line) => line === currentNode.lineBeingUsed)
+    !_.isEmpty(road.includesLines) &&
+    road.includesLines.some((line) => line === currentNode.lineBeingUsed)
   );
 }
 
