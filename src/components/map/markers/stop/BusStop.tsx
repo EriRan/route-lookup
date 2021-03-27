@@ -7,7 +7,7 @@ import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
 
-class BusStop extends React.Component<Props, any> {
+class BusStop extends React.Component<Props, {}> {
   public render() {
     return (
       <g onClick={this.handleClick.bind(this, this.props.name)}>
