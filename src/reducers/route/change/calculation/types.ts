@@ -8,6 +8,14 @@ export type RouteNode = {
   shortestPath: Array<RouteNode>;
 };
 
+/**
+ * Route node that contains just the variables that RouteCalculatorUsedLineDeducer requires
+ */
+export type UsedLineRouteNode = {
+  linesAvailable: Array<string>;
+  selectedLine: string | null;
+};
+
 export type CalculationResponse = {
   totalDuration: number | null;
   route: Map<string, ResponseDirection> | null; //Todo: Change to the logic to use empty map instead of null instead

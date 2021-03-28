@@ -1,16 +1,16 @@
-import { RouteNode } from "./types";
+import { UsedLineRouteNode } from "./types";
 
 import _ from "lodash";
 
 /**
- * Select lines to use for the route nodes
+ * Select lines to use for the route nodes. Prefers the lines which are included the most during the route.
  */
 class RouteCalculatorUsedLineDeducer {
-  public deduce(shortestPath: Array<RouteNode>) {
+  public deduce(shortestPath: Array<UsedLineRouteNode>) {
     //Find out how many times different lines are included
     const lineUsageCountMap = this.createLineUsageCountMap(shortestPath);
     //Find out which lines to use for all route nodes
-    let previousNode: RouteNode | null = null;
+    let previousNode: UsedLineRouteNode | null = null;
     for (let i = 0; i < shortestPath.length; i++) {
       const currentRouteNode = shortestPath[i];
       this.deduceLinesToUse(currentRouteNode, previousNode, lineUsageCountMap);
@@ -19,7 +19,7 @@ class RouteCalculatorUsedLineDeducer {
   }
 
   private createLineUsageCountMap(
-    shortestPath: RouteNode[]
+    shortestPath: UsedLineRouteNode[]
   ): Map<string, number> {
     const lineUsageCountMap: Map<string, number> = new Map();
     shortestPath.forEach((routeNode) => {
@@ -36,8 +36,8 @@ class RouteCalculatorUsedLineDeducer {
   }
 
   private deduceLinesToUse(
-    currentRouteNode: RouteNode,
-    previousNode: RouteNode | null,
+    currentRouteNode: UsedLineRouteNode,
+    previousNode: UsedLineRouteNode | null,
     lineUsageCountMap: Map<string, number>
   ) {
     if (_.isNull(previousNode)) {
@@ -66,7 +66,7 @@ class RouteCalculatorUsedLineDeducer {
   }
 
   private deduceBestAvailableLine(
-    currentRouteNode: RouteNode,
+    currentRouteNode: UsedLineRouteNode,
     lineUsageCountMap: Map<string, number>
   ): string | null {
     if (_.isEmpty(currentRouteNode.linesAvailable)) {
@@ -94,7 +94,7 @@ class RouteCalculatorUsedLineDeducer {
 
   private canUseSameLineAsPrevious(
     linesAvailable: string[],
-    previousNode: RouteNode
+    previousNode: UsedLineRouteNode
   ) {
     return (
       !_.isEmpty(linesAvailable) &&
