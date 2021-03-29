@@ -115,13 +115,13 @@ export function createErrorResponse(
   if (_.isUndefined(errorMessage) || _.isEmpty(errorMessage)) {
     return {
       totalDuration: null,
-      route: null,
+      route: new Map(),
       errorMessages: [],
     };
   }
   return {
     totalDuration: null,
-    route: null,
+    route: new Map(),
     errorMessages: new Array<string>(errorMessage),
   };
 }

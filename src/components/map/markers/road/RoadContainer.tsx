@@ -56,7 +56,7 @@ class RoadContainer extends React.Component<Props, {}> {
       return null;
     }
     if (this.hasRouteBeenCalculated(calculatedRoute)) {
-      const calculatedRouteNode = calculatedRoute!.route!.get(
+      const calculatedRouteNode = calculatedRoute!.route.get(
         road.from.name + "-" + road.to.name
       );
       return (
@@ -66,8 +66,8 @@ class RoadContainer extends React.Component<Props, {}> {
           startPointLocation={startPointLocation}
           endPointLocation={endPointLocation}
           includesLines={road.includesLines}
+          calculationDone={true}
           calculatedRouteNode={calculatedRouteNode}
-          isRouteCalculated={true}
         />
       );
     }
@@ -78,7 +78,7 @@ class RoadContainer extends React.Component<Props, {}> {
         startPointLocation={startPointLocation}
         endPointLocation={endPointLocation}
         includesLines={road.includesLines}
-        isRouteCalculated={false}
+        calculationDone={false}
       />
     );
   }
@@ -88,11 +88,10 @@ class RoadContainer extends React.Component<Props, {}> {
    */
   private hasRouteBeenCalculated(calculatedRoute: CalculationResponse | null) {
     return (
-      !isUndefinedOrNull(calculatedRoute) &&
-      !isUndefinedOrNull(calculatedRoute!.totalDuration) &&
-      calculatedRoute!.totalDuration! > 0 &&
-      _.isMap(calculatedRoute!.route) &&
-      calculatedRoute!.route.size > 0
+      !_.isNull(calculatedRoute) &&
+      !_.isNull(calculatedRoute!.totalDuration) &&
+      calculatedRoute!.totalDuration > 0 &&
+      !_.isEmpty(calculatedRoute!.route)
     );
   }
 }

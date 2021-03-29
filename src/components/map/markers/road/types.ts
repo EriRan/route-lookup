@@ -4,11 +4,11 @@ import { BusStopLocation } from "../../types";
 
 export type RoadLineProps = {
   roadData: Road;
+  calculationDone: boolean;
+  calculatedRouteNode?: ResponseDirection;
   startPointLocation?: BusStopLocation;
   endPointLocation?: BusStopLocation;
   includesLines?: Array<String>;
-  calculatedRouteNode?: ResponseDirection;
-  isRouteCalculated: boolean;
 };
 
 export type RoadDurationProps = {
