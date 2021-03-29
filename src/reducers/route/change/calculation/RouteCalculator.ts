@@ -26,9 +26,6 @@ class RouteCalculator {
     startStop: StopState,
     destinationStop: StopState
   ): CalculationResponse | null {
-    if (!hasUsableInput(startStop) || !hasUsableInput(destinationStop)) {
-      return null;
-    }
     const allNodesMap: Map<string, RouteNode> = createAllNodesStatusMap(
       this.transportData
     );
@@ -39,6 +36,9 @@ class RouteCalculator {
     );
     if (!_.isNull(errorResponse)) {
       return errorResponse;
+    }
+    if (!hasUsableInput(startStop) || !hasUsableInput(destinationStop)) {
+      return null;
     }
     const startStopName = startStop.name!;
     const destinationStopName = destinationStop.name!;
@@ -160,8 +160,8 @@ function removeNode(nodeNameToRemove: string, nodeNames: Array<string>) {
   nodeNames.splice(nodeNames.indexOf(nodeNameToRemove), 1);
 }
 
-function hasUsableInput(targetStop: StopState | null) {
-  return targetStop && !isNullOrEmpty(targetStop.name);
+function hasUsableInput(targetStop: StopState) {
+  return !isNullOrEmpty(targetStop.name);
 }
 
 export default RouteCalculator;
