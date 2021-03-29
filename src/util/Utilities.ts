@@ -7,3 +7,7 @@ export function isUndefinedOrNull(value: any) {
 export function isUndefinedOrNullOrEmptyString(value: any) {
   return _.isUndefined(value) || _.isNull(value) || value === "";
 }
+
+export function isNullOrEmpty(value: any) {
+  return _.isUndefined(value) || _.isEmpty(value);
+}
