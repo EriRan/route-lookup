@@ -6,7 +6,6 @@ import {
   UNKNOWN_ROAD_COLOR,
 } from "./RoadConstant";
 import { BLUE_LINE, GREEN_LINE, RED_LINE, YELLOW_LINE } from "./KnownLines";
-import { isUndefinedOrNull } from "../../../../util/Utilities";
 import { ResponseDirection } from "../../../../reducers/route/change/calculation/types";
 import { RoadStyle } from "./types";
 
@@ -21,9 +20,9 @@ import { RoadStyle } from "./types";
  * }
  */
 export function provideStyles(
-  isRouteCalculated: boolean,
-  calculatedRouteNode?: ResponseDirection,
-  includesLines?: string[]
+  calculationDone: boolean,
+  includesLines?: string[],
+  calculatedRouteNode?: ResponseDirection
 ): Array<RoadStyle> {
   if (!Array.isArray(includesLines)) {
     console.error(
@@ -34,30 +33,30 @@ export function provideStyles(
   if (includesLines.length === 0) {
     return new Array(createResponse(UNUSED_ROAD_COLOR, UNUSED_ROAD_OPACITY));
   }
-  return deduceFromLines(isRouteCalculated, includesLines, calculatedRouteNode);
+  return deduceFromLines(calculationDone, includesLines, calculatedRouteNode);
 
   function deduceFromLines(
-    isRouteCalculated: boolean,
+    calculationDone: boolean,
     includesLines: string[],
     calculatedRouteNode?: ResponseDirection
   ) {
     const arrayResponse = new Array<RoadStyle>();
     includesLines.forEach((lineName) => {
       arrayResponse.push(
-        deduceOneLineStyle(lineName, isRouteCalculated, calculatedRouteNode)
+        deduceOneLineStyle(calculationDone, lineName, calculatedRouteNode)
       );
     });
     return arrayResponse;
   }
 
   function deduceOneLineStyle(
+    calculationDone: boolean,
     lineName: string,
-    isRouteCalculated: boolean,
     calculatedRouteNode?: ResponseDirection
   ) {
     return returnColorDependingOnLine(
       lineName,
-      deduceCorrectOpacity(lineName, isRouteCalculated, calculatedRouteNode)
+      deduceCorrectOpacity(calculationDone, lineName, calculatedRouteNode)
     );
   }
   function returnColorDependingOnLine(lineName: string, opacity: number) {
@@ -81,14 +80,14 @@ export function provideStyles(
   }
 
   function deduceCorrectOpacity(
+    calculationDone: boolean,
     lineName: string,
-    isRouteCalculated: boolean,
     calculatedRouteNode?: ResponseDirection
   ): number {
     if (
-      !isRouteCalculated ||
-      (!isUndefinedOrNull(calculatedRouteNode) &&
-        calculatedRouteNode!.line === lineName)
+      !calculationDone ||
+      (calculatedRouteNode && //Calculated route does not inc
+        calculatedRouteNode.line === lineName) //Calculation has been done and the line is available
     ) {
       return USED_ROAD_OPACITY;
     }

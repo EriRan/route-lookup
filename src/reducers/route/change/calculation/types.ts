@@ -18,7 +18,7 @@ export type UsedLineRouteNode = {
 
 export type CalculationResponse = {
   totalDuration: number | null;
-  route: Map<string, ResponseDirection> | null; //Todo: Change to the logic to use empty map instead of null instead
+  route: Map<string, ResponseDirection>;
   errorMessages: Array<string>;
 };
 

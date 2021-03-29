@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 import RoadLineDuration from "./RoadLineDuration";
 import { provideStyles } from "./roadStyleProvider";
@@ -18,7 +17,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
       <g className="road-line">
         {this.renderLinesAndDuration(
           this.props.roadData,
-          this.props.isRouteCalculated,
+          this.props.calculationDone,
           this.props.calculatedRouteNode,
           this.props.startPointLocation,
           this.props.endPointLocation
@@ -29,7 +28,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
 
   renderLinesAndDuration(
     roadData: Road,
-    isRouteCalculated: boolean,
+    calculationDone: boolean,
     calculatedRouteNode?: ResponseDirection,
     startPointLocation?: BusStopLocation,
     endPointLocation?: BusStopLocation
@@ -43,9 +42,9 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
       return [];
     }
     const styleObjects = provideStyles(
-      isRouteCalculated,
-      calculatedRouteNode,
-      roadData.includesLines
+      calculationDone,
+      roadData.includesLines,
+      calculatedRouteNode
     );
     const objectsToRender = Array<JSX.Element>();
     for (let i = 0; i < styleObjects.length; i++) {
@@ -59,7 +58,7 @@ class RoadLine extends React.Component<RoadLineProps, {}> {
         )
       );
     }
-    if (!isRouteCalculated || !_.isUndefined(calculatedRouteNode)) {
+    if (!calculationDone || calculatedRouteNode) {
       objectsToRender.push(
         this.renderDuration(startPointLocation, endPointLocation, roadData)
       );
