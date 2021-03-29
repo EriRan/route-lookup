@@ -8,6 +8,10 @@ import { createErrorResponse } from "../responseConverter";
 import { CalculationResponse, RouteNode } from "../types";
 import _ from "lodash";
 
+/**
+ * Validates start and end stop before calculation is ran.
+ * @return CalculationResponse with errors if something is wrong with the input or null if everything is all right
+ */
 class RouteCalculatorInputValidator {
   public validate(
     startStop: StopState,
