@@ -1,6 +1,6 @@
 import RouteCalculator from "./calculation/RouteCalculator";
 import TransportDataSingleton from "../../../data/TransportDataSingleton";
-import { isUndefinedOrNullOrEmptyString } from "../../../util/Utilities";
+import { isNullOrEmpty } from "../../../util/Utilities";
 import { RouteStore, Payload, StopState } from "../types";
 
 /**
@@ -53,21 +53,15 @@ export function changeStartOrDestination(
  * Calculate and set route for the provided state if possible
  */
 export function appendCalculatedRoute(currentState: RouteStore) {
-  if (
-    hasUsableInput(currentState.startStop) &&
-    hasUsableInput(currentState.destinationStop)
-  ) {
-    currentState.calculatedRoute = new RouteCalculator(
-      TransportDataSingleton.getInstance()
-    ).calculate(currentState.startStop!, currentState.destinationStop!);
-  } else {
-    currentState.calculatedRoute = null;
-  }
+  currentState.calculatedRoute = new RouteCalculator(
+    TransportDataSingleton.getInstance()
+  ).calculate(currentState.startStop!, currentState.destinationStop!);
+
   return currentState;
 }
 
 function hasUsableInput(targetStop: StopState | null) {
-  return targetStop && !isUndefinedOrNullOrEmptyString(targetStop.name);
+  return targetStop && !isNullOrEmpty(targetStop.name);
 }
 
 function createEmptyStopData() {
