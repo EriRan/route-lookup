@@ -14,12 +14,13 @@ test("Route with no lines is not used", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("D");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  validateResponse(response, 5, 2);
-  Array.from(response.route!.entries()).forEach((entry) => {
+  validateResponse(response!, 5, 2);
+  Array.from(response!.route!.entries()).forEach((entry) => {
     const key = entry[0];
     const value = entry[1];
     expect(key).not.toBe("A-D");
@@ -31,14 +32,15 @@ test("Optimal route is deduced", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("R");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  validateResponse(response, 11, 3);
-  expect(response.route!.get("A-B")!.line).toBe("Vihreä");
-  expect(response.route!.get("B-D")!.line).toBe("Vihreä");
-  expect(response.route!.get("D-R")!.line).toBe("Punainen");
+  validateResponse(response!, 11, 3);
+  expect(response!.route!.get("A-B")!.line).toBe("Vihreä");
+  expect(response!.route!.get("B-D")!.line).toBe("Vihreä");
+  expect(response!.route!.get("D-R")!.line).toBe("Punainen");
 });
 
 /**
@@ -50,12 +52,13 @@ test("Same line can be used all the way with two line options at start", () => {
   const startStopState = createStopState("E");
   const destinationStopState = createStopState("H");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  validateResponse(response, 4, 3);
-  response.route!.forEach((singleDirection) => {
+  validateResponse(response!, 4, 3);
+  response!.route!.forEach((singleDirection) => {
     expect(singleDirection.line).toBe("Vihreä");
   });
 });
@@ -63,16 +66,17 @@ test("Same line can be used all the way with two line options at start", () => {
 test("Same line can be used all the way with one line option at start", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("J");
-  const response: CalculationResponse = calculator.calculate(
+  const response: CalculationResponse | null = calculator.calculate(
     startStopState,
     destinationStopState
   );
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  validateResponse(response, 10, 7);
-  response.route!.forEach((singleDirection) => {
+  validateResponse(response!, 10, 7);
+  response!.route!.forEach((singleDirection) => {
     expect(singleDirection.line).toBe("Vihreä");
   });
 });
@@ -81,42 +85,56 @@ test("Unknown start stop", () => {
   const startStopState = createStopState("Railway station");
   const destinationStopState = createStopState("A");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(true);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  expect(response).toBeDefined();
-  expect(response.errorMessages).toBeDefined();
-  expect(response.errorMessages.length).toBe(1);
-  expect(response.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
+  expect(response!.errorMessages).toBeDefined();
+  expect(response!.errorMessages.length).toBe(1);
+  expect(response!.errorMessages).toContain(UNKNOWN_START_STOP_INPUTED);
 });
 
 test("Unknown end stop", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("Railway station");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(true);
 
-  expect(response).toBeDefined();
-  expect(response.errorMessages).toBeDefined();
-  expect(response.errorMessages.length).toBe(1);
-  expect(response.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
+  expect(response!.errorMessages).toBeDefined();
+  expect(response!.errorMessages.length).toBe(1);
+  expect(response!.errorMessages).toContain(UNKNOWN_END_STOP_INPUTED);
 });
 
 test("Already at the destination", () => {
   const startStopState = createStopState("A");
   const destinationStopState = createStopState("A");
   const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeTruthy();
 
   expect(startStopState.hasErrors).toBe(false);
   expect(destinationStopState.hasErrors).toBe(false);
 
-  expect(response).toBeDefined();
-  expect(response.errorMessages).toBeDefined();
-  expect(response.errorMessages.length).toBe(1);
-  expect(response.errorMessages).toContain(ALREADY_AT_DESTINATION);
+  expect(response!.errorMessages).toBeDefined();
+  expect(response!.errorMessages.length).toBe(1);
+  expect(response!.errorMessages).toContain(ALREADY_AT_DESTINATION);
+});
+
+test("No start stop provided", () => {
+  const startStopState = createStopState(null);
+  const destinationStopState = createStopState("A");
+  const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeFalsy();
+});
+
+test("No destination stop provided", () => {
+  const startStopState = createStopState("A");
+  const destinationStopState = createStopState(null);
+  const response = calculator.calculate(startStopState, destinationStopState);
+  expect(response).toBeFalsy();
 });
 
 function validateResponse(
@@ -133,7 +151,7 @@ function validateResponse(
   expect(response.route!.size).toBe(routeSize);
 }
 
-function createStopState(name: string): StopState {
+function createStopState(name: string | null): StopState {
   return {
     name: name,
     hasErrors: false,
