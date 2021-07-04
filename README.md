@@ -8,7 +8,7 @@
 
 This project is a webapp that was originally created for Solidabis' code challenge of April 2020. The original challenge page can be found here: https://koodihaaste.solidabis.com/ (Be wary: their certificate for the page has ran out). Goal of the challenge was to create a route search web application where the user could select two stops and receive the fastest possible route between them using the available bus lines. I've continued the application even after the challenge with various improvements. If you want to see how the code was at the time of the submission, check one of the tags.
 
-This web page can be tried out from here: https://route-lookup.netlify.app/
+This app is running live here: https://route-lookup.netlify.app/
 
 ### Description
 
