@@ -37,6 +37,7 @@ Developed on Windows 10 Home version 1909.
 
 1. <a href="https://www.npmjs.com/get-npm">NPM</a>
 2. ~500 mb storage space
+3. For running tests you need to have Jest installed globally. Do this with `npm install -g jest`
 
 #### Running the application
 
