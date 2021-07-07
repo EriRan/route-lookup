@@ -14,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false, // False because with true we run into infinite compilation problems when deleting a file while webpack dev server is running. To get the compilation problems go away, the dev server would need to be restarted.
     "noEmitOnError": true,
     "jsx": "react-jsx"
   },
