@@ -8,7 +8,7 @@ module.exports = merge(common, {
     ignored: /node_modules/,
   },
   devServer: {
-    contentBase: "./dist",
+    static: "./dist",
     hot: true,
   },
 });
