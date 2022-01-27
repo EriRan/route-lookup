@@ -8,43 +8,43 @@ import {
 } from "../../../../util/Utilities";
 import { RouteInputEvent, RouteInputProps } from "./types";
 import { Stop } from "../../../../data/mapper/types";
+import { useTranslation } from "react-i18next";
 
-class RouteInput extends React.Component<RouteInputProps, {}> {
-  render() {
-    return (
-      <TextField
-        className="center-input"
-        label={this.props.label}
-        autoFocus={this.props.autoFocus}
-        value={this.getCurrentValue()}
-        variant="outlined"
-        margin="dense"
-        color="primary"
-        //onChange calls an action, which sets the value and whether there are errors.
-        //Once the state change is applied here, text input will get the error status
-        //from the state
-        onChange={this.handleChange.bind(this)}
-        error={this.hasError()}
-      />
-    );
-  }
+const RouteInput = (props: RouteInputProps) => {
+  const { t } = useTranslation();
+  return (
+    <TextField
+      className="center-input"
+      label={t(props.label)}
+      autoFocus={props.autoFocus}
+      value={getCurrentValue()}
+      variant="outlined"
+      margin="dense"
+      color="primary"
+      //onChange calls an action, which sets the value and whether there are errors.
+      //Once the state change is applied here, text input will get the error status
+      //from the state
+      onChange={handleChange.bind(this)}
+      error={hasError()}
+    />
+  );
 
-  private getCurrentValue() {
+  function getCurrentValue() {
     if (
-      !isUndefinedOrNull(this.props.inputStopData) &&
-      !isUndefinedOrNull(this.props.inputStopData!.name)
+      !isUndefinedOrNull(props.inputStopData) &&
+      !isUndefinedOrNull(props.inputStopData!.name)
     ) {
-      return this.props.inputStopData!.name;
+      return props.inputStopData!.name;
     }
     return "";
   }
-
-  private handleChange(event: RouteInputEvent) {
+  
+  function handleChange(event: RouteInputEvent) {
     //Some input validation at first
     if (_.isEmpty(event.target.value)) {
-      this.props.onChangeFunction(
+      props.onChangeFunction(
         "",
-        this.isInputInvalid("", this.props.stopMap)
+        isInputInvalid("", props.stopMap)
       );
     }
     //Material UI https://material-ui.com/es/guides/typescript/#handling-value-and-event-handlers
@@ -52,27 +52,27 @@ class RouteInput extends React.Component<RouteInputProps, {}> {
       console.error("Non string input received");
       return;
     }
-
+  
     const value = _.upperCase(event.target!.value as string);
-    this.props.onChangeFunction(
+    props.onChangeFunction(
       value,
-      this.isInputInvalid(value, this.props.stopMap)
+      isInputInvalid(value, props.stopMap)
     );
   }
-
-  private hasError(): boolean {
+  
+  function hasError(): boolean {
     if (
-      isUndefinedOrNull(this.props.inputStopData) ||
-      isUndefinedOrNull(this.props.inputStopData?.hasErrors)
+      isUndefinedOrNull(props.inputStopData) ||
+      isUndefinedOrNull(props.inputStopData?.hasErrors)
     ) {
       return false;
     }
-    return this.props.inputStopData!.hasErrors!;
+    return props.inputStopData!.hasErrors!;
   }
-
-  private isInputInvalid(input: string, stopMap: Map<string, Stop>) {
+  
+  function isInputInvalid(input: string, stopMap: Map<string, Stop>) {
     return !isUndefinedOrNullOrEmptyString(input) && !stopMap.has(input);
   }
-}
+};
 
 export default RouteInput;
