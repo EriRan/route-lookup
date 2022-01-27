@@ -2,7 +2,7 @@
   "resources": {
     "fi": {
       "translation": {
-        "APP_TITLE": "Kuutiola Reittiopas",
+        "APP_TITLE": "Kuutiola reittiopas",
         "ROUTE_SEARCH_HEADER": "Reittihaku",
         "ROUTE_SEARCH_START_POINT_HEADER": "Mistä lähdet?",
         "ROUTE_SEARCH_START_POINT_PLACEHOLDER": "Lähtöpaikka",
