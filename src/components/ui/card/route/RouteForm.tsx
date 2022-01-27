@@ -6,23 +6,25 @@ import { setStartStop, setDestinationStop } from "../../../../actions";
 import { Typography, Grid } from "@material-ui/core";
 import { RootState } from "../../../../reducers/types";
 import { Stop } from "../../../../data/mapper/types";
+import { Trans } from "react-i18next";
 
 class RouteForm extends React.Component<Props, {}> {
+  
   render() {
     return (
       <Grid container alignItems="center" direction="row">
-        <Typography color="primary">Mistä lähdet?</Typography>
+        <Typography color="primary"><Trans>ROUTE_SEARCH_START_POINT_HEADER</Trans></Typography>
         <RouteInput
-          label="Lähtöpaikka"
+          label="ROUTE_SEARCH_START_POINT_PLACEHOLDER"
           autoFocus={true}
           onChangeFunction={this.props.setStartStop}
           stopMap={this.props.stopMap}
           inputStopData={this.props.startStop}
         />
 
-        <Typography color="primary">Minne haluat mennä?</Typography>
+        <Typography color="primary"><Trans>ROUTE_SEARCH_END_POINT_HEADER</Trans></Typography>
         <RouteInput
-          label="Määränpää"
+          label="ROUTE_SEARCH_END_POINT_PLACEHOLDER"
           onChangeFunction={this.props.setDestinationStop}
           stopMap={this.props.stopMap}
           inputStopData={this.props.destinationStop}

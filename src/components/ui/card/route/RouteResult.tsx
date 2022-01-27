@@ -9,6 +9,8 @@ import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import _ from "lodash";
 import RouteResultErrors from "./RouteResultErrors";
+import { Trans } from "react-i18next";
+import { t } from "i18next";
 
 class RouteResult extends React.Component<Props, {}> {
   render() {
@@ -33,7 +35,9 @@ class RouteResult extends React.Component<Props, {}> {
     ).map((stopRoute) => {
       return (
         <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-          {stopRoute.from} → {stopRoute.to} linjalla {stopRoute.line}
+          <Trans>
+          {stopRoute.from} → {stopRoute.to} {t('ROUTE_RESULT_WITH_LINE')} {stopRoute.line}
+          </Trans>
         </Typography>
       );
     });
@@ -41,7 +45,7 @@ class RouteResult extends React.Component<Props, {}> {
       <div>
         {compressedRouteData}
         <Divider />
-        <Typography>Kesto yhteensä: {calculatedRoute.totalDuration}</Typography>
+        <Typography><Trans>{t('ROUTE_RESULT_TOTAL_DURATION')}: </Trans>{calculatedRoute.totalDuration}</Typography>
       </div>
     );
   }

@@ -2,15 +2,15 @@ import React from "react";
 
 import { AccordionSummary, Typography } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useTranslation } from "react-i18next";
 
-class RouteCardHeader extends React.Component<{}, {}> {
-  render() {
-    return (
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="h5">Reittihaku</Typography>
-      </AccordionSummary>
-    );
-  }
-}
+const RouteCardHeader = () => {
+  const { t } = useTranslation();
+  return (
+    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Typography variant="h5">{t('ROUTE_SEARCH_HEADER')}</Typography>
+    </AccordionSummary>
+  );
+};
 
 export default RouteCardHeader;
