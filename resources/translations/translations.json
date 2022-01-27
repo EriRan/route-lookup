@@ -2,7 +2,7 @@
   "resources": {
     "en": {
       "translation": {
-        "Welcome to React": "Kuutiola"
+        "LOCAL_DEVELOPMENT_VERSION": "Local development version"
       }
     }
   },
