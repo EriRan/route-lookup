@@ -1,28 +1,30 @@
-import React from "react";
 import _ from "lodash";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { useTranslation } from "react-i18next";
 
-class RouteResultErrors extends React.Component<Props, {}> {
-  render() {
-    if (_.isEmpty(this.props.errorMessages)) {
-      return <div />;
-    }
-    return <List dense={true}>{this.createItems()}</List>;
+const RouteResultErrors = (props: Props) => {
+  const { t } = useTranslation();
+
+  if (_.isEmpty(props.errorMessages)) {
+    return <div />;
   }
+  return <List dense={true}>{createItems()}</List>;
 
-  private createItems(): JSX.Element[] {
+  function createItems(): JSX.Element[] {
     let errorIndex = 1;
-    return this.props.errorMessages.map((errorMessage) => {
+    return props.errorMessages.map((errorMessage) => {
+      const message = t(errorMessage);
+      console.log(message);
       return (
         <ListItem key={`input-error-${errorIndex++}`}>
-          <ListItemText primary={errorMessage} />
+          <ListItemText primary={message} />
         </ListItem>
       );
     });
   }
-}
+};
 
 type Props = {
   errorMessages: Array<string>;
