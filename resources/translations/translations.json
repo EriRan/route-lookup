@@ -1,0 +1,15 @@
+{
+  "resources": {
+    "en": {
+      "translation": {
+        "Welcome to React": "Kuutiola"
+      }
+    }
+  },
+  "lng": "en",
+  "fallbackLng": "en",
+
+  "interpolation": {
+    "escapeValue": false
+  }
+}
