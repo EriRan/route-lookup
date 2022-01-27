@@ -10,7 +10,12 @@
         "ROUTE_SEARCH_END_POINT_PLACEHOLDER": "Määränpää",
         "ROUTE_RESULT_WITH_LINE": "linjalla",
         "ROUTE_RESULT_TOTAL_DURATION": "Kesto yhteensä",
-        "LOCAL_DEVELOPMENT_VERSION": "Paikallinen kehitysversio"
+        "LOCAL_DEVELOPMENT_VERSION": "Paikallinen kehitysversio",
+        "ROUTE_ERROR_ROUTE_NOT_FOUND": "Reittiä ei löytynyt",
+        "ROUTE_ERROR_ALREADY_AT_DESTINATION": "Olet jo määränpäässäsi",
+        "ROUTE_ERROR_UNKNOWN_START_STOP_INPUTED": "Tuntematon lähtöpaikka",
+        "ROUTE_ERROR_UNKNOWN_END_STOP_INPUTED": "Tuntematon määränpää",
+        "ROUTE_ERROR_ERROR_DURING_ROUTE_SEARCH": "Reitinhaussa tapahtui virhe"
       }
     }
   },
