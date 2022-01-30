@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import { REDUCERS } from "./route/routeReducer";
+import { LANGUAGE_REDUCERS } from "./language/languageReducer";
+import { REDUCERS as ROUTE_REDUCERS } from "./route/routeReducer";
 
 export default combineReducers({
-  route: REDUCERS,
+  route: ROUTE_REDUCERS,
+  language: LANGUAGE_REDUCERS
 });
