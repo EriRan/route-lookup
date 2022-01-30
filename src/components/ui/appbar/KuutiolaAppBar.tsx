@@ -1,12 +1,10 @@
 import { FunctionComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 import { KuutiolaAppBarProps } from "./types";
 import KuutiolaAppBarSubtitle from "./KuutiolaAppBarSubtitle";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { LANGUAGE_CHANGE } from "../../../actions/language/actions";
+import KuutiolaAppTitle from "./KuutiolaApptitle";
 
 const styles = {
   centeredTitle: {
@@ -14,22 +12,11 @@ const styles = {
   },
 };
 
-const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = ({
-  classes,
-}) => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
+const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = () => {
   return (
     <AppBar color="primary">
       <Toolbar>
-        <Typography
-          variant="h5"
-          align="center"
-          className={classes.centeredTitle}
-          onClick={() => dispatch({type: LANGUAGE_CHANGE, payload: {language: "en"}})}
-        >
-          {t('APP_TITLE')}
-        </Typography>
+        <KuutiolaAppTitle />
         <KuutiolaAppBarSubtitle />
       </Toolbar>
     </AppBar>
