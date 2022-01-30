@@ -3,10 +3,11 @@ export type Action = {
   payload: Payload;
 };
 
-export type LanguageType = 'fi' | 'en';
+export type LanguageType = "fi" | "en";
 
 export type LanguageStore = {
   language: LanguageType;
+  isLanguageDropdownOpen: boolean;
 };
 
 export type Payload = LanguageState;
