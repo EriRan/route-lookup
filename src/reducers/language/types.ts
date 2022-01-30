@@ -3,12 +3,14 @@ export type Action = {
   payload: Payload;
 };
 
+export type LanguageType = 'fi' | 'en' | 'jp';
+
 export type LanguageStore = {
-  language: string;
+  language: LanguageType;
 };
 
 export type Payload = LanguageState;
 
 export type LanguageState = {
-  language: string;
+  language: LanguageType;
 };

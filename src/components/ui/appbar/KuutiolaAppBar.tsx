@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { KuutiolaAppBarProps } from "./types";
 import KuutiolaAppBarSubtitle from "./KuutiolaAppBarSubtitle";
-import KuutiolaAppTitle from "./KuutiolaApptitle";
+import KuutiolaAppTitle from "./KuutiolaAppTitle";
+import LanguageSelector from "./LanguageSelector";
 
 const styles = {
   centeredTitle: {
@@ -16,6 +17,7 @@ const KuutiolaAppBar: FunctionComponent<KuutiolaAppBarProps> = () => {
   return (
     <AppBar color="primary">
       <Toolbar>
+        <LanguageSelector />
         <KuutiolaAppTitle />
         <KuutiolaAppBarSubtitle />
       </Toolbar>
