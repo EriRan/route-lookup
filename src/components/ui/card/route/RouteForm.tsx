@@ -5,7 +5,7 @@ import RouteInput from "./RouteInput";
 import { Typography, Grid } from "@material-ui/core";
 import { RootState } from "../../../../reducers/types";
 import { Stop } from "../../../../data/mapper/types";
-import { Trans } from "react-i18next";
+import { Translation } from "react-i18next";
 import { setDestinationStop, setStartStop } from "../../../../actions/route";
 
 class RouteForm extends React.Component<Props, {}> {
@@ -13,7 +13,7 @@ class RouteForm extends React.Component<Props, {}> {
   render() {
     return (
       <Grid container alignItems="center" direction="row">
-        <Typography color="primary"><Trans>ROUTE_SEARCH_START_POINT_HEADER</Trans></Typography>
+        <Typography color="primary"><Translation>{(t) => t('ROUTE_SEARCH_START_POINT_HEADER')}</Translation></Typography>
         <RouteInput
           label="ROUTE_SEARCH_START_POINT_PLACEHOLDER"
           autoFocus={true}
@@ -22,7 +22,7 @@ class RouteForm extends React.Component<Props, {}> {
           inputStopData={this.props.startStop}
         />
 
-        <Typography color="primary"><Trans>ROUTE_SEARCH_END_POINT_HEADER</Trans></Typography>
+        <Typography color="primary"><Translation>{(t) => t('ROUTE_SEARCH_END_POINT_HEADER')}</Translation></Typography>
         <RouteInput
           label="ROUTE_SEARCH_END_POINT_PLACEHOLDER"
           onChangeFunction={this.props.setDestinationStop}
@@ -49,11 +49,9 @@ const mapDispatch = {
 const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-
 type PassedProps = {
   stopMap: Map<string, Stop>;
 };
-
 type Props = PropsFromRedux & PassedProps;
 
 export default connector(RouteForm);
