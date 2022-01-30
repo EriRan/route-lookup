@@ -2,11 +2,11 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import RouteInput from "./RouteInput";
-import { setStartStop, setDestinationStop } from "../../../../actions";
 import { Typography, Grid } from "@material-ui/core";
 import { RootState } from "../../../../reducers/types";
 import { Stop } from "../../../../data/mapper/types";
 import { Trans } from "react-i18next";
+import { setDestinationStop, setStartStop } from "../../../../actions/route";
 
 class RouteForm extends React.Component<Props, {}> {
   

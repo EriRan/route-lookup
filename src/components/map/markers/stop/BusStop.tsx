@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { connect, ConnectedProps } from "react-redux";
 
-import { stopClicked } from "../../../../actions";
 import {
   BUS_STOP_CIRCLE_RADIUS,
   SELECTED_STOP_COLOR,
@@ -11,6 +10,7 @@ import "./BusStop.css";
 import { RootState } from "../../../../reducers/types";
 import { StopState } from "../../../../reducers/route/types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { stopClicked } from "../../../../actions/route";
 
 const BusStop: FunctionComponent<Props> = (props) => {
   //Create style class with font from Material UI. We want the default button text style from here
