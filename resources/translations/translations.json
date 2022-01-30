@@ -22,9 +22,9 @@
       "translation": {
         "APP_TITLE": "Kuutiola transport guide",
         "ROUTE_SEARCH_HEADER": "Route search",
-        "ROUTE_SEARCH_START_POINT_HEADER": "Which start point?",
+        "ROUTE_SEARCH_START_POINT_HEADER": "Where are you at?",
         "ROUTE_SEARCH_START_POINT_PLACEHOLDER": "Start point",
-        "ROUTE_SEARCH_END_POINT_HEADER": "Which destination?",
+        "ROUTE_SEARCH_END_POINT_HEADER": "Where do you want to go?",
         "ROUTE_SEARCH_END_POINT_PLACEHOLDER": "Destination",
         "ROUTE_RESULT_WITH_LINE": "with line",
         "ROUTE_RESULT_TOTAL_DURATION": "Total duration",
