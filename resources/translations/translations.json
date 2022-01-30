@@ -6,7 +6,7 @@
         "ROUTE_SEARCH_HEADER": "Reittihaku",
         "ROUTE_SEARCH_START_POINT_HEADER": "Mistä lähdet?",
         "ROUTE_SEARCH_START_POINT_PLACEHOLDER": "Lähtöpaikka",
-        "ROUTE_SEARCH_END_POINT_HEADER": "Mistä lähdet?",
+        "ROUTE_SEARCH_END_POINT_HEADER": "Minne haluat mennä?",
         "ROUTE_SEARCH_END_POINT_PLACEHOLDER": "Määränpää",
         "ROUTE_RESULT_WITH_LINE": "linjalla",
         "ROUTE_RESULT_TOTAL_DURATION": "Kesto yhteensä",
