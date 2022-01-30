@@ -6,7 +6,7 @@ const INITIAL_STATE: LanguageStore = {
   language: "fi",
 };
 
-export const REDUCERS = (state = INITIAL_STATE, action: Action) => {
+export const LANGUAGE_REDUCERS = (state = INITIAL_STATE, action: Action) => {
   switch (action.type) {
     case LANGUAGE_CHANGE:
       i18next.changeLanguage(action.payload.language);
