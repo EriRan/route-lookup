@@ -9,12 +9,18 @@ export default function LanguageSelector() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (language: LanguageType) => {
+
+  const handleLanguageSelectionChange = (language: LanguageType) => {
     setAnchorEl(null);
     dispatch({ type: LANGUAGE_CHANGE, payload: { language: language } });
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const currentLanguage = useSelector(
@@ -27,7 +33,7 @@ export default function LanguageSelector() {
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
+        onClick={handleMenuOpen}
       >
         {getLanguageFlagEmoji(currentLanguage)}
       </Button>
@@ -41,19 +47,19 @@ export default function LanguageSelector() {
         }}
       >
         <MenuItem
-          onClick={() => handleClose("fi")}
+          onClick={() => handleLanguageSelectionChange("fi")}
           selected={currentLanguage === "fi"}
         >
           🇫🇮
         </MenuItem>
         <MenuItem
-          onClick={() => handleClose("en")}
+          onClick={() => handleLanguageSelectionChange("en")}
           selected={currentLanguage === "en"}
         >
           🇺🇸
         </MenuItem>
         <MenuItem
-          onClick={() => handleClose("jp")}
+          onClick={() => handleLanguageSelectionChange("jp")}
           selected={currentLanguage === "jp"}
         >
           🇯🇵
