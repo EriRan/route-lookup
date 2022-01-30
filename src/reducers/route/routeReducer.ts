@@ -16,7 +16,7 @@ const INITIAL_STATE: RouteStore = {
   destinationStop: { name: null, hasErrors: false },
 };
 
-export const REDUCERS = (state = INITIAL_STATE, action: Action) => {
+export const REDUCERS = (state = INITIAL_STATE, action: Action): RouteStore => {
   switch (action.type) {
     case SET_START_STOP:
       return appendCalculatedRoute({
