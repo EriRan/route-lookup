@@ -3,7 +3,7 @@ export type Action = {
   payload: Payload;
 };
 
-export type LanguageType = 'fi' | 'en' | 'jp';
+export type LanguageType = 'fi' | 'en';
 
 export type LanguageStore = {
   language: LanguageType;

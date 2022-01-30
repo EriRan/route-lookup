@@ -58,12 +58,6 @@ export default function LanguageSelector() {
         >
           🇺🇸
         </MenuItem>
-        <MenuItem
-          onClick={() => handleLanguageSelectionChange("jp")}
-          selected={currentLanguage === "jp"}
-        >
-          🇯🇵
-        </MenuItem>
       </Menu>
     </div>
   );
@@ -75,8 +69,6 @@ const getLanguageFlagEmoji = (language: LanguageType) => {
       return "🇫🇮";
     case "en":
       return "🇺🇸";
-    case "jp":
-      return "🇯🇵";
     default:
       throw new Error("Unimplemented handling for language: " + language);
   }
