@@ -2,7 +2,7 @@ import {
   SET_START_STOP,
   SET_DESTINATION_STOP,
   STOP_CLICKED,
-} from "../../actions/actions";
+} from "../../actions/route/actions";
 
 import {
   appendCalculatedRoute,
