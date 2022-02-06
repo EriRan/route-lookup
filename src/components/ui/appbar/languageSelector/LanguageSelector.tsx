@@ -8,10 +8,10 @@ import {
 import { LanguageType } from "../../../../reducers/language/types";
 import { RootState } from "../../../../reducers/types";
 import LanguageSelectorItem from "./LanguageSelectorItem";
+import i18next from "i18next";
 
 export default function LanguageSelector() {
   const dispatch = useDispatch();
-
   const languageState = useSelector((state: RootState) => {
     return {
       isLanguageDropdownOpen: state.language.isLanguageDropdownOpen,
@@ -27,6 +27,16 @@ export default function LanguageSelector() {
   const handleClose = () => {
     dispatch(closeLanguageDropdown());
   };
+
+  const languageSelectorItems = Object.keys(
+    i18next.services.resourceStore.data
+  ).map((availableLanguage) => (
+    <LanguageSelectorItem
+      key={`language-selector-${availableLanguage}`}
+      language={availableLanguage}
+      isSelected={languageState.language === availableLanguage}
+    />
+  ));
   return (
     <div>
       <Button
@@ -49,14 +59,7 @@ export default function LanguageSelector() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <LanguageSelectorItem
-          language="en"
-          isSelected={languageState.language === "en"}
-        />
-        <LanguageSelectorItem
-          language="fi"
-          isSelected={languageState.language === "fi"}
-        />
+        {languageSelectorItems}
       </Menu>
     </div>
   );
