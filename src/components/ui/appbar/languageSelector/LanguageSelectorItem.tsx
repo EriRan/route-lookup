@@ -1,10 +1,7 @@
 import { MenuItem } from "@material-ui/core";
 import { forwardRef, FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
-import {
-  CLOSE_LANGUAGE_DROPDOWN,
-  LANGUAGE_CHANGE,
-} from "../../../../actions/language/actions";
+import { changeLanguage, closeLanguageDropdown } from "../../../../actions/language";
 import { LanguageType } from "../../../../reducers/language/types";
 
 type Props = {
@@ -18,9 +15,9 @@ const LanguageSelectorItem: FunctionComponent<Props> = forwardRef((props: Props,
   const handleLanguageSelectionChange = (language: LanguageType) => {
     // Don't bother making a redux call if we are selecting already selected language
     if (!props.isSelected) {
-      dispatch({ type: LANGUAGE_CHANGE, payload: { language: language } });
+      dispatch(changeLanguage(language));
     }
-    dispatch({ type: CLOSE_LANGUAGE_DROPDOWN });
+    dispatch(closeLanguageDropdown());
   };
 
   const getLanguageFlagEmoji = (language: LanguageType) => {
