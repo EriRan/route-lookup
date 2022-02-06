@@ -1,7 +1,7 @@
 import { MenuItem } from "@material-ui/core";
 import { forwardRef, FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
-import { changeLanguage, closeLanguageDropdown } from "../../../../actions/language";
+import { changeLanguage, closeLanguageDropdown } from "../../../../../actions/language";
 
 type Props = {
   language: string;
