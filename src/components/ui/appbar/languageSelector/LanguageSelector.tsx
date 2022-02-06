@@ -28,6 +28,7 @@ export default function LanguageSelector() {
     dispatch(closeLanguageDropdown());
   };
 
+  // Get all available languages and create selector items for each language
   const languageSelectorItems = Object.keys(
     i18next.services.resourceStore.data
   ).map((availableLanguage) => (
