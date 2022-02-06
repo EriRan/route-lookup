@@ -2,9 +2,9 @@ import { Button, Menu } from "@material-ui/core";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  CLOSE_LANGUAGE_DROPDOWN,
-  OPEN_LANGUAGE_DROPDOWN,
-} from "../../../../actions/language/actions";
+  closeLanguageDropdown,
+  openLanguageDropdown,
+} from "../../../../actions/language";
 import { LanguageType } from "../../../../reducers/language/types";
 import { RootState } from "../../../../reducers/types";
 import LanguageSelectorItem from "./LanguageSelectorItem";
@@ -12,49 +12,51 @@ import LanguageSelectorItem from "./LanguageSelectorItem";
 export default function LanguageSelector() {
   const dispatch = useDispatch();
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const isLanguageDropdownOpen = useSelector(
-    (state: RootState) => state.language.isLanguageDropdownOpen
-  );
-  const currentLanguage = useSelector(
-    (state: RootState) => state.language.language
-  );
+  const languageState = useSelector((state: RootState) => {
+    return {
+      isLanguageDropdownOpen: state.language.isLanguageDropdownOpen,
+      anchorElement: state.language.languageDropdownAnchorElement,
+      language: state.language.language,
+    };
+  });
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch({
-      type: OPEN_LANGUAGE_DROPDOWN,
-    });
-    setAnchorEl(event.currentTarget);
+    dispatch(openLanguageDropdown(event.currentTarget));
   };
 
   const handleClose = () => {
-    dispatch({ type: CLOSE_LANGUAGE_DROPDOWN });
-    setAnchorEl(null);
+    dispatch(closeLanguageDropdown());
   };
-
   return (
     <div>
       <Button
         id="basic-button"
-        aria-controls={isLanguageDropdownOpen ? "basic-menu" : undefined}
+        aria-controls={
+          languageState.isLanguageDropdownOpen ? "basic-menu" : undefined
+        }
         aria-haspopup="true"
-        aria-expanded={isLanguageDropdownOpen ? "true" : undefined}
+        aria-expanded={languageState.isLanguageDropdownOpen ? "true" : "false"}
         onClick={handleMenuOpen}
       >
-        {getLanguageFlagEmoji(currentLanguage)}
+        {getLanguageFlagEmoji(languageState.language)}
       </Button>
       <Menu
         id="basic-menu"
-        anchorEl={anchorEl}
-        open={isLanguageDropdownOpen}
+        anchorEl={languageState.anchorElement}
+        open={languageState.isLanguageDropdownOpen}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <LanguageSelectorItem language="en" isSelected={currentLanguage === 'en'} />
-        <LanguageSelectorItem language="fi" isSelected={currentLanguage === 'fi'} />
+        <LanguageSelectorItem
+          language="en"
+          isSelected={languageState.language === "en"}
+        />
+        <LanguageSelectorItem
+          language="fi"
+          isSelected={languageState.language === "fi"}
+        />
       </Menu>
     </div>
   );

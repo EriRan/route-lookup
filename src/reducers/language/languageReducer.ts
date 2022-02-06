@@ -8,7 +8,8 @@ import { Action, LanguageStore } from "./types";
 
 const INITIAL_STATE: LanguageStore = {
   language: "fi",
-  isLanguageDropdownOpen: false
+  isLanguageDropdownOpen: false,
+  languageDropdownAnchorElement: null,
 };
 
 export const LANGUAGE_REDUCERS = (
@@ -25,12 +26,15 @@ export const LANGUAGE_REDUCERS = (
     case OPEN_LANGUAGE_DROPDOWN:
       return {
         ...state,
-        isLanguageDropdownOpen: true
+        isLanguageDropdownOpen: true,
+        languageDropdownAnchorElement:
+          action.payload.languageDropdownAnchorElement,
       };
     case CLOSE_LANGUAGE_DROPDOWN:
       return {
         ...state,
-        isLanguageDropdownOpen: false
+        isLanguageDropdownOpen: false,
+        languageDropdownAnchorElement: null,
       };
     default:
       return state;
