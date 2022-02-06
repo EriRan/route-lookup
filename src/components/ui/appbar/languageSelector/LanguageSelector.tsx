@@ -7,7 +7,7 @@ import {
 } from "../../../../actions/language";
 import { LanguageType } from "../../../../reducers/language/types";
 import { RootState } from "../../../../reducers/types";
-import LanguageSelectorItem from "./LanguageSelectorItem";
+import LanguageSelectorItem from "./languageSelectorItem/LanguageSelectorItem";
 import i18next from "i18next";
 
 export default function LanguageSelector() {
