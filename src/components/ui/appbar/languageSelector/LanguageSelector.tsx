@@ -9,6 +9,7 @@ import { LanguageType } from "../../../../reducers/language/types";
 import { RootState } from "../../../../reducers/types";
 import LanguageSelectorItem from "./languageSelectorItem/LanguageSelectorItem";
 import i18next from "i18next";
+import convertLanguageFlagEmoji from "./languageToFlagEmojiConverter";
 
 export default function LanguageSelector() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export default function LanguageSelector() {
         aria-expanded={languageState.isLanguageDropdownOpen ? "true" : "false"}
         onClick={handleMenuOpen}
       >
-        {getLanguageFlagEmoji(languageState.language)}
+        {convertLanguageFlagEmoji(languageState.language)}
       </Button>
       <Menu
         id="basic-menu"
@@ -65,14 +66,3 @@ export default function LanguageSelector() {
     </div>
   );
 }
-
-const getLanguageFlagEmoji = (language: LanguageType) => {
-  switch (language) {
-    case "fi":
-      return "🇫🇮";
-    case "en":
-      return "🇺🇸";
-    default:
-      throw new Error("Unimplemented handling for language: " + language);
-  }
-};
