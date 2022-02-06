@@ -30,6 +30,7 @@ export default function LanguageSelector() {
 
   const handleClose = () => {
     dispatch({ type: CLOSE_LANGUAGE_DROPDOWN });
+    setAnchorEl(null);
   };
 
   return (
@@ -52,8 +53,8 @@ export default function LanguageSelector() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <LanguageSelectorItem language="en" />
-        <LanguageSelectorItem language="fi" />
+        <LanguageSelectorItem language="en" isSelected={currentLanguage === 'en'} />
+        <LanguageSelectorItem language="fi" isSelected={currentLanguage === 'fi'} />
       </Menu>
     </div>
   );
