@@ -8,10 +8,10 @@ export type LanguageType = "fi" | "en";
 export type LanguageStore = {
   language: LanguageType;
   isLanguageDropdownOpen: boolean;
+  languageDropdownAnchorElement: HTMLElement | null;
 };
 
-export type Payload = LanguageState;
-
-export type LanguageState = {
+export type Payload = {
   language: LanguageType;
+  languageDropdownAnchorElement: HTMLElement;
 };
