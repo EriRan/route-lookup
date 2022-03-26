@@ -1,4 +1,3 @@
-import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import { Divider, Typography } from "@material-ui/core";
@@ -9,18 +8,16 @@ import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import _ from "lodash";
 import RouteResultErrors from "./RouteResultErrors";
-import { Trans } from "react-i18next";
-import { t } from "i18next";
+import { Trans, useTranslation } from "react-i18next";
 
-class RouteResult extends React.Component<Props, {}> {
-  render() {
-    if (!isUndefinedOrNull(this.props.calculatedRoute)) {
-      return this.renderRoute(this.props.calculatedRoute!);
-    }
-    return <div />;
+const RouteResult = (props: Props) => {
+  const { t } = useTranslation();
+  if (!isUndefinedOrNull(props.calculatedRoute)) {
+    return renderRoute(props.calculatedRoute!);
   }
+  return <div />;
 
-  renderRoute(calculatedRoute: CalculationResponse) {
+  function renderRoute(calculatedRoute: CalculationResponse) {
     if (!_.isEmpty(calculatedRoute.errorMessages)) {
       return (
         <RouteResultErrors errorMessages={calculatedRoute.errorMessages} />
@@ -36,7 +33,8 @@ class RouteResult extends React.Component<Props, {}> {
       return (
         <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
           <Trans>
-          {stopRoute.from} → {stopRoute.to} {t('ROUTE_RESULT_WITH_LINE')} {stopRoute.line}
+            {stopRoute.from} → {stopRoute.to} {t("ROUTE_RESULT_WITH_LINE")}{" "}
+            {stopRoute.line}
           </Trans>
         </Typography>
       );
@@ -45,11 +43,14 @@ class RouteResult extends React.Component<Props, {}> {
       <div>
         {compressedRouteData}
         <Divider />
-        <Typography><Trans>{t('ROUTE_RESULT_TOTAL_DURATION')}: </Trans>{calculatedRoute.totalDuration}</Typography>
+        <Typography>
+          <Trans>{t("ROUTE_RESULT_TOTAL_DURATION")}: </Trans>
+          {calculatedRoute.totalDuration}
+        </Typography>
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = (state: RootState) => {
   return {
