@@ -8,7 +8,7 @@ import { RootState } from "../../../../reducers/types";
 import { CalculationResponse } from "../../../../reducers/route/change/calculation/types";
 import _ from "lodash";
 import RouteResultErrors from "./RouteResultErrors";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const RouteResult = (props: Props) => {
   const { t } = useTranslation();
@@ -32,10 +32,8 @@ const RouteResult = (props: Props) => {
     ).map((stopRoute) => {
       return (
         <Typography key={`result-stop-${stopRoute.from}-${stopRoute.to}`}>
-          <Trans>
             {stopRoute.from} → {stopRoute.to} {t("ROUTE_RESULT_WITH_LINE")}{" "}
             {stopRoute.line}
-          </Trans>
         </Typography>
       );
     });
@@ -44,7 +42,7 @@ const RouteResult = (props: Props) => {
         {compressedRouteData}
         <Divider />
         <Typography>
-          <Trans>{t("ROUTE_RESULT_TOTAL_DURATION")}: </Trans>
+          {t("ROUTE_RESULT_TOTAL_DURATION")}:{" "}
           {calculatedRoute.totalDuration}
         </Typography>
       </div>
