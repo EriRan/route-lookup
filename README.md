@@ -47,9 +47,11 @@ Developed on Windows 10 Home version 1909.
 4. After installation is complete, type `npm start`
 5. Browser window should now open with the application
 
-### Other commands
+### All commands
 
 - npm test
   - Run tests to ensure the application is working correctly. All of the tests should pass.
 - npm run build
   - Create a production bundle to /dist folder
+- npm start
+  - Run the app in a local webpack server. The default address is http://localhost:8080/
