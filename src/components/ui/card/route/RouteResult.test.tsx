@@ -4,6 +4,7 @@ import { createRouteLookupStore } from '../../../../reducers';
 import RouteResult from './RouteResult';
 
 test('Render it', () => {
+  // TODO: Do something about i18n translation warning here
   const component = renderer.create(
     <Provider store={createRouteLookupStore()}><RouteResult /></Provider>,
   );
