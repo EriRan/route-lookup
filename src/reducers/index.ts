@@ -4,7 +4,7 @@ import { REDUCERS as ROUTE_REDUCERS } from "./route/routeReducer";
 import { applyMiddleware, compose, createStore } from "redux";
 import reduxThunk from "redux-thunk";
 
-export default function createRouteLookupStore() {
+export const createRouteLookupStore = () => {
   const composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   // Creation of root reducers

@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import './i18n';
 
 import App from "./components/App";
-import createRouteLookupStore from "./reducers/";
+import { createRouteLookupStore } from "./reducers";
 
 render(
   <Provider store={createRouteLookupStore()}>
