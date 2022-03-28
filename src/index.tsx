@@ -5,8 +5,6 @@ import './i18n';
 import App from "./components/App";
 import createRouteLookupStore from "./reducers/";
 
-
-
 render(
   <Provider store={createRouteLookupStore()}>
     <App />
