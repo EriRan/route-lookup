@@ -1,8 +1,15 @@
 import { combineReducers } from "redux";
 import { LANGUAGE_REDUCERS } from "./language/languageReducer";
 import { REDUCERS as ROUTE_REDUCERS } from "./route/routeReducer";
+import { applyMiddleware, compose, createStore } from "redux";
+import reduxThunk from "redux-thunk";
 
-export default combineReducers({
-  route: ROUTE_REDUCERS,
-  language: LANGUAGE_REDUCERS
-});
+export default function createRouteLookupStore() {
+  const composeEnhancers =
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const reducers = combineReducers({
+    route: ROUTE_REDUCERS,
+    language: LANGUAGE_REDUCERS,
+  });
+  return createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
+}
