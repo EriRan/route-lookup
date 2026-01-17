@@ -6,9 +6,9 @@ import { Stop } from "../../../../../data/mapper/types";
 describe("busStopLocationProvider", () => {
   test("Integration test", () => {
     const stopsMap = TransportDataSingleton.getInstance().stopMap;
-    const busStopLocations = provideBusStopLocations(
-      stopsMap.values().next().value
-    );
+    const firstStop = stopsMap.values().next().value;
+    expect(firstStop).toBeDefined();
+    const busStopLocations = provideBusStopLocations(firstStop!);
 
     expect(busStopLocations).toBeDefined();
     expect(busStopLocations.busStopLocationMap).toBeDefined();

@@ -6,9 +6,14 @@ import { FunctionComponent } from "react";
 
 const MapView: FunctionComponent<MapViewProps> = (props) => {
   //Start from the first bus stop in the props and crawl to next ones through the roads.
-  const busStopLocations = provideBusStopLocations(
-    props.stopMap.values().next().value
-  );
+  const firstBusStop = props.stopMap.values().next().value;
+  if (!firstBusStop) {
+    return (<div className="map-background">
+      Map data missing
+    </div>
+    );
+  }
+  const busStopLocations = provideBusStopLocations(firstBusStop);
   const roads = Array.from(props.stopMap.values()).flatMap(
     (stop) => stop.roads
   );

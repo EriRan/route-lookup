@@ -17,7 +17,21 @@ describe("MapView", () => {
     const xMax = 123;
     const yMax = 321;
     const stopMap = new Map<string, Stop>();
+    stopMap.set("A", {
+      name: "A",
+      roads: [
+        {
+          from: { name: "A", roads: [] },
+          to: { name: "B", roads: [] },
+          duration: 5,
+          isReverse: false,
+          includesLines: ["green"],
+        },
+      ]
+    })
     const busStopLocationMap = new Map<string, BusStopLocation>();
+    busStopLocationMap.set("A", { x: 0, y: 0 });
+    busStopLocationMap.set("B", { x: 50, y: 0 });
     busStopLocationProviderSpy.mockReturnValue({
       busStopLocationMap: busStopLocationMap,
       xMax: xMax,
@@ -62,5 +76,18 @@ describe("MapView", () => {
     renderWithProviders(<MapView stopMap={stopMap} />);
 
     expect(screen.getAllByText(BUS_STOP_TITLE).length).toBe(2);
+  })
+
+  test("No bus stops prints an error", () => {
+    const stopMap = new Map<string, Stop>();
+    const busStopLocationMap = new Map<string, BusStopLocation>();
+    busStopLocationProviderSpy.mockReturnValue({
+      busStopLocationMap: busStopLocationMap,
+      xMax: 123,
+      yMax: 321,
+    });
+    renderWithProviders(<MapView stopMap={stopMap} />);
+
+    expect(screen.getByText("Map data missing")).toBeTruthy();
   })
 });
