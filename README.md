@@ -34,7 +34,7 @@ This application uses the provided route data json to first render the bus stops
 #### Requirements
 
 1. <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">NPM</a>
-3. Node 16
+3. Node
 2. ~500 mb storage space
 3. For running tests you need to have Jest installed globally. Do this with `npm install -g jest`
 
